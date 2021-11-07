@@ -2,6 +2,8 @@ var express = require("express");
 var app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
+const passenger = require("./routes/Passenger");
+
 
 
 app.use(express.json());
@@ -17,5 +19,13 @@ mongoose.connect(DB,
 }).catch((error)=>  console.log(error));
 
 app.use(express.json());
+
+app.use("/passenger", passenger);
+
  
 console.log("Hello World");
+
+app.listen(3001);
+console.log("Server Listening on port 3001");
+
+module.exports=app;
