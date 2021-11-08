@@ -25,6 +25,9 @@ const passengerSchema = new Schema({
 	mileageRewards: {
 	type: Number,
 	},
+	creditCardNumber: {
+		type: Number,
+		},
 
 })
 
