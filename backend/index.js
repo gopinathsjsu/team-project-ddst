@@ -3,7 +3,7 @@ var app = express();
 const mongoose = require('mongoose');
 const cors = require('cors');
 const passenger = require("./routes/Passenger");
-
+const admin = require("./routes/Admin");
 
 
 app.use(express.json());
@@ -21,7 +21,7 @@ mongoose.connect(DB,
 app.use(express.json());
 
 app.use("/passenger", passenger);
-
+app.use("/admin", admin);
  
 console.log("Hello World");
 
