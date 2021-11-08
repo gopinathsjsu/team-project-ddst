@@ -82,6 +82,7 @@ router.post("/adminRegister", (req, res) => {
         destination: req.body.destination,
         airplaneName: req.body.airplaneName,
         price: req.body.price,
+        numberOfMiles: req.body.numberOfMiles,
         startTime: req.body.startTime,
         endTime: req.body.endTime
       });
@@ -93,7 +94,5 @@ router.post("/adminRegister", (req, res) => {
       }
     });
   })
-
-
 
 module.exports=router;
