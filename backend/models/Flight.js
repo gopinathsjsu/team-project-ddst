@@ -36,6 +36,17 @@ const flightSchema = new Schema({
 		type: Date,
 		default:Date.now
 	},
+	status: {
+		type: String,
+	},
+	seatInfo: {
+		seatNumber:{
+			type: String,
+		},
+		seatAvailability:{
+			type:String,
+		},
+	},
 })
 
 

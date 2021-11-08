@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const passenger = require("./routes/Passenger");
 const admin = require("./routes/Admin");
+const booking = require("./routes/Booking");
 
 
 app.use(express.json());
@@ -22,6 +23,7 @@ app.use(express.json());
 
 app.use("/passenger", passenger);
 app.use("/admin", admin);
+app.use("/booking", booking);
  
 console.log("Hello World");
 
