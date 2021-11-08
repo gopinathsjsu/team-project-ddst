@@ -1,5 +1,6 @@
 const express = require("express");
 const adminSchema = require("../models/Admin");
+const flightSchema = require("../models/Flight");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("../validation/register");
@@ -70,7 +71,28 @@ router.post("/adminRegister", (req, res) => {
   });
 
 
+  router.post("/addFlights", (req, res) =>{
+    flightSchema.findOne({ flightNumber: req.body.flightNumber}).then(flight => {
+      if (flight) {
+      return res.status(400).json({ message: "Flight already exists" });
+      } else {
+      const newFlight = new flightSchema({
+        flightNumber: req.body.flightNumber,
+        origin: req.body.origin,
+        destination: req.body.destination,
+        airplaneName: req.body.airplaneName,
+        price: req.body.price,
+        startTime: req.body.startTime,
+        endTime: req.body.endTime
+      });
 
+        newFlight
+          .save()
+          .then(flight => res.json(flight))
+          .catch(err => console.log(err));
+      }
+    });
+  })
 
 
 
