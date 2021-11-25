@@ -20,19 +20,8 @@ export default function Sample() {
     
     <FrontSide style={{ backgroundColor: '#fffffc'}} >
       <h2 className="header">Are you a traveller looking to book a flight with Jet Airways?</h2> <br /> 
-      {/* <button onClick={() => { ref.current.toggle(); }}> Toggle via button</button> */}
-      {/* <img src={card1}
-       width="350px"
-       height= '200px'
-       margin="auto"
-       padding="10px"
-      >
-      
-      
-      </img> */}
-
-      {/* <h3><p>Are you a young producer looking to make a new movie?</p> </h3>
-      <h3><p>Use this feature to get which combination of actors, director and genre works the best for you!</p> </h3> */}
+      <button className="btn">Register</button>
+      <button className="btn"> Login</button>
      </FrontSide>
     
     
