@@ -90,4 +90,21 @@ router.post('/addFlights', (req, res) => {
     });
 });
 
+
+
+router.get('/deleteFlight', function(req, res) { 
+
+    flightSchema.findOneAndDelete({flightNumber:req.body.flightNumber}).then((deleteflight)=>{
+        // console.log(deleteflight);
+        if(deleteflight){
+            res.status(200).json({ message: 'Flight deleted sucessfully!' });
+        }
+        else{
+            res.status(400).json({ message: 'Flight does not exist!' });
+        }
+    })
+    .catch((err) => console.log(err));
+});
+
+
 module.exports = router;
