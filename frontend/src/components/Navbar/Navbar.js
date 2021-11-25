@@ -18,6 +18,8 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from "react-icons/fa";
+import { withStyles } from '@material-ui/core/styles';
+import "./Navbar.css"
 
 const drawerWidth = 240;
 
@@ -53,6 +55,7 @@ const AppBar = styled(MuiAppBar, {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.easeOut,
       duration: theme.transitions.duration.enteringScreen,
+      
     }),
   }),
 }));
@@ -66,9 +69,22 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
-export default function PersistentDrawerLeft() {
+const styles = {
+    root: {
+      flexGrow: 1,
+    },
+    toolbarButtons: {
+        marginLeft: 'auto',
+      },
+  };
+  
+
+
+function  PersistentDrawerLeft(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const { classes } = props;
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -92,9 +108,11 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          
+          <Typography className="header" variant="h6" noWrap component="div">
             Jet Aiways
           </Typography>
+          
         </Toolbar>
       </AppBar>
       <Drawer
@@ -167,3 +185,4 @@ export default function PersistentDrawerLeft() {
     </Box>
   );
 }
+export default withStyles(styles)(PersistentDrawerLeft);
