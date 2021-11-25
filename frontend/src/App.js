@@ -4,7 +4,7 @@
 import Register from "./components/Register/Register"
 // import Login from "./components/Register/Login"
 import { Router, Route,Routes, Switch, BrowserRouter} from 'react-router-dom'
-import Navbar from "./components/Navbar/Navbar"
+import Navbar from "./components/UserNavbar/UserNavbar"
 
 
 function App() {

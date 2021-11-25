@@ -19,7 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from "react-icons/fa";
 import { withStyles } from '@material-ui/core/styles';
-import "./Navbar.css"
+import './UserNav.css'
 
 const drawerWidth = 240;
 
@@ -148,6 +148,11 @@ function  PersistentDrawerLeft(props) {
             <ListItem>
                 <ListItemIcon><FaPlane/></ListItemIcon>
                 <ListItemText primary="Book a Flight" />
+            </ListItem>
+            <Divider />
+            <ListItem>
+                <ListItemIcon><FaPlane/></ListItemIcon>
+                <ListItemText primary="My Flights" />
             </ListItem>
             <Divider />
         </List>
