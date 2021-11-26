@@ -12,4 +12,21 @@ router.post('/search', (req, res) => {
     });
 });
 
+router.post('/selectFlight', (req, res) => {
+    const flightNumber = req.body.flightNumber;
+    flightSchema.find({ flightNumber: flightNumber }).then((selectFlight) => {
+        if (selectFlight) {
+            res.json({ flightSchema });
+        } else res.json({ status: false, message: 'Error while selecting!' });
+    });
+});
+
+router.post('/seatDetails', (req, res) => {
+    const passengerFirstName = req.body.passengerFirstName;
+    const passengerLastName = req.body.passengerLastName;
+    const seatNumber = req.body.seatNumber;
+
+    console.log(passengerFirstName);
+});
+
 module.exports = router;
