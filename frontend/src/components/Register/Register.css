@@ -1,5 +1,5 @@
 body {
-    background-color: #e0ece4;
+    
     margin: 0;
     padding-top: 65px;
     padding-right: 10px;
@@ -9,5 +9,13 @@ body {
       sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image: url("../../images/254381.jpeg");
   }
   
+  .bg_img
+  {
+    height:100%;
+    width:100%;
+    position:relative;
+    justify-content:center;
+  }

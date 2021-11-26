@@ -18,6 +18,7 @@ import * as Yup from "yup"
 import { TextField } from "formik-mui"
 import "./Register.css"
 
+
 const useStyle = makeStyles((theme) => ({
   padding: {
     padding: theme.spacing(3),
@@ -79,6 +80,8 @@ const UserForm = () => {
   }
 
   return (
+    <div className="bg_img">
+      
     <Grid container justify="center" spacing={1}>
       <Grid item md={6}>
         <Card className={classes.padding}>
@@ -153,6 +156,7 @@ const UserForm = () => {
         </Card>
       </Grid>
     </Grid>
+    </div>
   )
 }
 
