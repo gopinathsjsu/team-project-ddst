@@ -3,16 +3,24 @@ import React from 'react';
 import Cards from "../Cards/Cards"
 import AdminCard from "../Cards/AdminCard"
 import { Row, Col, Alert, Container } from "react-bootstrap";
+import { ClassNames } from "@emotion/react";
+import Grid from "@mui/material/Grid";
+import "./Landing.css"
+
 
 function Landing() {
     return (
-        <div>
-        {/* <div styles={{ backgroundImage: `url(${bg_image})` }}></div> */}
-    <div class="Row">
-    <div class="Column"><Cards/></div>
-    <div class="Column"><AdminCard/></div>
-    </div>
-        </div>
+            <div className="center">
+           <Grid container spacing={4}>
+           <Grid item xs={6}>
+               <Cards/>
+            </Grid>
+            <Grid item xs={6}>
+               <AdminCard/>
+            </Grid>
+            </Grid>
+            </div>
+       
     );
 }
 
