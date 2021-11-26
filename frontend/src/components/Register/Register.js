@@ -16,6 +16,7 @@ import {
 import { Formik, Form, Field } from "formik"
 import * as Yup from "yup"
 import { TextField } from "formik-mui"
+import "./Register.css"
 
 const useStyle = makeStyles((theme) => ({
   padding: {
@@ -81,7 +82,7 @@ const UserForm = () => {
     <Grid container justify="center" spacing={1}>
       <Grid item md={6}>
         <Card className={classes.padding}>
-          <CardHeader title="REGISTER FORM"></CardHeader>
+          <CardHeader title="USER REGISTERATION"></CardHeader>
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
@@ -112,48 +113,6 @@ const UserForm = () => {
                         />
                       </Grid>
 
-                      <Grid item xs={12} sm={6} md={12}>
-                        <FormControl fullWidth variant="outlined">
-                          <InputLabel id="demo-simple-select-outlined-label">
-                            Occupation
-                          </InputLabel>
-                          <Select
-                            labelId="demo-simple-select-outlined-label"
-                            id="demo-simple-select-outlined"
-                            label="Occupation"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.occupation}
-                            name="occupation">
-                            <MenuItem>None</MenuItem>
-                            {options.map((item) => (
-                              <MenuItem key={item.value} value={item.value}>
-                                {item.label}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6}>
-                        <Field
-                          label="City"
-                          variant="outlined"
-                          fullWidth
-                          name="city"
-                          value={values.city}
-                          component={TextField}
-                        />
-                      </Grid>
-                      <Grid item xs={12} sm={6} md={6}>
-                        <Field
-                          label="Country"
-                          variant="outlined"
-                          fullWidth
-                          name="country"
-                          value={values.country}
-                          component={TextField}
-                        />
-                      </Grid>
                       <Grid item xs={12} sm={6} md={6}>
                         <Field
                           label="Email"
