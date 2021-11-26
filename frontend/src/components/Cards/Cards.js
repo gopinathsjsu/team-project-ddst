@@ -15,7 +15,6 @@ function Card2() {
             bulk of the card's content.
           </Card.Text>
           <Button variant="primary">Login</Button>
-          
           <Button variant="primary">Sign Up</Button>
         </Card.Body>
       </Card>
