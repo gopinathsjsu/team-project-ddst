@@ -3,15 +3,14 @@ import bg_image from '../../images/254381.jpeg';
 import './Login.css';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
+import {useNavigate} from "react-router-dom"; 
 
 function Login() {
+
+    let navigate=useNavigate();
     const [password, setPassword] = React.useState('');
     const [email, setEmail] = React.useState('');
 
-    let redirectVar = null;
-    if (localStorage.getItem('email')) {
-        redirectVar = <Link to='/dashboard' />;
-    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -28,6 +27,8 @@ function Login() {
 
         axios.post('http://localhost:3001/passenger/login', data).then((response) => {
             console.log('Got response data', response.data);
+            navigate('/customerDashboard')
+            
         });
     };
 
