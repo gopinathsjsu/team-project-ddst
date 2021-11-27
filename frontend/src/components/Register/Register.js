@@ -117,10 +117,12 @@ const UserForm = () => {
 
                 />
               </div>
-              <center><button class="btn">
+              <button class="btn">
                 SIGN UP
-              </button></center>
+              </button>
+              <a href="/login" style={{ color: "black", paddingLeft: "200px",fontSize:"17px", fontWeight:"bold"}}>Already a member? Click here to login.</a>
             </form>
+            
           </div>
         </div>
         </div>
