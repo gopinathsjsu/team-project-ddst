@@ -5,6 +5,8 @@ import Navbar from './components/UserNavbar/UserNavbar';
 import Landing from './components/Landing/Landing';
 import Login from "./components/Login/Login"
 import AdminLogin from './components/AdminLogin/AdminLogin';
+import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'
+
 
 
 function App() {
@@ -16,6 +18,7 @@ function App() {
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/adminLogin' element={<AdminLogin />} />
+                <Route exact path='/customerDashboard' element={<CustomerDashboard />} />
             </Routes>
         </BrowserRouter>
     );

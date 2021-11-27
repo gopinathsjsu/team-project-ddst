@@ -2,11 +2,16 @@ import React from 'react';
 import bg_image from "../../images/254381.jpeg"
 import "./Login.css"
 import axios from 'axios';
-
+import { BrowserRouter, Route, Link, Switch, Redirect } from "react-router-dom";
 
 function Login() {
     const [password,setPassword]=React.useState("");
     const [email,setEmail]=React.useState("");
+
+    let redirectVar = null;
+  if (localStorage.getItem('email')) {
+    redirectVar = <Link to="/dashboard" />;
+  }
 
 
     const handleSubmit = (event) => {
