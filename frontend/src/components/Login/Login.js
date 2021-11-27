@@ -1,95 +1,82 @@
 import React from 'react';
-import { Grid, makeStyles, Card, CardContent, MenuItem, InputLabel, Select, CardActions, Button, CardHeader, FormControl } from '@material-ui/core';
-
-import { Formik, Form, Field } from 'formik';
-import * as Yup from 'yup';
-import { TextField } from 'formik-mui';
-import '../Register/Register.css';
-import './Login.css'
-
-const useStyle = makeStyles((theme) => ({
-    padding: {
-        padding: theme.spacing(3),
-    },
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
-
-//Data
-const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-};
+import bg_image from "../../images/254381.jpeg"
+import "./Login.css"
+import axios from 'axios';
 
 
+function Login() {
+    const [password,setPassword]=React.useState("");
+    const [email,setEmail]=React.useState("");
 
 
-const Login = () => {
-    const classes = useStyle();
-
-    const onSubmit = (values) => {
-        console.log(values);
-    };
-
+    const handleSubmit = (event) => {
+        event.preventDefault()
+        console.log(`
+        Email: ${email}
+        Password: ${password}
+      `);
+  
+      var data ={
+        emailID:email,
+        password:password,
+      }
+      console.log("Printing data",data)
+  
+      axios.post("http://localhost:3001/passenger/login",data).then((response)=>
+      {
+          console.log("Got response data",response.data)      
+          
+      })
+  
+      };
+    
+    
     return (
-        <div>
-            <Grid container justify='center' spacing={1} className="loginGrid">
-                <Grid item md={6}>
-                    <Card className={classes.padding}>
-                        <CardHeader title='ADMIN LOGIN'></CardHeader>
-                        <Formik initialValues={initialValues}  onSubmit={onSubmit}>
-                            {({ dirty, isValid, values, handleChange, handleBlur }) => {
-                                return (
-                                    <Form>
-                                        <CardContent>
-                                            <Grid item container spacing={5} justify='center'>
-                                                <Grid item xs={12}>
-                                                    <Field
-                                                        label='Email'
-                                                        variant='outlined'
-                                                        fullWidth
-                                                        name='email'
-                                                        value={values.email}
-                                                        component={TextField}
-                                                    />
-                                                </Grid>
-                                                <Grid item xs={12}>
-                                                    <Field
-                                                        label='Password'
-                                                        variant='outlined'
-                                                        fullWidth
-                                                        name='password'
-                                                        value={values.password}
-                                                        type='password'
-                                                        component={TextField}
-                                                    />
-                                                </Grid>
-                                            </Grid>
-                                        </CardContent>
-                                        <CardActions>
-                                            <Button
-                                                disabled={!dirty || !isValid}
-                                                variant='contained'
-                                                color='primary'
-                                                type='Submit'
-                                                className={classes.button}
-                                            >
-                                             LOGIN
-                                            </Button>
-                                        </CardActions>
-                                    </Form>
-                                );
-                            }}
-                        </Formik>
-                    </Card>
-                </Grid>
-            </Grid>
+        <div className="loginBody" style={ {backgroundImage: `url(${bg_image})`,backgroundSize:'cover'}}>
+        <div className="loginContainer">
+        <div className="row">
+          <div className="col-md-4">
+            <h4 data-testid="LoginTest" style={{ color: "black", fontSize: 25, marginBottom: 22 }}>
+              WELCOME TO JET AIRWAYS!
+            </h4>
+            <form onSubmit={handleSubmit}>
+            
+                <div class="form-group inputLogin" style={{ color: "black"}}>
+                <label for="exampleInputEmail1">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Enter email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                
+                />
+              </div>
+              <div class="form-group inputLogin" style={{ color: "black"}}>
+                <label for="exampleInputPassword1">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="Password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+
+                />
+              </div>
+              <center><button class="btn">
+                LOGIN
+              </button></center>
+            </form>
+          </div>
+        </div>
+        </div>
         </div>
     );
-};
+}
 
 export default Login;
-
