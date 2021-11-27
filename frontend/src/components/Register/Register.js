@@ -7,20 +7,17 @@ import './Register.css';
 import bg_image from "../../images/254381.jpeg"
 import axios from 'axios';
 
-const useStyle = makeStyles((theme) => ({
-    padding: {
-        padding: theme.spacing(3),
-    },
-    button: {
-        margin: theme.spacing(1),
-    },
-}));
-
-
-
+// const useStyle = makeStyles((theme) => ({
+//     padding: {
+//         padding: theme.spacing(3),
+//     },
+//     button: {
+//         margin: theme.spacing(1),
+//     },
+// }));
 
 const UserForm = () => {
-    const classes = useStyle();
+    // const classes = useStyle();
     const [firstName,setFirstName]=React.useState("");
     const [lastName,setLastName]=React.useState("");
     const [password,setPassword]=React.useState("");
@@ -52,8 +49,6 @@ const UserForm = () => {
     })
 
     };
-
-
 
     return (
         <div className="registerBody" style={ {backgroundImage: `url(${bg_image})`,backgroundSize:'cover'}}>
