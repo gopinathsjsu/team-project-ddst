@@ -26,29 +26,31 @@ const UserForm = () => {
     const [password,setPassword]=React.useState("");
     const [email,setEmail]=React.useState("");
 
-    const handleFirstName = (value) => {
-        console.log("Got First Name",value);
-        setFirstName(value)
-      };
-    
-    const handleLastName = (value) => {
-        console.log("Got Last Name",value);
-        setLastName(value)
-      };
-      
-    const handlePassword = (value) => {
-        console.log("Got Password",value);
-        setPassword(value)
-      };
-    
-    const handleEmail = (value) => {
-        console.log("Got Email",value);
-        setEmail(value)
-      };
     
 
-    const onSubmit = (values) => {
-        console.log(values);
+    const handleSubmit = (event) => {
+      event.preventDefault()
+      console.log(`
+      FirstName: ${firstName}
+      LastName: ${lastName}
+      Email: ${email}
+      Password: ${password}
+    `);
+
+    var data ={
+      firstName:firstName,
+      lastName:lastName,
+      emailID:email,
+      password:password,
+    }
+    console.log("Printing data",data)
+
+    axios.post("http://localhost:3001/passenger/register",data).then((response)=>
+    {
+        console.log("Got response data",response.data)      
+        
+    })
+
     };
 
 
@@ -61,7 +63,7 @@ const UserForm = () => {
             <h4 data-testid="LoginTest" style={{ color: "black", fontSize: 25, marginBottom: 22 }}>
               WELCOME TO JET AIRWAYS!
             </h4>
-            <form>
+            <form onSubmit={handleSubmit}>
             <div class="form-group inputLogin" style={{ color: "black"}}>
                 <label for="firstName">First Name</label>
                 <input
@@ -69,6 +71,11 @@ const UserForm = () => {
                   class="form-control"
                   id="fName"
                   placeholder="Enter First Name"
+                  onChange={(e) => {
+                    console.log("Got first name",e.target.value)
+                    setFirstName(e.target.value);
+                  }}
+                  
                   
                 />
               </div>
@@ -81,6 +88,9 @@ const UserForm = () => {
                   class="form-control"
                   id="fName"
                   placeholder="Enter Last Name"
+                  onChange={(e) => {
+                    setLastName(e.target.value);
+                  }}
                   
                 />
               </div>
@@ -93,6 +103,9 @@ const UserForm = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Enter email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
                 
                 />
               </div>
@@ -103,6 +116,10 @@ const UserForm = () => {
                   class="form-control"
                   id="exampleInputPassword1"
                   placeholder="Password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+
                 />
               </div>
               <center><button class="btn">
