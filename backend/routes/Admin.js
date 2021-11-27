@@ -96,7 +96,7 @@ router.get('/deleteFlight', function (req, res) {
         .then((deleteflight) => {
             // console.log(deleteflight);
             if (deleteflight) {
-                res.status(200).json({ message: 'Flight deleted sucessfully!' });
+                res.status(200).json({ message: 'Flight deleted successfully!' });
             } else {
                 res.status(400).json({ message: 'Flight does not exist!' });
             }
