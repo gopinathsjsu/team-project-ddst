@@ -19,7 +19,12 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from 'react-icons/fa';
 import { withStyles } from '@material-ui/core/styles';
-import './UserNav.css';
+import './CommonNavbar.css';
+import {BsFillPersonFill} from 'react-icons/bs';
+import {Redirect} from 'react-router';
+import { useHistory } from 'react-router-dom';
+import { Link } from "react-router-dom";
+
 
 const drawerWidth = 240;
 
@@ -66,16 +71,25 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-const styles = {
+const styles = theme =>({
     root: {
         flexGrow: 1,
     },
     toolbarButtons: {
         marginLeft: 'auto',
     },
-};
+    // listItemText:{
+    //     fontSize:'30',//Not working, check later
+    //   }
+    list: {
+        width: 250
+      },
+      fullList: {
+        width: "auto"
+      }
+});
 
-function PersistentDrawerLeft(props) {
+function CommonNavbar(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
     const { classes } = props;
@@ -93,7 +107,8 @@ function PersistentDrawerLeft(props) {
             <CssBaseline />
             <AppBar position='fixed' open={open}>
                 <Toolbar>
-                    <IconButton
+                    <IconButton iconStyle={styles.largeIcon}
+                        fontSize="large"
                         color='inherit'
                         aria-label='open drawer'
                         onClick={handleDrawerOpen}
@@ -103,8 +118,8 @@ function PersistentDrawerLeft(props) {
                         <MenuIcon />
                     </IconButton>
 
-                    <Typography className='header' variant='h6' noWrap component='div'>
-                        Jet Aiways
+                    <Typography className='header' variant='h3' noWrap component='div'>
+                        Jet Airways
                     </Typography>
                 </Toolbar>
             </AppBar>
@@ -136,18 +151,18 @@ function PersistentDrawerLeft(props) {
           ))}
         </List> */}
                 <List>
-                    <ListItem>
+                    <ListItem button component={Link} to="/login">
                         <ListItemIcon>
-                            <FaPlane />
+                            <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>
-                        <ListItemText primary='Book a Flight' />
+                        <ListItemText  classes={{primary:classes.listItemText}} primary='Admin' />
                     </ListItem>
                     <Divider />
-                    <ListItem>
+                    <ListItem button component={Link} to="/register">
                         <ListItemIcon>
-                            <FaPlane />
+                            <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>
-                        <ListItemText primary='My Flights' />
+                        <ListItemText primary='Customer' />
                     </ListItem>
                     <Divider />
                 </List>
@@ -176,4 +191,4 @@ function PersistentDrawerLeft(props) {
         </Box>
     );
 }
-export default withStyles(styles)(PersistentDrawerLeft);
+export default withStyles(styles)(CommonNavbar);

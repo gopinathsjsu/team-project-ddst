@@ -1,16 +1,7 @@
-.bgimg
-{
-    margin:0;
-     height: 100%;
-} 
-
-.Row {
-    display: table;
-    width: 100%; /*Optional*/
-    table-layout: fixed; /*Optional*/
-    border-spacing: 10px; /*Optional*/
-}
-.Column {
-    display: table-cell;
-    
+.center {
+    margin: 0 auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

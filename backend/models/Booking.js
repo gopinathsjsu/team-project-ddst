@@ -26,6 +26,9 @@ const bookingSchema = new Schema({
         type: String,
         required: true,
     },
+    numOfSeats: {
+        type: Number,
+    },
     seatNumber: {
         type: String,
     },

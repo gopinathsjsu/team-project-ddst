@@ -1,54 +1,47 @@
-import { useRef } from 'react';
-import Flippy, { FrontSide, BackSide } from 'react-flippy';
-// import card1 from "./card1.jpg"
+import React from 'react';
+import { render } from 'react-dom';
+import { Card, ListGroup, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.css';
+import '../Cards/Cards.css';
+import { Grid } from '@mui/material'
+
+function Card2() {
+    return (
+        <div id='small2'>
+           <Card style={{ width: '400px', height: '300px', margin: '30px 0px 0px 40px', border: '1px solid rgba(0, 0, 0, 1)', fontSize: '20px'}}>
+                <Card.Body>
+                    <Card.Title style={{fontSize: '25px'}}><center><h1>Admin Login</h1></center></Card.Title>
+                    <br/>
+                    <Card.Text style={{color:'black', fontWeight:'bold'}}>Are you an admin trying to add flights? Login here to schedule or cancel flights.</Card.Text>
+                    <br/>
+                    <br/>
+                    
+                    <Grid container  columns={16}>
+                    
+                    <Grid item xs={4}>
+                    </Grid>
+                    
+                    <Grid item xs={3}>
+                    <Button variant='primary'>Login</Button>
+                    </Grid>
+                    
+                    <Grid item xs={2}>
+                    </Grid>
 
 
-export default function Sample() {
-  const ref = useRef();
-  return (
-    <Flippy
-      flipOnHover={false} // default false
-      flipOnClick={true} // default false
-      flipDirection="horizontal" // horizontal or vertical
-      ref={ref} // to use toggle method like ref.curret.toggle()
-      // if you pass isFlipped prop component will be controlled component.
-      // and other props, which will go to div
-      style={{ width: '400px', height: '350px', margin:'30px 0px 0px 40px' }} /// these are optional style, it is not necessary
-  >
-    
-    
-    
-    <FrontSide style={{ backgroundColor: '#fffffc'}} >
-      <h2 className="header">An employee you an employee of Jet Airways?</h2> <br /> 
-      <button className="btn">Register</button>
-      <button className="btn">Login</button>
-      {/* <button onClick={() => { ref.current.toggle(); }}> Toggle via button</button> */}
-      {/* <img src={card1}
-       width="350px"
-       height= '200px'
-       margin="auto"
-       padding="10px"
-      >
-      
-      
-      </img> */}
+                    <Grid item xs={3}>
+                    <Button variant='primary'>Sign Up</Button>
+                    </Grid>
 
-      {/* <h3><p>Are you a young producer looking to make a new movie?</p> </h3>
-      <h3><p>Use this feature to get which combination of actors, director and genre works the best for you!</p> </h3> */}
-     </FrontSide>
-    
-    
-    {/* <BackSide style={{ backgroundColor: '#fffffc'}}>
-      <h3>IMDB Movie Rate Prediction</h3>
-      <div className="myList">
-      <li style={{fontSize: "20px"}}>Sometimes budgeting a movie can prove to be costly if the movie fails badly at the box office.</li> <br></br>
-      <li style={{fontSize: "20px"}}>This Feature predicts the success of movie by providing imdb score on the basis of actors and directors using Machine Learning Algorithm</li> <br></br>
-      <li style={{fontSize: "20px"}}>If you are planning to invest heavy money and resources on any movie, it is better to know if movie will earn success or not  </li>
-      <p> </p>
-      </div>
-    </BackSide> */}
-  </Flippy>
-
-
-  )
+                    <Grid item xs={4}>
+                    </Grid>
+                    
+                    </Grid>
+                    
+                </Card.Body>
+            </Card>
+        </div>
+    );
 }
+
+export default Card2;

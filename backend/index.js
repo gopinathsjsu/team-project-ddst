@@ -25,8 +25,6 @@ app.use('/passenger', passenger);
 app.use('/admin', admin);
 app.use('/booking', booking);
 
-console.log('Hello World');
-
 app.listen(3001);
 console.log('Server Listening on port 3001');
 
