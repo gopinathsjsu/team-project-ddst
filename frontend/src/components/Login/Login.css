@@ -2,3 +2,21 @@
 {
     height:100vh !important;
 }
+.loginContainer
+{
+    margin: auto; 
+    max-width: auto;
+    padding-top: auto;
+    padding: 30px 400px; 
+ 
+
+}
+.row
+{
+    font-family: inherit;
+    font-size: 14px;
+    width: 300%;
+    padding: 10px;
+
+
+}
