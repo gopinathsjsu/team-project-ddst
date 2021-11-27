@@ -4,6 +4,8 @@ import { Router, Route, Routes, Switch, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/UserNavbar/UserNavbar';
 import Landing from './components/Landing/Landing';
 import Login from "./components/Login/Login"
+import AdminLogin from './components/AdminLogin/AdminLogin';
+
 
 function App() {
     return (
@@ -13,6 +15,7 @@ function App() {
                 <Route exact path='/' element={<Landing />} />
                 <Route exact path='/register' element={<Register />} />
                 <Route exact path='/login' element={<Login />} />
+                <Route exact path='/adminLogin' element={<AdminLogin />} />
             </Routes>
         </BrowserRouter>
     );

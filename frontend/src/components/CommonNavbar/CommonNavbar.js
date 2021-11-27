@@ -140,18 +140,8 @@ function CommonNavbar(props) {
                     <IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
                 </DrawerHeader>
                 <Divider />
-                {/* <List>
-          {['Book a Flight', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <FaPlane /> : <FaPlane />}
-              </ListItemIcon>
-              <ListItemText primary={text} /> 
-            </ListItem>
-          ))}
-        </List> */}
                 <List>
-                    <ListItem button component={Link} to="/login">
+                    <ListItem button component={Link} to="/adminLogin">
                         <ListItemIcon>
                             <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>
@@ -169,7 +159,7 @@ function CommonNavbar(props) {
             </Drawer>
             <Main open={open}>
                 <DrawerHeader />
-                <Typography paragraph>
+                {/* <Typography paragraph>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                     Rhoncus dolor purus non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in
                     hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id donec ultrices. Odio morbi
@@ -186,7 +176,7 @@ function CommonNavbar(props) {
                     sem et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin nibh sit. Ornare aenean euismod
                     elementum nisi quis eleifend. Commodo viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices
                     sagittis orci a.
-                </Typography>
+                </Typography> */}
             </Main>
         </Box>
     );

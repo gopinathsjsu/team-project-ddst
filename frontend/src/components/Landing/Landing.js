@@ -8,16 +8,17 @@ import Grid from '@mui/material/Grid';
 import './Landing.css';
 import CommonNavbar from '../CommonNavbar/CommonNavbar'
 
+
 function Landing() {
     return (
-        <div className='center'>
+        <div className="landingBody" style={ {backgroundImage: `url(${bg_image})`,backgroundSize:'cover'}}>
             <CommonNavbar></CommonNavbar>
             <Grid container spacing={4}>
                 <Grid item xs={6}>
-                    {/* <Cards /> */}
+                    
                 </Grid>
                 <Grid item xs={6}>
-                    {/* <AdminCard /> */}
+                    
                 </Grid>
             </Grid>
         </div>
