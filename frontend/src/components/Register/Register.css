@@ -1,26 +1,16 @@
 .registerBody {
-    
-    height:100vh !important;
-
-    
+    height: 100vh !important;
 }
 
-.thiscontainer
-{
-    margin: auto; 
+.thiscontainer {
+    margin: auto;
     max-width: auto;
     padding-top: auto;
-    padding: 30px 400px; 
- 
-
+    padding: 30px 400px;
 }
-.row
-{
-
+.row {
     font-family: inherit;
     font-size: 14px;
     width: 300%;
     padding: 10px;
-
-
 }

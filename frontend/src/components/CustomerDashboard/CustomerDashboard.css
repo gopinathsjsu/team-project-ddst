@@ -1,15 +1,12 @@
-.userDashboardBody
-{
-    height:100vh !important;
+.userDashboardBody {
+    height: 100vh !important;
 }
 
-.rectangle
-{
+.rectangle {
     width: 500px;
-    height:90px;
+    height: 90px;
     border: 1px solid black;
     margin: auto;
     text-align: center;
     font-size: 20px;
-    
 }

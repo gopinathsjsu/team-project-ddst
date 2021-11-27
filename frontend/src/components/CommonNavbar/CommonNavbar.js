@@ -20,11 +20,10 @@ import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from 'react-icons/fa';
 import { withStyles } from '@material-ui/core/styles';
 import './CommonNavbar.css';
-import {BsFillPersonFill} from 'react-icons/bs';
-import {Redirect} from 'react-router';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
-import { Link } from "react-router-dom";
-
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -71,7 +70,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
     justifyContent: 'flex-end',
 }));
 
-const styles = theme =>({
+const styles = (theme) => ({
     root: {
         flexGrow: 1,
     },
@@ -82,11 +81,11 @@ const styles = theme =>({
     //     fontSize:'30',//Not working, check later
     //   }
     list: {
-        width: 250
-      },
-      fullList: {
-        width: "auto"
-      }
+        width: 250,
+    },
+    fullList: {
+        width: 'auto',
+    },
 });
 
 function CommonNavbar(props) {
@@ -107,8 +106,9 @@ function CommonNavbar(props) {
             <CssBaseline />
             <AppBar position='fixed' open={open}>
                 <Toolbar>
-                    <IconButton iconStyle={styles.largeIcon}
-                        fontSize="large"
+                    <IconButton
+                        iconStyle={styles.largeIcon}
+                        fontSize='large'
                         color='inherit'
                         aria-label='open drawer'
                         onClick={handleDrawerOpen}
@@ -141,16 +141,16 @@ function CommonNavbar(props) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    <ListItem button component={Link} to="/adminLogin">
+                    <ListItem button component={Link} to='/adminLogin'>
                         <ListItemIcon>
-                            <BsFillPersonFill fontSize="large"/>
+                            <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText  classes={{primary:classes.listItemText}} primary='Admin' />
+                        <ListItemText classes={{ primary: classes.listItemText }} primary='Admin' />
                     </ListItem>
                     <Divider />
-                    <ListItem button component={Link} to="/register">
+                    <ListItem button component={Link} to='/register'>
                         <ListItemIcon>
-                            <BsFillPersonFill fontSize="large"/>
+                            <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
                         <ListItemText primary='Customer' />
                     </ListItem>

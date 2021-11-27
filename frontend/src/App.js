@@ -3,11 +3,9 @@ import Register from './components/Register/Register';
 import { Router, Route, Routes, Switch, BrowserRouter } from 'react-router-dom';
 import Navbar from './components/UserNavbar/UserNavbar';
 import Landing from './components/Landing/Landing';
-import Login from "./components/Login/Login"
+import Login from './components/Login/Login';
 import AdminLogin from './components/AdminLogin/AdminLogin';
-import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard'
-
-
+import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
 
 function App() {
     return (
