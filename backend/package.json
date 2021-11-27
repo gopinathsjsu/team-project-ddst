@@ -4,6 +4,7 @@
   "description": "CMPE 202 Project ",
   "main": "index.js",
   "scripts": {
+    "start": "npx nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

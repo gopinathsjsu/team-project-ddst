@@ -4,7 +4,7 @@ const bookingSchema = require('../models/Booking');
 const flightSchema = require('../models/Flight');
 const router = express.Router();
 
-router.post('/search', (req, res) => {
+router.post('/search', async (req, res) => {
     flightSchema.find({ origin: req.body.origin, destination: req.body.destination, startTime: req.body.startTime }).exec((err, flightSchema) => {
         if (err) {
             console.log(err);
@@ -18,7 +18,7 @@ router.post('/search', (req, res) => {
     });
 });
 
-router.post('/selectFlight', (req, res) => {
+router.post('/selectFlight', async (req, res) => {
     const id = req.body.id;
     flightSchema.findOne({ _id: id }).then((selectFlight) => {
         if (selectFlight) {
@@ -27,10 +27,18 @@ router.post('/selectFlight', (req, res) => {
     });
 });
 
-router.post('/seatDetails', (req, res) => {
-    const passengerFirstName = req.body.passengerFirstName;
-    const passengerLastName = req.body.passengerLastName;
-    const seatNumber = req.body.seatNumber;
+router.post('/seatDetails', async (req, res) => {
+    try {
+        let passengerFirstName = req.body.passengerFirstName;
+        let passengerLastName = req.body.passengerLastName;
+        let seatNumber = req.body.seatNumber;
+        await flightSchema.updateOne({ seatsAvailable: seatNumber }, { $pull: { seatsAvailable: seatNumber } });
+        await flightSchema.updateOne({ $push: { seatsTaken: seatNumber } });
+        res.status(200).json({ message: 'Seat added successfully' });
+        console.log();
+    } catch (error) {
+        console.log(error);
+    }
 });
 
 module.exports = router;
