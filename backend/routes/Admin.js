@@ -121,4 +121,16 @@ router.post('/addAirports', async (req, res) => {
     });
 });
 
+router.get('/getAirportNames', function(req, res) {
+    airportSchema.find({}, function(err, airports) {
+      var airportList = [];
+  
+      airports.forEach(function(airport) {
+        airportList.push(airport.airportName);
+      });
+    //   console.log(airportList);
+      res.send(airportList);  
+    });
+  });
+
 module.exports = router;
