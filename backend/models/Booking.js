@@ -10,6 +10,10 @@ const bookingSchema = new Schema({
         type: String,
         required: true,
     },
+    passengerEmailID: {
+        type: String,
+        required: true,
+    },
     flightNumber: {
         type: Number,
         required: true,

@@ -101,7 +101,7 @@ function PersistentDrawerLeft(props) {
                         edge='start'
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon  sx={{ fontSize: 30 }} />
+                        <MenuIcon sx={{ fontSize: 30 }} />
                     </IconButton>
 
                     <Typography className='header' variant='h3' noWrap component='div'>

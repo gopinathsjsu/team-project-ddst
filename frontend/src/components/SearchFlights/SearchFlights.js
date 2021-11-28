@@ -29,6 +29,14 @@ function SearchFlights(props) {
         );
     },[])
 
+    const disablePastDate = () => {
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, "0");
+        const mm = String(today.getMonth()).padStart(2, "0"); //January is 0!
+        const yyyy = today.getFullYear();
+        return yyyy + "-" + mm + "-" + dd;
+    };
+
     const handleSelectedValue = (value) => {
         console.log("Got Selected Value",value);
         
@@ -59,7 +67,7 @@ function SearchFlights(props) {
 
 
 
-                        <Autocomplete
+                        <Autocomplete className="searchContainer"
       id="combo-box-demo"
       options={airportList}
       getOptionLabel={(option) => option}
@@ -71,7 +79,7 @@ function SearchFlights(props) {
     />
     <br></br>
 
-<Autocomplete
+<Autocomplete className="searchContainer"
       id="combo-box-demo"
       options={updatedAirportList}
       getOptionLabel={(option) => option}
@@ -83,14 +91,12 @@ function SearchFlights(props) {
     />
     <br></br>
     <label for="deptdate">Departure Date:</label>
-    <input type="date">
+    <br></br>
+    <input type="date" min={disablePastDate()}>
 
     </input>
     <br/><br/>
-    <label for="arrdate">Arrival Date:</label>
-    <input type="date">
-    </input>
-    <br/><br/>
+    
 
 
     

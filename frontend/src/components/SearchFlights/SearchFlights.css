@@ -4,8 +4,13 @@
 
 
 .searchContainer {
+    width: auto;
+    height: auto;
     margin: auto;
-    max-width: auto;
-    padding-top: auto;
-    padding: 30px 400px;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    text-align: center;
 }
