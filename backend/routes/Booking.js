@@ -71,23 +71,22 @@ router.post('/selectFlight', async (req, res) => {
 //     }
 // });
 
-async function milesUpdate(emailID,userDetails,selectFlight,mileagePoints){
-    mileagePoints = userDetails.mileageRewards + Math.round((selectFlight.numberOfMiles)/100);
-    console.log(mileagePoints);
-    await passengerSchema.updateOne({emailID:emailID}, {$set:{"mileageRewards":mileagePoints}});
-    return
+async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints) {
+    mileagePoints = userDetails.mileageRewards + Math.round(selectFlight.numberOfMiles / 100);
+    await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
+    return;
 }
 
-async function seatUpdate(seatNumber){
+// Try-Catch remaining
+async function seatUpdate(seatNumber) {
     await flightSchema.updateOne({ seatsAvailable: seatNumber }, { $pull: { seatsAvailable: seatNumber } });
-    return 
+    return;
 }
 
-async function flightReserved(emailID,selectFlight){
-    await passengerSchema.updateOne({ emailID:emailID }, { $push: { "flightsReserved": selectFlight.id } });
-    return 
+async function flightReserved(emailID, selectFlight) {
+    await passengerSchema.updateOne({ emailID: emailID }, { $push: { flightsReserved: selectFlight.id } });
+    return;
 }
-
 
 router.post('/passengerDetails', async (req, res) => {
     try {
@@ -99,13 +98,12 @@ router.post('/passengerDetails', async (req, res) => {
         flightSchema.findOne({ _id: id }).then((selectFlight) => {
             if (selectFlight) {
                 seatUpdate(seatNumber);
-                passengerSchema.findOne({emailID}).then((userDetails)=>{
-                    if(userDetails){
+                passengerSchema.findOne({ emailID }).then((userDetails) => {
+                    if (userDetails) {
                         let mileagePoints = 0;
-                        milesUpdate(emailID,userDetails,selectFlight,mileagePoints);
-                        flightReserved(emailID,selectFlight);
-                    }
-                    else res.json({ status: false, message: 'Error while selecting!' });
+                        milesUpdate(emailID, userDetails, selectFlight, mileagePoints);
+                        flightReserved(emailID, selectFlight);
+                    } else res.json({ status: false, message: 'Error while selecting!' });
                 });
                 let passengerDetail = new bookingSchema({
                     passengerFirstName: passengerFirstName,
@@ -122,14 +120,12 @@ router.post('/passengerDetails', async (req, res) => {
                 passengerDetail
                     .save()
                     .then((passengerDetail) => res.json(passengerDetail))
-                    .catch((err) => console.log(err));    
+                    .catch((err) => console.log(err));
             } else res.json({ status: false, message: 'Error while selecting!' });
         });
     } catch (error) {
         console.log(error);
     }
 });
-
-
 
 module.exports = router;

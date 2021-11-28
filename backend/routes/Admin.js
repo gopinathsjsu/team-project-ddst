@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const airportSchema = require('../models/Airports');
 
 router.post('/adminRegister', (req, res) => {
     // Form validation
@@ -102,6 +103,22 @@ router.post('/deleteFlight', function (req, res) {
             }
         })
         .catch((err) => console.log(err));
+});
+
+router.post('/addAirports', async (req, res) => {
+    airportSchema.findOne({ airportName: req.body.airportName }).then((airport) => {
+        if (airport) {
+            return res.status(400).json({ message: 'Airport already exists' });
+        } else {
+            const newAirport = new airportSchema({
+                airportName: req.body.airportName,
+            });
+            newAirport
+                .save()
+                .then((airport) => res.json(airport))
+                .catch((err) => console.log(err));
+        }
+    });
 });
 
 module.exports = router;
