@@ -98,10 +98,6 @@ function SearchFlights(props) {
     <br/><br/>
     
 
-
-    
-                           
-
                                 <button class='btn'>SEARCH FLIGHTS</button>
                             
                         </form>
