@@ -94,9 +94,8 @@ router.post('/addFlights', (req, res) => {
 router.post('/deleteFlight', function (req, res) {
     flightSchema
         .findOneAndDelete({ flightNumber: req.body.flightNumber })
-        .then((deleteflight) => {
-            // console.log(deleteflight);
-            if (deleteflight) {
+        .then((deleteFlight) => {
+            if (deleteFlight) {
                 res.status(200).json({ message: 'Flight deleted successfully!' });
             } else {
                 res.status(400).json({ message: 'Flight does not exist!' });
@@ -121,16 +120,16 @@ router.post('/addAirports', async (req, res) => {
     });
 });
 
-router.get('/getAirportNames', function(req, res) {
-    airportSchema.find({}, function(err, airports) {
-      var airportList = [];
-  
-      airports.forEach(function(airport) {
-        airportList.push(airport.airportName);
-      });
-    //   console.log(airportList);
-     return res.json(airportList);  
+router.get('/getAirportNames', function (req, res) {
+    airportSchema.find({}, function (err, airports) {
+        var airportList = [];
+
+        airports.forEach(function (airport) {
+            airportList.push(airport.airportName);
+        });
+        //   console.log(airportList);
+        return res.json(airportList);
     });
-  });
+});
 
 module.exports = router;
