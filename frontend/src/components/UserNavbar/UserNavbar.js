@@ -101,7 +101,7 @@ function PersistentDrawerLeft(props) {
                         edge='start'
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon />
+                        <MenuIcon sx={{ fontSize: 30 }}/>
                     </IconButton>
 
                     <Typography className='header' variant='h3' noWrap component='div'>
@@ -129,14 +129,14 @@ function PersistentDrawerLeft(props) {
                 <List>
                     <ListItem button component={Link} to='/searchFlights'>
                         <ListItemIcon>
-                            <FaPlane />
+                            <FaPlane fontSize="large" />
                         </ListItemIcon>
                         <ListItemText primary='Book a Flight' />
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/customerDashboard'>
                         <ListItemIcon>
-                            <FaPlane />
+                            <FaPlane fontSize="large"/>
                         </ListItemIcon>
                         <ListItemText primary='My Dashboard' />
                     </ListItem>
