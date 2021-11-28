@@ -20,6 +20,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from 'react-icons/fa';
 import { withStyles } from '@material-ui/core/styles';
 import './UserNav.css';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 
@@ -125,29 +126,19 @@ function PersistentDrawerLeft(props) {
                     <IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
                 </DrawerHeader>
                 <Divider />
-                {/* <List>
-          {['Book a Flight', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <FaPlane /> : <FaPlane />}
-              </ListItemIcon>
-              <ListItemText primary={text} /> 
-            </ListItem>
-          ))}
-        </List> */}
                 <List>
-                    <ListItem>
+                    <ListItem button component={Link} to='/searchFlights'>
                         <ListItemIcon>
                             <FaPlane />
                         </ListItemIcon>
                         <ListItemText primary='Book a Flight' />
                     </ListItem>
                     <Divider />
-                    <ListItem>
+                    <ListItem button component={Link} to='/customerDashboard'>
                         <ListItemIcon>
                             <FaPlane />
                         </ListItemIcon>
-                        <ListItemText primary='My Flights' />
+                        <ListItemText primary='My Dashboard' />
                     </ListItem>
                     <Divider />
                 </List>

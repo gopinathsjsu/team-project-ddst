@@ -6,6 +6,7 @@ import Landing from './components/Landing/Landing';
 import Login from './components/Login/Login';
 import AdminLogin from './components/AdminLogin/AdminLogin';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
+import SearchFlights from './components/SearchFlights/SearchFlights';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                 <Route exact path='/login' element={<Login />} />
                 <Route exact path='/adminLogin' element={<AdminLogin />} />
                 <Route exact path='/customerDashboard' element={<CustomerDashboard />} />
+                <Route exact path='/searchFlights' element={<SearchFlights />} />
             </Routes>
         </BrowserRouter>
     );

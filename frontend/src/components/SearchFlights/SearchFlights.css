@@ -1,0 +1,11 @@
+.searchFlightsBody {
+    height: 100vh !important;
+}
+
+
+.searchContainer {
+    margin: auto;
+    max-width: auto;
+    padding-top: auto;
+    padding: 30px 400px;
+}

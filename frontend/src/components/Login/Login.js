@@ -27,6 +27,7 @@ function Login() {
 
         axios.post('http://localhost:3001/passenger/login', data).then((response) => {
             console.log('Got response data', response.data);
+            localStorage.setItem('email',email)
             navigate('/customerDashboard')
             
         });

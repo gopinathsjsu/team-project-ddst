@@ -6,18 +6,12 @@ import { TextField } from 'formik-mui';
 import './Register.css';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
+import {useNavigate} from "react-router-dom"; 
 
-// const useStyle = makeStyles((theme) => ({
-//     padding: {
-//         padding: theme.spacing(3),
-//     },
-//     button: {
-//         margin: theme.spacing(1),
-//     },
-// }));
 
 const UserForm = () => {
     // const classes = useStyle();
+    let navigate=useNavigate();
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -42,6 +36,8 @@ const UserForm = () => {
 
         axios.post('http://localhost:3001/passenger/register', data).then((response) => {
             console.log('Got response data', response.data);
+            localStorage.setItem('email',email)
+            navigate('/customerDashboard')
         });
     };
 
