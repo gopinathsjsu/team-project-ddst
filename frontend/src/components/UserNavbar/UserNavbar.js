@@ -21,6 +21,7 @@ import { FaPlane } from 'react-icons/fa';
 import { withStyles } from '@material-ui/core/styles';
 import './UserNav.css';
 import { Link } from 'react-router-dom';
+import { BsFillPersonFill } from 'react-icons/bs';
 
 const drawerWidth = 240;
 
@@ -89,6 +90,12 @@ function PersistentDrawerLeft(props) {
         setOpen(false);
     };
 
+    const handleLogout = ()=>
+    {
+        localStorage.removeItem('email')
+    }
+
+
     return (
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
@@ -141,6 +148,13 @@ function PersistentDrawerLeft(props) {
                         <ListItemText primary='My Dashboard' />
                     </ListItem>
                     <Divider />
+                    <ListItem button component={Link} to='/login' onClick={handleLogout}>
+                        <ListItemIcon>
+                            <BsFillPersonFill fontSize="large"/>
+                        </ListItemIcon>
+                        <ListItemText primary='Logout' />
+                    </ListItem>
+
                 </List>
             </Drawer>
             <Main open={open}>

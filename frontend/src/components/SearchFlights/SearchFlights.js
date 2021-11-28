@@ -18,6 +18,10 @@ function SearchFlights(props) {
     const [airportList, setAirports] = React.useState([]);
     const [selectedAirport, setSelectedAirport] = React.useState("");
     const [updatedAirportList,setUpdatedAirportList]=React.useState([])
+    const [origin,setOrigin]=React.useState("")
+    const [destination,setDestination]=React.useState("")
+    const [date,setDate]=React.useState("")
+
 
     useEffect(() => {
 
@@ -53,6 +57,24 @@ function SearchFlights(props) {
         console.log("Printing updated list",filteredList)
         setUpdatedAirportList(filteredList)
     }
+
+
+    const handleSubmit=(e)=>
+    {
+        e.preventDefault();
+
+        var data = {
+            origin: origin,
+            destination: destination,
+            date:date
+        };
+        console.log('Printing data', data);
+
+    //     axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
+    //         console.log('Got response data', response.data);
+    //     });
+    // };
+    }
     return (
         <div className='searchFlightsBody'>
         <UserNavbar />
@@ -75,6 +97,7 @@ function SearchFlights(props) {
       renderInput={(params) => <TextField {...params} label="Origin" variant="outlined" />}
       onChange={(event, newValue) => {
         handleSelectedValue(newValue);
+        setOrigin(newValue)
       }}
     />
     <br></br>
@@ -85,20 +108,23 @@ function SearchFlights(props) {
       getOptionLabel={(option) => option}
       style={{ width: 400 }}
       renderInput={(params) => <TextField {...params} label="Destination" variant="outlined" />}
-    //   onChange={(event, newValue) => {
-    //     handleChangeActor2(newValue);
-    //   }}
+      onChange={(event, newValue) => {
+        setDestination(newValue);
+      }}
     />
     <br></br>
     <label for="deptdate">Departure Date:</label>
     <br></br>
-    <input type="date" min={disablePastDate()}>
+    <input type="date" min={disablePastDate()} onChange={(event, newValue) => {
+        setDate(event.target.value);
+        console.log(event.target.value)
+      }}>
 
     </input>
     <br/><br/>
     
 
-                                <button class='btn'>SEARCH FLIGHTS</button>
+                                <button class='btn' onClick={handleSubmit}>SEARCH FLIGHTS</button>
                             
                         </form>
                     </div>
