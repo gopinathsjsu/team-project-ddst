@@ -92,23 +92,19 @@ router.post('/selectFlight', async (req, res) => {
 //     }
 // });
 
-async function milesDelete(emailID, userDetails, selectFlight, mileagePoints) {
-    mileagePoints = userDetails.mileageRewards - Math.round(selectFlight.numberOfMiles / 100);
+async function milesDelete(emailID, userDetails, cancelSeat, mileagePoints) {
+    mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
     await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
     return;
 }
 
-async function seatDelete(selectFlight, seatNumber) {
-    let flag = 'Not Available';
-    if (selectFlight.seatsAvailable.indexOf(seatNumber) === -1) {
-        return flag;
-    }
-    await flightSchema.updateOne({ seatsAvailable: seatNumber }, { $pull: { seatsAvailable: seatNumber } });
+async function seatDelete(cancelSeat, seatNumber) {
+    await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
     return;
 }
 
-async function flightCanceled(emailID, selectFlight) {
-    await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: selectFlight.id } });
+async function flightCanceled(emailID, cancelSeat) {
+    await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: cancelSeat.id } });
     return;
 }
 
@@ -130,6 +126,7 @@ router.post('/cancelReservation', async (req, res) => {
                                     let mileagePoints = 0;
                                     milesDelete(emailID, userDetails, cancelSeat, mileagePoints);
                                     flightCanceled(emailID, cancelSeat);
+                                    seatDelete(cancelSeat, seatNumber);
                                 }
                             });
                             res.status(200).json({ message: 'Reservation canceled successfully!' });
@@ -138,35 +135,7 @@ router.post('/cancelReservation', async (req, res) => {
                         }
                     })
                     .catch((err) => console.log(err));
-
-                flag = seatUpdate(cancelSeat, seatNumber);
-                if (flag === 'Not Available') {
-                    return res.json({ message: 'Seat not Available, choose another seat!' });
-                }
-                passengerSchema.findOne({ emailID }).then((userDetails) => {
-                    if (userDetails) {
-                        let mileagePoints = 0;
-                        milesDelete(emailID, userDetails, cancelSeat, mileagePoints);
-                        flightReserved(emailID, cancelSeat);
-                    } else res.json({ status: false, message: 'Error while selecting!' });
-                });
-                let passengerDetail = new bookingSchema({
-                    passengerFirstName: passengerFirstName,
-                    passengerLastName: passengerLastName,
-                    flightNumber: selectFlight.flightNumber,
-                    airplaneName: selectFlight.airplaneName,
-                    origin: selectFlight.origin,
-                    destination: selectFlight.destination,
-                    seatNumber: seatNumber,
-                    price: selectFlight.price,
-                    startTime: selectFlight.startTime,
-                    endTime: selectFlight.endTime,
-                });
-                passengerDetail
-                    .save()
-                    .then((passengerDetail) => res.json(passengerDetail))
-                    .catch((err) => console.log(err));
-            } else res.json({ status: false, message: 'Error while selecting!' });
+            } else res.json({ status: false, message: 'No such flight found!' });
         });
     } catch (error) {
         console.log(error);
