@@ -110,6 +110,9 @@ async function milesDelete(emailID, userDetails, cancelSeat, mileagePoints) {
 }
 
 async function seatDelete(cancelSeat, seatNumber) {
+    if(cancelSeat.seatsAvailable.indexOf(seatNumber) !==-1){
+        return;
+    }
     await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
     return;
 }
