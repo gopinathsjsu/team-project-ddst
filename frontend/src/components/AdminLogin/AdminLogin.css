@@ -1,3 +1,4 @@
 .adminLoginBody {
     height: 100vh !important;
+    overflow-x: hidden;
 }

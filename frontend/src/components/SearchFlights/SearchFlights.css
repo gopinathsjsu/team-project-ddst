@@ -1,5 +1,7 @@
 .searchFlightsBody {
     height: 100vh !important;
+    /* max-width: auto; */
+    overflow-x: hidden;
 }
 
 

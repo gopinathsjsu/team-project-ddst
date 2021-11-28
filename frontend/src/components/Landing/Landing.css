@@ -1,3 +1,4 @@
 .landingBody {
     height: 100vh !important;
+    overflow-x: hidden;
 }
