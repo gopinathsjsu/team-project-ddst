@@ -65,4 +65,22 @@ router.post('/login', (req, res) => {
     });
 });
 
+router.post('/userDashboardDetails', (req, res) => {
+    const emailID = req.body.emailID;
+
+    // Find user by email
+    passengerSchema.findOne({ emailID }).then((user) => {
+        // Check if user exists
+        if (!user) {
+            return res.status(404).json({ emailnotfound: 'Email not found' });
+        } else {
+            res.json({
+                firstName: user.firstName,
+                lastName: user.lastName,
+                mileageRewards: user.mileageRewards,
+            });
+        }
+    });
+});
+
 module.exports = router;

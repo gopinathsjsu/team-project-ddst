@@ -90,7 +90,7 @@ router.post('/addFlights', (req, res) => {
     });
 });
 
-router.get('/deleteFlight', function (req, res) {
+router.post('/deleteFlight', function (req, res) {
     flightSchema
         .findOneAndDelete({ flightNumber: req.body.flightNumber })
         .then((deleteflight) => {
