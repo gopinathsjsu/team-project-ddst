@@ -83,6 +83,11 @@ async function seatUpdate(seatNumber){
     return 
 }
 
+async function flightReserved(emailID,selectFlight){
+    await passengerSchema.updateOne({ emailID:emailID }, { $push: { "flightsReserved": selectFlight.id } });
+    return 
+}
+
 
 router.post('/passengerDetails', async (req, res) => {
     try {
@@ -98,6 +103,7 @@ router.post('/passengerDetails', async (req, res) => {
                     if(userDetails){
                         let mileagePoints = 0;
                         milesUpdate(emailID,userDetails,selectFlight,mileagePoints);
+                        flightReserved(emailID,selectFlight);
                     }
                     else res.json({ status: false, message: 'Error while selecting!' });
                 });
