@@ -16,21 +16,35 @@ import axios from 'axios';
 
 function SearchFlights(props) {
     const [airportList, setAirports] = React.useState([]);
+    const [selectedAirport, setSelectedAirport] = React.useState("");
+    const [updatedAirportList,setUpdatedAirportList]=React.useState([])
 
     useEffect(() => {
 
         axios.get("http://localhost:3001/admin/getAirportNames").then((response)=>
         {
         console.log("Got list of all airports",response.data)
-        
-         setAirports(response.data)
-        
-        
+        setAirports(response.data)
         }
         );
     },[])
 
-
+    const handleSelectedValue = (value) => {
+        console.log("Got Selected Value",value);
+        
+        console.log("Selected origin airport",value)
+        for(let i=0;i<airportList.length;i++)
+        {
+            if(airportList[i]==value)
+            {
+                continue;
+            }
+            updatedAirportList[i]=airportList[i];
+        };
+        let filteredList=updatedAirportList.filter(n=>n)
+        console.log("Printing updated list",filteredList)
+        setUpdatedAirportList(filteredList)
+    }
     return (
         <div className='searchFlightsBody'>
         <UserNavbar />
@@ -47,19 +61,19 @@ function SearchFlights(props) {
 
                         <Autocomplete
       id="combo-box-demo"
-    //   options={actor1list}
+      options={airportList}
       getOptionLabel={(option) => option}
       style={{ width: 400 }}
       renderInput={(params) => <TextField {...params} label="Origin" variant="outlined" />}
-    //   onChange={(event, newValue) => {
-    //     handleChangeActor1(newValue);
-    //   }}
+      onChange={(event, newValue) => {
+        handleSelectedValue(newValue);
+      }}
     />
     <br></br>
 
 <Autocomplete
       id="combo-box-demo"
-    //   options={actor2list}
+      options={updatedAirportList}
       getOptionLabel={(option) => option}
       style={{ width: 400 }}
       renderInput={(params) => <TextField {...params} label="Destination" variant="outlined" />}
@@ -92,5 +106,6 @@ function SearchFlights(props) {
     </div>
     );
 }
+
 
 export default SearchFlights;
