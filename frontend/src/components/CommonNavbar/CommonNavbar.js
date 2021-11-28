@@ -24,6 +24,7 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import { Redirect } from 'react-router';
 import { useHistory } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import { fontSize } from '@mui/system';
 
 const drawerWidth = 240;
 
@@ -77,9 +78,9 @@ const styles = (theme) => ({
     toolbarButtons: {
         marginLeft: 'auto',
     },
-    // listItemText:{
-    //     fontSize:'30',//Not working, check later
-    //   }
+    listItemText:{
+        fontSize: '2rem',//Not working, check later
+      },
     list: {
         width: 250,
     },
@@ -105,17 +106,18 @@ function CommonNavbar(props) {
         <Box sx={{ display: 'flex' }}>
             <CssBaseline />
             <AppBar position='fixed' open={open}>
-                <Toolbar>
+                <Toolbar >
                     <IconButton
+                        
                         iconStyle={styles.largeIcon}
-                        fontSize='large'
+                        fontSize="large"
                         color='inherit'
                         aria-label='open drawer'
                         onClick={handleDrawerOpen}
                         edge='start'
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon />
+                        <MenuIcon sx={{ fontSize: 30 }} />
                     </IconButton>
 
                     <Typography className='header' variant='h3' noWrap component='div'>
@@ -145,12 +147,12 @@ function CommonNavbar(props) {
                         <ListItemIcon>
                             <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText classes={{ primary: classes.listItemText }} primary='Admin' />
+                        <ListItemText primary='Admin' sx={{ fontSize: 30 }}/>
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/register'>
                         <ListItemIcon>
-                            <BsFillPersonFill fontSize='large' />
+                            <BsFillPersonFill fontSize='large'/>
                         </ListItemIcon>
                         <ListItemText primary='Customer' />
                     </ListItem>
