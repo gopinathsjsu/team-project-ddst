@@ -5,7 +5,7 @@ const flightSchema = require('../models/Flight');
 const router = express.Router();
 
 router.post('/search', async (req, res) => {
-    flightSchema.find({ origin: req.body.origin, destination: req.body.destination, startTime: req.body.startTime }).exec((err, flightSchema) => {
+    flightSchema.find({ origin: req.body.origin, destination: req.body.destination }).exec((err, flightSchema) => {
         if (err) {
             console.log(err);
             res.json({ status: false, message: 'Error while searching' });
