@@ -15,6 +15,22 @@ import axios from 'axios';
 
 
 function SearchFlights(props) {
+    const [airportList, setAirports] = React.useState([]);
+
+    useEffect(() => {
+
+        axios.get("http://localhost:3001/admin/getAirportNames").then((response)=>
+        {
+        console.log("Got list of all airports",response.data)
+        
+         setAirports(response.data)
+        
+        
+        }
+        );
+    },[])
+
+
     return (
         <div className='searchFlightsBody'>
         <UserNavbar />
@@ -62,7 +78,7 @@ function SearchFlights(props) {
     </input>
     <br/><br/>
 
-    
+
     
                            
 

@@ -129,7 +129,7 @@ router.get('/getAirportNames', function(req, res) {
         airportList.push(airport.airportName);
       });
     //   console.log(airportList);
-      res.send(airportList);  
+     return res.json(airportList);  
     });
   });
 
