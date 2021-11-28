@@ -36,13 +36,14 @@ async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints) {
 
 // Try-Catch remaining
 async function seatUpdate(selectFlight, seatNumber) {
-    let flag = true;
+    const flag = 0;
     if(selectFlight.seatsAvailable.indexOf(seatNumber)===-1){
         return flag;
     }
     await flightSchema.updateOne({ seatsAvailable: seatNumber }, { $pull: { seatsAvailable: seatNumber } });
-    return !(flag);
-    
+    const temp = 1;
+    // console.log(temp);
+    return temp;
 }
 
 async function flightReserved(emailID, selectFlight) {
@@ -62,10 +63,11 @@ router.post('/passengerDetails', async (req, res) => {
             if (selectFlight) {
                 passengerSchema.findOne({ emailID }).then((userDetails) => {
                     if (userDetails) {
-                        flag = seatUpdate(selectFlight, seatNumber);
-                        console.log(flag);
-                        if (flag) {
-                        return res.json({ message: 'Seat not Available, choose another seat!' });}
+                        seatUpdate(selectFlight, seatNumber).then(result => {
+                        console.log(result);
+                        if (result===0) {
+                            return res.json({ message: 'Seat not Available, choose another seat!' });  
+                        }
                         else{
                         let mileagePoints = 0;
                         milesUpdate(emailID, userDetails, selectFlight, mileagePoints);
@@ -88,6 +90,7 @@ router.post('/passengerDetails', async (req, res) => {
                             .then((passengerDetail) => res.json(passengerDetail))
                             .catch((err) => console.log(err));
                         }
+                    });
                     } else return res.json({ status: false, message: 'Please Login to Book the flight!' });
                 });
                 
