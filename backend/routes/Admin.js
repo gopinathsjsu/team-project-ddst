@@ -52,7 +52,7 @@ router.post('/adminLogin', (req, res) => {
     adminSchema.findOne({ email }).then((user) => {
         // Check if user exists
         if (!user) {
-            return res.status(404).json({ emailnotfound: 'Email not found' });
+            return res.status(404).json({ emailNotFound: 'Email not found' });
         }
         // Check password
         bcrypt.compare(password, user.password).then((isMatch) => {
@@ -61,7 +61,7 @@ router.post('/adminLogin', (req, res) => {
                 res.writeHead(200, { 'Content-Type': 'text/plain' });
                 res.end('Successful Login');
             } else {
-                return res.status(400).json({ passwordincorrect: 'Password incorrect' });
+                return res.status(400).json({ passwordIncorrect: 'Password incorrect' });
             }
         });
     });
@@ -91,11 +91,44 @@ router.post('/addFlights', (req, res) => {
     });
 });
 
+// router.post('/deleteFlight', function (req, res) {
+//     flightSchema
+//         .findOneAndDelete({ flightNumber: req.body.flightNumber })
+//         .then((deleteFlight) => {
+//             if (deleteFlight) {
+//                 res.status(200).json({ message: 'Flight deleted successfully!' });
+//             } else {
+//                 res.status(400).json({ message: 'Flight does not exist!' });
+//             }
+//         })
+//         .catch((err) => console.log(err));
+// });
+
+async function revertMileageRewards(emailID, userDetails, cancelSeat, mileagePoints) {
+    mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
+    await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
+    return;
+}
+
+async function seatDelete(cancelSeat, seatNumber) {
+    if (cancelSeat.seatsAvailable.indexOf(seatNumber) !== -1) {
+        return;
+    }
+    await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
+    return;
+}
+
+async function flightCanceled(emailID, cancelSeat) {
+    await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: cancelSeat.id } });
+    return;
+}
+
 router.post('/deleteFlight', function (req, res) {
     flightSchema
-        .findOneAndDelete({ flightNumber: req.body.flightNumber })
+        .findOneAndDelete({ _id: req.body.id })
         .then((deleteFlight) => {
             if (deleteFlight) {
+                revertMileageRewards();
                 res.status(200).json({ message: 'Flight deleted successfully!' });
             } else {
                 res.status(400).json({ message: 'Flight does not exist!' });

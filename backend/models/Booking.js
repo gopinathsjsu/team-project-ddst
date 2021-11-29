@@ -30,6 +30,10 @@ const bookingSchema = new Schema({
         type: String,
         required: true,
     },
+    mileageRewardsUsed: {
+        type: Number,
+        default: 0,
+    },
     numOfSeats: {
         type: Number,
     },
