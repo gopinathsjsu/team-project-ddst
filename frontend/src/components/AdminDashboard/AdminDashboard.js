@@ -12,6 +12,7 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
+import AdminNavbar from "../AdminNavbar/AdminNavbar"
 
 
 function SearchFlights(props) {
@@ -74,18 +75,26 @@ function SearchFlights(props) {
             flightNumber:parseInt(flightNumber),
             numberOfMiles:parseInt(miles),
             startTime:arrivalDate,
-            endTime:departureDate
+            endTime:departureDate,
+            price:ticketCost
         };
         console.log('Printing data', data);
 
         axios.post('http://localhost:3001/admin/addFlights', data).then((response) => {
+            console.log("STATUS",response.status)
+            if(response.status==202)
+            {
+                console.log("Flight already there")
+                alert("Flight Already exists!")
+            }
             console.log('Got response data', response.data);
+            
         });
     };
     
     return (
         <div className='searchFlightsBody'>
-            
+            <AdminNavbar/>
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>
