@@ -148,7 +148,7 @@ function PersistentDrawerLeft(props) {
                         <ListItemText primary='My Dashboard' />
                     </ListItem>
                     <Divider />
-                    <ListItem button component={Link} to='/login' onClick={handleLogout}>
+                    <ListItem button component={Link} to='/home' onClick={handleLogout}>
                         <ListItemIcon>
                             <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>

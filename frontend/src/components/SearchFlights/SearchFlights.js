@@ -123,7 +123,7 @@ function SearchFlights(props) {
               <TableCell align="center">{row.destination}</TableCell>
               <TableCell align="center">{row.startTime}</TableCell>
               <TableCell align="center">{row.endTime}</TableCell>
-              <TableCell align="center">{row.price}</TableCell>
+              <TableCell align="center">$ {row.price}</TableCell>
               <TableCell align="center"><Button>Book Now</Button></TableCell>
             </TableRow>
         // </TableBody>

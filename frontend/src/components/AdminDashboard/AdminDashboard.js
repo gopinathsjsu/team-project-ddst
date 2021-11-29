@@ -16,11 +16,16 @@ import axios from 'axios';
 
 function SearchFlights(props) {
     const [airportList, setAirports] = React.useState([]);
-    const [selectedAirport, setSelectedAirport] = React.useState("");
     const [updatedAirportList,setUpdatedAirportList]=React.useState([])
     const [origin,setOrigin]=React.useState("")
     const [destination,setDestination]=React.useState("")
-    const [date,setDate]=React.useState("")
+    const [ticketCost,setTicketCost]=React.useState("")
+    const [departureDate,setDepartureDateTime]=React.useState("")
+    const [arrivalDate,setArrivalDateTime]=React.useState("")
+    const [flightNumber,setFlightNumber]=React.useState("")
+    const [miles,setMiles]=React.useState("")
+    
+
 
 
     useEffect(() => {
@@ -66,18 +71,21 @@ function SearchFlights(props) {
         var data = {
             origin: origin,
             destination: destination,
-            date:date
+            flightNumber:parseInt(flightNumber),
+            numberOfMiles:parseInt(miles),
+            startTime:arrivalDate,
+            endTime:departureDate
         };
         console.log('Printing data', data);
 
-    //     axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
-    //         console.log('Got response data', response.data);
-    //     });
-    // };
-    }
+        axios.post('http://localhost:3001/admin/addFlights', data).then((response) => {
+            console.log('Got response data', response.data);
+        });
+    };
+    
     return (
         <div className='searchFlightsBody'>
-            <UserNavbar />
+            
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>
@@ -89,12 +97,14 @@ function SearchFlights(props) {
                             <label for='exampleInputPassword1'>Origin</label>
                             <Autocomplete className="searchContainer"
                                 id="combo-box-demo"
-                                options={updatedAirportList}
+                                options={airportList}
                                 getOptionLabel={(option) => option}
                                 // style={{ width: "relative" }}
                                 renderInput={(params) => <TextField {...params} label="Origin" variant="outlined" />}
                                 onChange={(event, newValue) => {
-                                    setDestination(newValue);
+                                    setOrigin(newValue);
+                                    handleSelectedValue(newValue);
+                                    console.log(origin)
                                 }}
                                 />
                                 <br></br>
@@ -107,6 +117,7 @@ function SearchFlights(props) {
                                 renderInput={(params) => <TextField {...params} label="Destination" variant="outlined" />}
                                 onChange={(event, newValue) => {
                                     setDestination(newValue);
+                                    console.log(destination)
                                 }}
                                 />
                                 <br></br>
@@ -116,9 +127,9 @@ function SearchFlights(props) {
                                     class='form-control'
                                     id='number'
                                     placeholder='Enter Flight Number'
-                                    // onChange={(e) => {
-                                    //     setEmail(e.target.value);
-                                    // }}
+                                    onChange={(e) => {
+                                        setFlightNumber(e.target.value);
+                                    }}
                                 />
                             </div>
                             <div class='form-group inputLogin' style={{ color: 'black' }}>
@@ -128,9 +139,9 @@ function SearchFlights(props) {
                                     class='form-control'
                                     id='number'
                                     placeholder='Enter Miles'
-                                    // onChange={(e) => {
-                                    //     setPassword(e.target.value);
-                                    // }}
+                                    onChange={(e) => {
+                                        setMiles(e.target.value);
+                                    }}
                                 />
                             </div>
                                 <div class='form-group inputLogin' style={{ color: 'black' }}>
@@ -140,15 +151,31 @@ function SearchFlights(props) {
                                     class='form-control'
                                     id='number'
                                     placeholder='Enter Ticket Cost'
-                                    // onChange={(e) => {
-                                    //     setPassword(e.target.value);
-                                    // }}
+                                    onChange={(e) => {
+                                        setTicketCost(e.target.value);
+                                    }}
                                 />
                             </div>
                                 <label for="deptime">Departure Date:</label><br></br>
-                                    <input type="datetime-local" id="deptime" name="deptime"></input><br></br><br></br>
+                                    <input type="datetime-local" 
+                                    id="deptime" 
+                                    name="deptime"
+                                    onChange={(e) => {
+                                        setDepartureDateTime(e.target.value);
+                                    }}>
+                                    </input><br></br><br></br>
+
+
+
                                 <label for="arrtime">Arrival Date:</label><br></br>
-                                    <input type="datetime-local" id="arrtime" name="arrtime"></input><br></br>
+                                    <input 
+                                    type="datetime-local" 
+                                    id="arrtime" 
+                                    name="arrtime"
+                                    onChange={(e) => {
+                                        setArrivalDateTime(e.target.value);
+                                    }}
+                                    ></input><br></br>
                                 <br></br>
                             <center>
                                 <button class='btn'>Add Flight</button>
