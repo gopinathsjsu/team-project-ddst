@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
     table: {
       fontSize: '200pt',
     },
+    tablecell:{
+        fontSize:'40pt'
+    }
   }));
 
   const disablePastDate = () => {
@@ -127,26 +130,26 @@ function SearchFlights(props) {
       
         )}
 
-    const createTableHead =()=>
-{
-        console.log("Creating table head")
-        return         
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
-            <TableHead>
-            <TableRow>
-            <TableCell align="center">Flight Number</TableCell>
-                <TableCell align="center">Origin</TableCell>
-                <TableCell align="center">Destination</TableCell>
-                <TableCell align="center">Departure Time</TableCell>
-                <TableCell align="center">Arrival Time</TableCell>
-                <TableCell align="center">Price</TableCell>
-                <TableCell align="center">Book Flight</TableCell>
-            </TableRow>
-            </TableHead>
-            </Table>
-    </TableContainer>
-    }
+//    const createTableHead =()=>
+// {
+//         console.log("Creating table head")
+//         return         
+//         <TableContainer component={Paper}>
+//             <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
+//             <TableHead>
+//             <TableRow>
+//             <TableCell align="center">Flight Number</TableCell>
+//                 <TableCell align="center">Origin</TableCell>
+//                 <TableCell align="center">Destination</TableCell>
+//                 <TableCell align="center">Departure Time</TableCell>
+//                 <TableCell align="center">Arrival Time</TableCell>
+//                 <TableCell align="center">Price</TableCell>
+//                 <TableCell align="center">Book Flight</TableCell>
+//             </TableRow>
+//             </TableHead>
+//             </Table>
+//     </TableContainer>
+//     }
     
     
     
@@ -202,7 +205,7 @@ function SearchFlights(props) {
     <br/><br/>
     
 
-                                <button class='btn' onClick={handleSubmit}>SEARCH FLIGHTS</button>
+                               <button class='btn' onClick={handleSubmit}>SEARCH FLIGHTS</button>
                             
                         </form>
                         
@@ -210,11 +213,12 @@ function SearchFlights(props) {
                 </div>
             </div>
         </div>
+        <br></br>
         {console.log(resultFlights)}
-        {(resultFlights ?         <TableContainer component={Paper}>
+        {(resultFlights ?         <TableContainer component={Paper} className="tableDetails">
             <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
             <TableHead>
-            <TableRow>
+            <TableRow class = "tablecell">
             <TableCell align="center">Flight Number</TableCell>
                 <TableCell align="center">Origin</TableCell>
                 <TableCell align="center">Destination</TableCell>

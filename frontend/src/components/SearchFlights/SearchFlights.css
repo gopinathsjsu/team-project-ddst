@@ -2,10 +2,11 @@
     height: 100vh !important;
     /* max-width: auto; */
     overflow-x: hidden;
+    
 }
 
 
-/* .searchContainer {
+.searchContainer {
     width: auto;
     height: auto;
     margin: auto;
@@ -15,6 +16,6 @@
     bottom: 0;
     right: 0;
     text-align: center;
-} */
+}
 
 
