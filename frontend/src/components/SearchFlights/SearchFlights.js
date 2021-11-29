@@ -36,7 +36,22 @@ const useStyles = makeStyles(theme => ({
     },
     tablecell:{
         fontSize:'40pt'
-    }
+    },
+    root: {
+        "& .Autocomplete": {
+          border: "2px solid grey",
+          minHeight: 400,
+          color: "green",
+          fontSize: 18,
+          //hover discussed above
+          "& li": {
+            //list item specific styling
+            border: "2px solid green",
+            borderRadius: 4
+          }
+        }
+      }
+    
   }));
 
   const disablePastDate = () => {
@@ -118,12 +133,12 @@ function SearchFlights(props) {
               key={index}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell align="center">{row.flightNumber}</TableCell>
-              <TableCell align="center">{row.origin}</TableCell>
-              <TableCell align="center">{row.destination}</TableCell>
-              <TableCell align="center">{row.startTime}</TableCell>
-              <TableCell align="center">{row.endTime}</TableCell>
-              <TableCell align="center">$ {row.price}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>{row.flightNumber}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>{row.origin}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>{row.destination}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>{row.startTime}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>{row.endTime}</TableCell>
+              <TableCell align="center" style={{ fontSize: 15 }}>$ {row.price}</TableCell>
               <TableCell align="center"><Button>Book Now</Button></TableCell>
             </TableRow>
         // </TableBody>
@@ -171,11 +186,12 @@ function SearchFlights(props) {
 
 
                         <Autocomplete className="searchContainer"
+                       
       id="combo-box-demo"
       options={airportList}
       getOptionLabel={(option) => option}
       style={{ width: 400 }}
-      renderInput={(params) => <TextField {...params} label="Origin" variant="outlined" />}
+      renderInput={(params) => <TextField {...params} className={classes.root} label="Origin" variant="outlined"/>}
       onChange={(event, newValue) => {
         handleSelectedValue(newValue);
         setOrigin(newValue)
@@ -187,8 +203,8 @@ function SearchFlights(props) {
       id="combo-box-demo"
       options={updatedAirportList}
       getOptionLabel={(option) => option}
-      style={{ width: 400 }}
-      renderInput={(params) => <TextField {...params} label="Destination" variant="outlined" />}
+      style={{ width: 400}}
+      renderInput={(params) => <TextField {...params} className={classes.root} label="Destination" variant="outlined" />}
       onChange={(event, newValue) => {
         setDestination(newValue);
       }}
@@ -219,16 +235,16 @@ function SearchFlights(props) {
             <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
             <TableHead>
             <TableRow class = "tablecell">
-            <TableCell align="center">Flight Number</TableCell>
-                <TableCell align="center">Origin</TableCell>
-                <TableCell align="center">Destination</TableCell>
-                <TableCell align="center">Departure Time</TableCell>
-                <TableCell align="center">Arrival Time</TableCell>
-                <TableCell align="center">Price</TableCell>
-                <TableCell align="center">Book Flight</TableCell>
+            <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Flight Number</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Origin</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Destination</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Departure Time</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Arrival Time</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Price</TableCell>
+                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Book Flight</TableCell>
             </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody align="center" style={{ fontWeight: "bold", fontSize: 20 }}>
             {resultFlights? [resultFlights.map(createFlightRow)]:""}
             </TableBody>
             </Table>
