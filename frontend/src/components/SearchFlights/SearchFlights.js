@@ -5,13 +5,45 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import "./SearchFlights.css"
-import { border, margin } from '@mui/system';
-import { Container, Row, Col } from 'react-bootstrap';
+import { border, fontSize, margin } from '@mui/system';
+
 import { useEffect, useState } from "react";
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
+import { makeStyles } from '@material-ui/core/styles';
+import { Container, Button, Form, Row, Col, Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
+
+// Material UI
+
+
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
+
+
+const useStyles = makeStyles(theme => ({
+    root: {
+      fontSize: '200pt',
+    },
+    table: {
+      fontSize: '200pt',
+    },
+  }));
+
+  const disablePastDate = () => {
+    const today = new Date();
+    const dd = String(today.getDate()).padStart(2, "0");
+    const mm = String(today.getMonth()).padStart(2, "0"); //January is 0!
+    const yyyy = today.getFullYear();
+    return yyyy + "-" + mm + "-" + dd;
+};
+
 
 
 function SearchFlights(props) {
@@ -21,6 +53,10 @@ function SearchFlights(props) {
     const [origin,setOrigin]=React.useState("")
     const [destination,setDestination]=React.useState("")
     const [date,setDate]=React.useState("")
+    const [resultFlights,setResultFlights]=React.useState("")
+    const [searchFlightFlag,setSearchFlightFlag]=React.useState(false)
+
+    const classes = useStyles();
 
 
     useEffect(() => {
@@ -33,13 +69,7 @@ function SearchFlights(props) {
         );
     },[])
 
-    const disablePastDate = () => {
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, "0");
-        const mm = String(today.getMonth()).padStart(2, "0"); //January is 0!
-        const yyyy = today.getFullYear();
-        return yyyy + "-" + mm + "-" + dd;
-    };
+
 
     const handleSelectedValue = (value) => {
         console.log("Got Selected Value",value);
@@ -59,6 +89,7 @@ function SearchFlights(props) {
     }
 
 
+
     const handleSubmit=(e)=>
     {
         e.preventDefault();
@@ -70,12 +101,59 @@ function SearchFlights(props) {
         };
         console.log('Printing data', data);
 
-    //     axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
-    //         console.log('Got response data', response.data);
-    //     });
-    // };
+        axios.post('http://localhost:3001/Booking/search', data).then((response) => {
+            console.log('Got response data', response.data.flightSchema);
+            setResultFlights(response.data.flightSchema)
+            setSearchFlightFlag(true)
+        });
+    };
+    
+    const createFlightRow = (row,index) => {
+        return (
+            // <TableBody>
+            <TableRow
+              key={index}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell align="center">{row.flightNumber}</TableCell>
+              <TableCell align="center">{row.origin}</TableCell>
+              <TableCell align="center">{row.destination}</TableCell>
+              <TableCell align="center">{row.startTime}</TableCell>
+              <TableCell align="center">{row.endTime}</TableCell>
+              <TableCell align="center">{row.price}</TableCell>
+              <TableCell align="center"><Button>Book Now</Button></TableCell>
+            </TableRow>
+        // </TableBody>
+      
+        )}
+
+    const createTableHead =()=>
+{
+        console.log("Creating table head")
+        return         
+        <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
+            <TableHead>
+            <TableRow>
+            <TableCell align="center">Flight Number</TableCell>
+                <TableCell align="center">Origin</TableCell>
+                <TableCell align="center">Destination</TableCell>
+                <TableCell align="center">Departure Time</TableCell>
+                <TableCell align="center">Arrival Time</TableCell>
+                <TableCell align="center">Price</TableCell>
+                <TableCell align="center">Book Flight</TableCell>
+            </TableRow>
+            </TableHead>
+            </Table>
+    </TableContainer>
     }
+    
+    
+    
     return (
+
+
+
         <div className='searchFlightsBody'>
         <UserNavbar />
         <div>
@@ -127,13 +205,41 @@ function SearchFlights(props) {
                                 <button class='btn' onClick={handleSubmit}>SEARCH FLIGHTS</button>
                             
                         </form>
+                        
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    );
-}
+        {console.log(resultFlights)}
+        {(resultFlights ?         <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
+            <TableHead>
+            <TableRow>
+            <TableCell align="center">Flight Number</TableCell>
+                <TableCell align="center">Origin</TableCell>
+                <TableCell align="center">Destination</TableCell>
+                <TableCell align="center">Departure Time</TableCell>
+                <TableCell align="center">Arrival Time</TableCell>
+                <TableCell align="center">Price</TableCell>
+                <TableCell align="center">Book Flight</TableCell>
+            </TableRow>
+            </TableHead>
+            <TableBody>
+            {resultFlights? [resultFlights.map(createFlightRow)]:""}
+            </TableBody>
+            </Table>
+    </TableContainer> : "")}
+        
+        
+        </div>
+        
+        
+    )}
 
+
+
+
+            
+   
 
 export default SearchFlights;
