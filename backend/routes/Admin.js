@@ -125,6 +125,7 @@ async function revertMileageRewards(cancelReservation) {
                 revertMileageRewardsFinal(passenger,element.mileageRewardsUsed);
             })
         }
+        
         bookingSchema.findOneAndDelete({flightNumber:element.flightNumber});
  
     }
