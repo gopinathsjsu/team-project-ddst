@@ -1,6 +1,7 @@
 const express = require('express');
 const adminSchema = require('../models/Admin');
 const flightSchema = require('../models/Flight');
+const bookingSchema = require('../models/Booking');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const validateRegisterInput = require('../validation/register');
@@ -76,7 +77,6 @@ router.post('/addFlights', (req, res) => {
                 flightNumber: req.body.flightNumber,
                 origin: req.body.origin,
                 destination: req.body.destination,
-                airplaneName: req.body.airplaneName,
                 price: req.body.price,
                 numberOfMiles: req.body.numberOfMiles,
                 startTime: req.body.startTime,
@@ -104,31 +104,46 @@ router.post('/addFlights', (req, res) => {
 //         .catch((err) => console.log(err));
 // });
 
-async function revertMileageRewards(emailID, userDetails, cancelSeat, mileagePoints) {
-    mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
-    await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
-    return;
-}
-
-async function seatDelete(cancelSeat, seatNumber) {
-    if (cancelSeat.seatsAvailable.indexOf(seatNumber) !== -1) {
-        return;
+async function revertMileageRewards(cancelReservation) {
+    for (let i = 0; i < cancelReservation.length; i++) {
+        let element = cancelReservation[i];
+        if (element.mileageRewardsUsed !== 0) {
+        } else {
+            console.log(element.mileageRewardsUsed);
+        }
     }
-    await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
-    return;
+    // mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
+    // await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
+    // return;
 }
 
-async function flightCanceled(emailID, cancelSeat) {
-    await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: cancelSeat.id } });
-    return;
-}
+// async function seatDelete(cancelSeat, seatNumber) {
+//     if (cancelSeat.seatsAvailable.indexOf(seatNumber) !== -1) {
+//         return;
+//     }
+//     await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
+//     return;
+// }
+
+// async function flightCanceled(emailID, cancelSeat) {
+//     await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: cancelSeat.id } });
+//     return;
+// }
 
 router.post('/deleteFlight', function (req, res) {
     flightSchema
-        .findOneAndDelete({ _id: req.body.id })
+        .findOne({ _id: req.body.id })
         .then((deleteFlight) => {
+            // console.log(deleteFlight[0].flightNumber);
             if (deleteFlight) {
-                revertMileageRewards();
+                bookingSchema.find({ flightNumber: deleteFlight.flightNumber }).then((cancelReservation) => {
+                    if (cancelReservation) {
+                        // console.log(cancelReservation);
+                        // return;
+                        revertMileageRewards(cancelReservation);
+                        return;
+                    }
+                });
                 res.status(200).json({ message: 'Flight deleted successfully!' });
             } else {
                 res.status(400).json({ message: 'Flight does not exist!' });

@@ -14,10 +14,6 @@ const flightSchema = new Schema({
         type: String,
         required: true,
     },
-    airplaneName: {
-        type: String,
-        required: true,
-    },
     passengerList: {
         type: Array,
         default: [],

@@ -72,6 +72,7 @@ router.post('/passengerDetails', async (req, res) => {
                                     passengerFirstName: passengerFirstName,
                                     passengerLastName: passengerLastName,
                                     passengerEmailID: passengerEmailID,
+                                    parentEmailID: emailID,
                                     flightNumber: selectFlight.flightNumber,
                                     airplaneName: selectFlight.airplaneName,
                                     origin: selectFlight.origin,
