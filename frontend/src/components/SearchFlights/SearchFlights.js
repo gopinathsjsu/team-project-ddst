@@ -191,7 +191,7 @@ function SearchFlights(props) {
       options={airportList}
       getOptionLabel={(option) => option}
       style={{ width: 400 }}
-      renderInput={(params) => <TextField {...params} className={classes.root} label="Origin" variant="outlined"/>}
+      renderInput={(params) => <TextField {...params} className={classes.root} label="Origin" variant="outlined" InputLabelProps={{padding:'0px 0px',color: '#555555', style: {fontSize: 14}}}/>}
       onChange={(event, newValue) => {
         handleSelectedValue(newValue);
         setOrigin(newValue)
@@ -204,7 +204,7 @@ function SearchFlights(props) {
       options={updatedAirportList}
       getOptionLabel={(option) => option}
       style={{ width: 400}}
-      renderInput={(params) => <TextField {...params} className={classes.root} label="Destination" variant="outlined" />}
+      renderInput={(params) => <TextField {...params} className={classes.root} label="Destination" variant="outlined" InputLabelProps={{padding:'0px 0px',color: '#555555', style: {fontSize: 14}}}/>}
       onChange={(event, newValue) => {
         setDestination(newValue);
       }}
@@ -221,7 +221,7 @@ function SearchFlights(props) {
     <br/><br/>
     
 
-                               <button class='btn' onClick={handleSubmit}>SEARCH FLIGHTS</button>
+                               <button class='btn' onClick={handleSubmit} style={{backgroundColor:"green",color:"white"}}>SEARCH FLIGHTS</button>
                             
                         </form>
                         
