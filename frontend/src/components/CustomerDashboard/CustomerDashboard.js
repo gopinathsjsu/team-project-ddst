@@ -29,11 +29,7 @@ function CustomerDashboard() {
         const response = await axios.post("http://localhost:3001/passenger/userDashboardDetails",data)
         setFirstName(response.data.firstName)
         setLastName(response.data.lastName)
-        setMileagePoints(response.data.mileageRewards)  
-        
-
-        
-        
+        setMileagePoints(response.data.mileageRewards)   
     }
 
     useEffect(() => {

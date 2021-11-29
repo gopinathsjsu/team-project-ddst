@@ -8,6 +8,7 @@ import AdminLogin from './components/AdminLogin/AdminLogin';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
 import SearchFlights from './components/SearchFlights/SearchFlights';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
+import AdminDeleteFlight from "./components/AdminDeleteFlight/AdminDeleteFlight"
 
 function App() {
     return (
@@ -22,6 +23,7 @@ function App() {
                 <Route exact path='/customerDashboard' element={<CustomerDashboard />} />
                 <Route exact path='/searchFlights' element={<SearchFlights />} />
                 <Route exact path='/adminDashboard' element={<AdminDashboard />} />
+                <Route exact path='/adminDeleteFlight' element={<AdminDeleteFlight />} />
             </Routes>
         </BrowserRouter>
     );
