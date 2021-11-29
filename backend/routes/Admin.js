@@ -71,7 +71,7 @@ router.post('/adminLogin', (req, res) => {
 router.post('/addFlights', (req, res) => {
     flightSchema.findOne({ flightNumber: req.body.flightNumber }).then((flight) => {
         if (flight) {
-            return res.status(400).json({ message: 'Flight already exists' });
+            return res.status(202).json({ message: 'Flight already exists' });
         } else {
             const newFlight = new flightSchema({
                 flightNumber: req.body.flightNumber,
