@@ -77,6 +77,7 @@ const styles = {
     },
 };
 
+
 function PersistentDrawerLeft(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -138,21 +139,21 @@ function PersistentDrawerLeft(props) {
                         <ListItemIcon>
                             <FaPlane fontSize="large" />
                         </ListItemIcon>
-                        <ListItemText primary='Book a Flight' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Book a Flight'/>
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/customerDashboard'>
                         <ListItemIcon>
                             <FaPlane fontSize="large"/>
                         </ListItemIcon>
-                        <ListItemText primary='My Dashboard' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='My Dashboard' />
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/home' onClick={handleLogout}>
                         <ListItemIcon>
                             <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>
-                        <ListItemText primary='Logout' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography fontSize="large" primary='Logout' />
                     </ListItem>
 
                 </List>
