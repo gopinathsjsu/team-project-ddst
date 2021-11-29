@@ -14,7 +14,8 @@ import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Button, Form, Row, Col, Card } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
+
 
 // Material UI
 
@@ -70,6 +71,8 @@ function SearchFlights(props) {
     const [searchFlightFlag, setSearchFlightFlag] = React.useState(false);
 
     const classes = useStyles();
+
+    const navigate=useNavigate();
 
     useEffect(() => {
         axios.get('http://localhost:3001/admin/getAirportNames').then((response) => {
@@ -133,7 +136,10 @@ function SearchFlights(props) {
                     $ {row.price}
                 </TableCell>
                 <TableCell align='center'>
-                    <Button>Book Now</Button>
+                    <Button onClick={() => navigate({
+                                            pathname: `/bookflight/${row.flightNumber}`,
+                                            state: {...row.flightNumber}
+                                        })}>Book Now</Button>
                 </TableCell>
             </TableRow>
             // </TableBody>
@@ -184,7 +190,7 @@ function SearchFlights(props) {
                                             className={classes.root}
                                             label='Origin'
                                             variant='outlined'
-                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 14 } }}
+                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 11.5 } }}
                                         />
                                     )}
                                     onChange={(event, newValue) => {
@@ -206,7 +212,7 @@ function SearchFlights(props) {
                                             className={classes.root}
                                             label='Destination'
                                             variant='outlined'
-                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 14 } }}
+                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 11.5 } }}
                                         />
                                     )}
                                     onChange={(event, newValue) => {
