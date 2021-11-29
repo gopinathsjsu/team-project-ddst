@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const airportSchema = require('../models/Airports');
+const passengerSchema = require('../models/Passenger');
 
 router.post('/adminRegister', (req, res) => {
     // Form validation
@@ -103,43 +104,31 @@ router.post('/addFlights', (req, res) => {
 //         })
 //         .catch((err) => console.log(err));
 // });
+async function revertMileageRewardsFinal(passenger,mileagePoints){
+    balanceMileagePoints = passenger.mileageRewards + mileagePoints;
+    await passengerSchema.updateOne({ emailID: passenger.emailID }, { $set: { mileageRewards: balanceMileagePoints } });
+}
+
 
 async function revertMileageRewards(cancelReservation) {
     for (let i = 0; i < cancelReservation.length; i++) {
         let element = cancelReservation[i];
         if (element.mileageRewardsUsed !== 0) {
-        } else {
-            console.log(element.mileageRewardsUsed);
+            passengerSchema.findOne({emailID:element.parentEmailID}).then((passenger)=>{
+                revertMileageRewardsFinal(passenger,element.mileageRewardsUsed);
+            })
         }
     }
-    // mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
-    // await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
-    // return;
 }
 
-// async function seatDelete(cancelSeat, seatNumber) {
-//     if (cancelSeat.seatsAvailable.indexOf(seatNumber) !== -1) {
-//         return;
-//     }
-//     await flightSchema.updateOne({ _id: cancelSeat.id }, { $push: { seatsAvailable: seatNumber } });
-//     return;
-// }
-
-// async function flightCanceled(emailID, cancelSeat) {
-//     await passengerSchema.updateOne({ emailID: emailID }, { $pull: { flightsReserved: cancelSeat.id } });
-//     return;
-// }
 
 router.post('/deleteFlight', function (req, res) {
     flightSchema
-        .findOne({ _id: req.body.id })
+        .findOneAndDelete({ _id: req.body.id })
         .then((deleteFlight) => {
-            // console.log(deleteFlight[0].flightNumber);
             if (deleteFlight) {
                 bookingSchema.find({ flightNumber: deleteFlight.flightNumber }).then((cancelReservation) => {
                     if (cancelReservation) {
-                        // console.log(cancelReservation);
-                        // return;
                         revertMileageRewards(cancelReservation);
                         return;
                     }
