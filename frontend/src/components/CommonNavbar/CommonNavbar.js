@@ -139,7 +139,7 @@ function CommonNavbar(props) {
                 open={open}
             >
                 <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
+                    <IconButton  onClick={handleDrawerClose}>{theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}</IconButton>
                 </DrawerHeader>
                 <Divider />
                 <List>
@@ -147,14 +147,14 @@ function CommonNavbar(props) {
                         <ListItemIcon>
                             <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText primary='Admin' sx={{ fontSize: 30 }}/>
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Admin'/>
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/register'>
                         <ListItemIcon>
                             <BsFillPersonFill fontSize='large'/>
                         </ListItemIcon>
-                        <ListItemText primary='Customer' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Customer' />
                     </ListItem>
                     <Divider />
                 </List>

@@ -138,7 +138,7 @@ function PersistentDrawerLeft(props) {
                         <ListItemIcon>
                             <FaPlane fontSize="large" />
                         </ListItemIcon>
-                        <ListItemText primary='Add Flights' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Add Flights' />
                     </ListItem>
                     <Divider />
                     
@@ -146,7 +146,7 @@ function PersistentDrawerLeft(props) {
                         <ListItemIcon>
                             <FaPlane fontSize="large" />
                         </ListItemIcon>
-                        <ListItemText primary='Cancel Flights' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Cancel Flights' />
                     </ListItem>
                     <Divider />
 
@@ -154,7 +154,7 @@ function PersistentDrawerLeft(props) {
                         <ListItemIcon>
                             <BsFillPersonFill fontSize="large"/>
                         </ListItemIcon>
-                        <ListItemText primary='Logout' />
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Logout' />
                     </ListItem>
 
                 </List>
