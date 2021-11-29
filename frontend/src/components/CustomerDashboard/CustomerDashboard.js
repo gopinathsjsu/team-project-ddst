@@ -8,6 +8,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Box from '@mui/material/Box';
 import Paper from '@material-ui/core/Paper';
 import { useEffect, useState } from "react";
+import { useNavigate} from "react-router-dom";
 
 let userEmail=localStorage.getItem('email')
 
@@ -18,6 +19,8 @@ function CustomerDashboard() {
     const [lastName, setLastName] = React.useState('');
     const [mileagePoints, setMileagePoints] = React.useState('');
 
+
+    
     
     
     const getDashboard = async (e) => {

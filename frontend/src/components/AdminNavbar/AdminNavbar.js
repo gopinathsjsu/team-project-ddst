@@ -142,7 +142,7 @@ function PersistentDrawerLeft(props) {
                     </ListItem>
                     <Divider />
                     
-                    <ListItem button component={Link} to='/adminDashboard'>
+                    <ListItem button component={Link} to='/adminDeleteFlight'>
                         <ListItemIcon>
                             <FaPlane fontSize="large" />
                         </ListItemIcon>

@@ -13,6 +13,7 @@ import TextField from '@material-ui/core/TextField';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import AdminNavbar from "../AdminNavbar/AdminNavbar"
+import { Link , useNavigate} from "react-router-dom";
 
 
 function SearchFlights(props) {
@@ -25,6 +26,9 @@ function SearchFlights(props) {
     const [arrivalDate,setArrivalDateTime]=React.useState("")
     const [flightNumber,setFlightNumber]=React.useState("")
     const [miles,setMiles]=React.useState("")
+
+    let navigate=useNavigate()
+    
     
 
 
@@ -88,6 +92,10 @@ function SearchFlights(props) {
                 alert("Flight Already exists!")
             }
             console.log('Got response data', response.data);
+            alert("Flight created successfully!")
+            window.location.reload()
+            
+            
             
         });
     };
