@@ -4,6 +4,8 @@ import './Login.css';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import {useNavigate} from "react-router-dom"; 
+import CommonNavbar from '../CommonNavbar/CommonNavbar';
+
 
 function Login() {
 
@@ -35,6 +37,7 @@ function Login() {
 
     return (
         <div className='loginBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
+            <CommonNavbar/>
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>

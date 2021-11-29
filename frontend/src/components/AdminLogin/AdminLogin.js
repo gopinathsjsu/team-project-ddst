@@ -3,6 +3,8 @@ import bg_image from '../../images/254381.jpeg';
 import './AdminLogin.css';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"; 
+import CommonNavbar from '../CommonNavbar/CommonNavbar';
+
 
 
 function AdminLogin() {
@@ -38,6 +40,8 @@ function AdminLogin() {
 
     return (
         <div className='adminLoginBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
+                        <CommonNavbar/>
+
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>

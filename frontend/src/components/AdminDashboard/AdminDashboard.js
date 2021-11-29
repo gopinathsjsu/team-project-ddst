@@ -101,6 +101,7 @@ function SearchFlights(props) {
     };
     
     return (
+        
         <div className='searchFlightsBody'>
             <AdminNavbar/>
             <div className='loginContainer'>

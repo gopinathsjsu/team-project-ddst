@@ -7,6 +7,7 @@ import './Register.css';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import {useNavigate} from "react-router-dom"; 
+import CommonNavbar from '../CommonNavbar/CommonNavbar';
 
 
 const UserForm = () => {
@@ -43,6 +44,7 @@ const UserForm = () => {
 
     return (
         <div className='registerBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
+            <CommonNavbar/>
             <div className='thiscontainer'>
                 <div className='row'>
                     <div className='col-md-4'>
