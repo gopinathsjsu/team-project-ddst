@@ -8,7 +8,7 @@ import AdminLogin from './components/AdminLogin/AdminLogin';
 import CustomerDashboard from './components/CustomerDashboard/CustomerDashboard';
 import SearchFlights from './components/SearchFlights/SearchFlights';
 import AdminDashboard from './components/AdminDashboard/AdminDashboard';
-import AdminDeleteFlight from "./components/AdminDeleteFlight/AdminDeleteFlight"
+import AdminDeleteFlight from './components/AdminDeleteFlight/AdminDeleteFlight';
 
 function App() {
     return (
