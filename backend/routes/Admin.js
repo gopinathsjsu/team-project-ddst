@@ -69,6 +69,13 @@ router.post('/adminLogin', (req, res) => {
     });
 });
 
+router.get('/getAllFlights', function (req, res) {
+    flightSchema.find({}, function (err, flights) {
+        //   console.log(airportList);
+        return res.json(flights);
+    });
+});
+
 router.post('/addFlights', (req, res) => {
     flightSchema.findOne({ flightNumber: req.body.flightNumber }).then((flight) => {
         if (flight) {
@@ -118,6 +125,8 @@ async function revertMileageRewards(cancelReservation) {
                 revertMileageRewardsFinal(passenger,element.mileageRewardsUsed);
             })
         }
+        bookingSchema.findOneAndDelete({flightNumber:element.flightNumber});
+ 
     }
 }
 

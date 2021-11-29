@@ -22,10 +22,6 @@ const bookingSchema = new Schema({
         type: Number,
         required: true,
     },
-    airplaneName: {
-        type: String,
-        required: true,
-    },
     origin: {
         type: String,
         required: true,

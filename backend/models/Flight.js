@@ -65,10 +65,6 @@ const flightSchema = new Schema({
             '5E',
         ],
     },
-    seatsTaken: {
-        type: Array,
-        default: [],
-    },
 });
 
 module.exports = Flight = mongoose.model('flights', flightSchema);
