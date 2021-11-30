@@ -152,7 +152,7 @@ router.post('/cancelReservation', async (req, res) => {
     }
 });
 
-router.get('/getBookedFlight', async (req, res) => {
+router.post('/getBookedFlight', async (req, res) => {
     const flightNumber = req.body.flightNumber;
     flightSchema.findOne({ flightNumber: flightNumber }).then((getFlight) => {
         if (getFlight) {
