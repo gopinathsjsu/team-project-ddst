@@ -152,4 +152,13 @@ router.post('/cancelReservation', async (req, res) => {
     }
 });
 
+router.get('/getBookedFlight', async (req, res) => {
+    const flightNumber = req.body.flightNumber;
+    flightSchema.findOne({ flightNumber: flightNumber }).then((getFlight) => {
+        if (getFlight) {
+            res.json({ getFlight });
+        } else res.json({ status: false, message: 'No such flight available!' });
+    });
+});
+
 module.exports = router;
