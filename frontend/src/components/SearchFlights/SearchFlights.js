@@ -173,57 +173,44 @@ function SearchFlights(props) {
         <div className='searchFlightsBody'>
             <UserNavbar />
             <div>
-                <div className='searchContainer'>
-                    <div className='row'>
-                        <div className='col-md-4'>
-                            <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
-                                BOOK A FLIGHT
-                            </h4>
-                            <form>
-                                <Autocomplete
-                                    className='searchContainer'
-                                    id='combo-box-demo'
-                                    options={airportList}
-                                    getOptionLabel={(option) => option}
-                                    style={{ width: 400 }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            className={classes.root}
-                                            label='Origin'
-                                            variant='outlined'
-                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 11.5 } }}
-                                        />
-                                    )}
-                                    onChange={(event, newValue) => {
-                                        handleSelectedValue(newValue);
-                                        setOrigin(newValue);
-                                    }}
+            <div className='loginContainer'>
+                <div className='row'>
+                    <div className='col-md-4'>
+                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                            BOOK A FLIGHT
+                        </h4>
+                        <form onSubmit={handleSubmit}>
+                            <div class='form-group inputLogin' style={{ color: 'black' }}>
+                            <label for='exampleInputPassword1'>Origin</label>
+                            <Autocomplete className="searchContainer"
+                                id="combo-box-demo"
+                                options={airportList}
+                                getOptionLabel={(option) => option}
+                                // style={{ width: "relative" }}
+                                renderInput={(params) => <TextField {...params} label="Origin" variant="outlined" InputLabelProps={{padding:'0px 0px',color: '#555555', style: {fontSize: 11.5}}}/>}
+                                onChange={(event, newValue) => {
+                                    setOrigin(newValue);
+                                    handleSelectedValue(newValue);
+                                    console.log(origin)
+                                }}
                                 />
                                 <br></br>
-
-                                <Autocomplete
-                                    className='searchContainer'
-                                    id='combo-box-demo'
-                                    options={updatedAirportList}
-                                    getOptionLabel={(option) => option}
-                                    style={{ width: 400 }}
-                                    renderInput={(params) => (
-                                        <TextField
-                                            {...params}
-                                            className={classes.root}
-                                            label='Destination'
-                                            variant='outlined'
-                                            InputLabelProps={{ padding: '0px 0px', color: '#555555', style: { fontSize: 11.5 } }}
-                                        />
-                                    )}
-                                    onChange={(event, newValue) => {
-                                        setDestination(newValue);
-                                    }}
+                                <label for='exampleInputPassword1'>Destination</label>
+                                <Autocomplete className="searchContainer"
+                                id="combo-box-demo"
+                                options={updatedAirportList}
+                                getOptionLabel={(option) => option}
+                                // style={{ width: "relative" }}
+                                renderInput={(params) => <TextField {...params} label="Destination" variant="outlined" InputLabelProps={{style: {padding:'0px 0px',color: '#555555',fontSize: 11.5}}}/>}
+                                onChange={(event, newValue) => {
+                                    setDestination(newValue);
+                                    console.log(destination)
+                                }}
                                 />
                                 <br></br>
-                                <label for='deptdate'>Departure Date:</label>
-                                <br></br>
+                            
+                            </div>
+                                <label for="deptime">Departure Date:</label><br></br>
                                 <input
                                     type='date'
                                     min={disablePastDate()}
@@ -231,18 +218,21 @@ function SearchFlights(props) {
                                         setDate(event.target.value);
                                         console.log(event.target.value);
                                     }}
-                                ></input>
-                                <br />
-                                <br />
-
-                                <button class='btn' onClick={handleSubmit} style={{ backgroundColor: 'green', color: 'white' }}>
+                                ></input><br></br><br></br>
+                            <center>
+                            <button class='btn' onClick={handleSubmit} style={{ backgroundColor: 'green', color: 'white' }}>
                                     SEARCH FLIGHTS
                                 </button>
-                            </form>
-                        </div>
+                            </center>
+                        </form>
                     </div>
                 </div>
             </div>
+            </div>
+
+
+
+
             <br></br>
             {console.log(resultFlights)}
             {resultFlights ? (
