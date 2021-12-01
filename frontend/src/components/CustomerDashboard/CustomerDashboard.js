@@ -10,7 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import { useEffect, useState } from "react";
 import { useNavigate} from "react-router-dom";
 
-let userEmail=localStorage.getItem('email')
+
 
 
 
@@ -23,7 +23,7 @@ function CustomerDashboard() {
     
     
     
-    const getDashboard = async (e) => {
+    const getDashboard = async (userEmail) => {
         
         let data=
     {
@@ -32,11 +32,18 @@ function CustomerDashboard() {
         const response = await axios.post("http://localhost:3001/passenger/userDashboardDetails",data)
         setFirstName(response.data.firstName)
         setLastName(response.data.lastName)
-        setMileagePoints(response.data.mileageRewards)   
+        setMileagePoints(response.data.mileageRewards)
+
+        
+
+
     }
+    
 
     useEffect(() => {
-        getDashboard()
+        let userEmail=localStorage.getItem('email')
+        console.log("inside use effect");
+            getDashboard(userEmail)
         
     },[],
     );

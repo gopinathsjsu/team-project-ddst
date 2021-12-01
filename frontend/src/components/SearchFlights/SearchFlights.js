@@ -70,6 +70,8 @@ function SearchFlights(props) {
     const [resultFlights, setResultFlights] = React.useState('');
     const [searchFlightFlag, setSearchFlightFlag] = React.useState(false);
 
+    
+
     const classes = useStyles();
 
     const navigate=useNavigate();
@@ -137,7 +139,7 @@ function SearchFlights(props) {
                 </TableCell>
                 <TableCell align='center'>
                     <Button onClick={() => navigate({
-                                            pathname: `/bookflight/${row.flightNumber}`,
+                                            pathname: `/bookFlight/${row.flightNumber}`,
                                             state: {...row.flightNumber}
                                         })}>Book Now</Button>
                 </TableCell>

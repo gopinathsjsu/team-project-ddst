@@ -135,18 +135,18 @@ function PersistentDrawerLeft(props) {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    <ListItem button component={Link} to='/searchFlights'>
-                        <ListItemIcon>
-                            <FaPlane fontSize="large" />
-                        </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Book a Flight'/>
-                    </ListItem>
-                    <Divider />
                     <ListItem button component={Link} to='/customerDashboard'>
                         <ListItemIcon>
                             <FaPlane fontSize="large"/>
                         </ListItemIcon>
                         <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='My Dashboard' />
+                    </ListItem>
+                    <Divider />
+                    <ListItem button component={Link} to='/searchFlights'>
+                        <ListItemIcon>
+                            <FaPlane fontSize="large" />
+                        </ListItemIcon>
+                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Book a Flight'/>
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/home' onClick={handleLogout}>
