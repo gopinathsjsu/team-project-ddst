@@ -27,6 +27,15 @@ router.post('/selectFlight', async (req, res) => {
     });
 });
 
+router.post('/getBookedFlight', async (req, res) => {
+    const flightNumber = req.body.flightNumber;
+    flightSchema.findOne({ flightNumber: flightNumber }).then((getFlight) => {
+        if (getFlight) {
+            res.json({ getFlight });
+        } else res.json({ status: false, message: 'No such flight available!' });
+    });
+});
+
 //// API IS IMPORTANT
 async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints) {
     mileagePoints = userDetails.mileageRewards + Math.round(selectFlight.numberOfMiles / 100);
@@ -150,15 +159,6 @@ router.post('/cancelReservation', async (req, res) => {
     } catch (error) {
         console.log(error);
     }
-});
-
-router.post('/getBookedFlight', async (req, res) => {
-    const flightNumber = req.body.flightNumber;
-    flightSchema.findOne({ flightNumber: flightNumber }).then((getFlight) => {
-        if (getFlight) {
-            res.json({ getFlight });
-        } else res.json({ status: false, message: 'No such flight available!' });
-    });
 });
 
 module.exports = router;
