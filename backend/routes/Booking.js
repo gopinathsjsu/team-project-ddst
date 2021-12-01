@@ -36,7 +36,6 @@ router.post('/getBookedFlight', async (req, res) => {
     });
 });
 
-//// API IS IMPORTANT
 async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints) {
     mileagePoints = userDetails.mileageRewards + Math.round(selectFlight.numberOfMiles / 100);
     await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
@@ -105,8 +104,6 @@ router.post('/passengerDetails', async (req, res) => {
         console.log(error);
     }
 });
-
-//API END
 
 async function milesDelete(emailID, userDetails, cancelSeat, mileagePoints) {
     mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
