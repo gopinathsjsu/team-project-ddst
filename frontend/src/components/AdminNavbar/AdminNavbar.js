@@ -19,7 +19,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import { FaPlane } from 'react-icons/fa';
 import { withStyles } from '@material-ui/core/styles';
-import "./AdminNavbar.css"
+import './AdminNavbar.css';
 import { Link } from 'react-router-dom';
 import { BsFillPersonFill } from 'react-icons/bs';
 
@@ -90,11 +90,9 @@ function PersistentDrawerLeft(props) {
         setOpen(false);
     };
 
-    const handleLogout = ()=>
-    {
-        localStorage.removeItem('adminEmail')
-    }
-
+    const handleLogout = () => {
+        localStorage.removeItem('adminEmail');
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -108,7 +106,7 @@ function PersistentDrawerLeft(props) {
                         edge='start'
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon sx={{ fontSize: 30 }}/>
+                        <MenuIcon sx={{ fontSize: 30 }} />
                     </IconButton>
 
                     <Typography className='header' variant='h3' noWrap component='div'>
@@ -136,27 +134,26 @@ function PersistentDrawerLeft(props) {
                 <List>
                     <ListItem button component={Link} to='/adminDashboard'>
                         <ListItemIcon>
-                            <FaPlane fontSize="large" />
+                            <FaPlane fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Add Flights' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='Add Flights' />
                     </ListItem>
                     <Divider />
-                    
+
                     <ListItem button component={Link} to='/adminDeleteFlight'>
                         <ListItemIcon>
-                            <FaPlane fontSize="large" />
+                            <FaPlane fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Cancel Flights' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='Cancel Flights' />
                     </ListItem>
                     <Divider />
 
                     <ListItem button component={Link} to='/home' onClick={handleLogout}>
                         <ListItemIcon>
-                            <BsFillPersonFill fontSize="large"/>
+                            <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography  primary='Logout' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='Logout' />
                     </ListItem>
-
                 </List>
             </Drawer>
             <Main open={open}>
@@ -166,5 +163,3 @@ function PersistentDrawerLeft(props) {
     );
 }
 export default withStyles(styles)(PersistentDrawerLeft);
-
-

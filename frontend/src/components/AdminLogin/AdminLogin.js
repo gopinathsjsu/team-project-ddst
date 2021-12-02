@@ -2,20 +2,14 @@ import React from 'react';
 import bg_image from '../../images/254381.jpeg';
 import './AdminLogin.css';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"; 
+import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
-
-
 
 function AdminLogin() {
     const [password, setPassword] = React.useState('');
     const [email, setEmail] = React.useState('');
 
-    let navigate=useNavigate();
-
-
-
-    
+    let navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -32,15 +26,14 @@ function AdminLogin() {
 
         axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
             console.log('Got response data', response.data);
-            localStorage.setItem('adminEmail',email)
-            navigate('/adminDashboard')
-
+            localStorage.setItem('adminEmail', email);
+            navigate('/adminDashboard');
         });
     };
 
     return (
         <div className='adminLoginBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
-                        <CommonNavbar/>
+            <CommonNavbar />
 
             <div className='loginContainer'>
                 <div className='row'>

@@ -3,16 +3,13 @@ import bg_image from '../../images/254381.jpeg';
 import './Login.css';
 import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
-import {useNavigate} from "react-router-dom"; 
+import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
 
-
 function Login() {
-
-    let navigate=useNavigate();
+    let navigate = useNavigate();
     const [password, setPassword] = React.useState('');
     const [email, setEmail] = React.useState('');
-
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -29,15 +26,14 @@ function Login() {
 
         axios.post('http://localhost:3001/passenger/login', data).then((response) => {
             console.log('Got response data', response.data);
-            localStorage.setItem('email',email)
-            navigate('/customerDashboard')
-            
+            localStorage.setItem('email', email);
+            navigate('/customerDashboard');
         });
     };
 
     return (
         <div className='loginBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
-            <CommonNavbar/>
+            <CommonNavbar />
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>

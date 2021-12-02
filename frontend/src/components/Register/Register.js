@@ -6,13 +6,12 @@ import { TextField } from 'formik-mui';
 import './Register.css';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
-import {useNavigate} from "react-router-dom"; 
+import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
-
 
 const UserForm = () => {
     // const classes = useStyle();
-    let navigate=useNavigate();
+    let navigate = useNavigate();
     const [firstName, setFirstName] = React.useState('');
     const [lastName, setLastName] = React.useState('');
     const [password, setPassword] = React.useState('');
@@ -37,14 +36,14 @@ const UserForm = () => {
 
         axios.post('http://localhost:3001/passenger/register', data).then((response) => {
             console.log('Got response data', response.data);
-            localStorage.setItem('email',email)
-            navigate('/customerDashboard')
+            localStorage.setItem('email', email);
+            navigate('/customerDashboard');
         });
     };
 
     return (
         <div className='registerBody' style={{ backgroundImage: `url(${bg_image})`, backgroundSize: 'cover' }}>
-            <CommonNavbar/>
+            <CommonNavbar />
             <div className='thiscontainer'>
                 <div className='row'>
                     <div className='col-md-4'>

@@ -77,7 +77,6 @@ const styles = {
     },
 };
 
-
 function PersistentDrawerLeft(props) {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
@@ -91,11 +90,9 @@ function PersistentDrawerLeft(props) {
         setOpen(false);
     };
 
-    const handleLogout = ()=>
-    {
-        localStorage.removeItem('email')
-    }
-
+    const handleLogout = () => {
+        localStorage.removeItem('email');
+    };
 
     return (
         <Box sx={{ display: 'flex' }}>
@@ -109,7 +106,7 @@ function PersistentDrawerLeft(props) {
                         edge='start'
                         sx={{ mr: 2, ...(open && { display: 'none' }) }}
                     >
-                        <MenuIcon sx={{ fontSize: 30 }}/>
+                        <MenuIcon sx={{ fontSize: 30 }} />
                     </IconButton>
 
                     <Typography className='header' variant='h3' noWrap component='div'>
@@ -137,25 +134,24 @@ function PersistentDrawerLeft(props) {
                 <List>
                     <ListItem button component={Link} to='/customerDashboard'>
                         <ListItemIcon>
-                            <FaPlane fontSize="large"/>
+                            <FaPlane fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='My Dashboard' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='My Dashboard' />
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/searchFlights'>
                         <ListItemIcon>
-                            <FaPlane fontSize="large" />
+                            <FaPlane fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography primary='Book a Flight'/>
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='Book a Flight' />
                     </ListItem>
                     <Divider />
                     <ListItem button component={Link} to='/home' onClick={handleLogout}>
                         <ListItemIcon>
-                            <BsFillPersonFill fontSize="large"/>
+                            <BsFillPersonFill fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{fontSize: "2rem"}} disableTypography fontSize="large" primary='Logout' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography fontSize='large' primary='Logout' />
                     </ListItem>
-
                 </List>
             </Drawer>
             <Main open={open}>

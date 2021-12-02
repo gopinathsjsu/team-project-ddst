@@ -7,20 +7,16 @@ import Grid from '@mui/material/Grid';
 
 import { border, fontSize, margin } from '@mui/system';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
-import { Container, Button, Form, Row, Col, Card } from "react-bootstrap";
-import { Link , useNavigate} from "react-router-dom";
-
-
-
+import { Container, Button, Form, Row, Col, Card } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
 
 // Material UI
-
 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -30,145 +26,148 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 
-
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
     root: {
-      fontSize: '200pt',
+        fontSize: '200pt',
     },
     table: {
-      fontSize: '200pt',
+        fontSize: '200pt',
     },
-    tablecell:{
-        fontSize:'40pt'
+    tablecell: {
+        fontSize: '40pt',
     },
     root: {
-        "& .Autocomplete": {
-          border: "2px solid grey",
-          minHeight: 400,
-          color: "green",
-          fontSize: 18,
-          //hover discussed above
-          "& li": {
-            //list item specific styling
-            border: "2px solid green",
-            borderRadius: 4
-          }
-        }
-      }
-    
-  }));
-
- 
-
-
+        '& .Autocomplete': {
+            border: '2px solid grey',
+            minHeight: 400,
+            color: 'green',
+            fontSize: 18,
+            //hover discussed above
+            '& li': {
+                //list item specific styling
+                border: '2px solid green',
+                borderRadius: 4,
+            },
+        },
+    },
+}));
 
 function SearchFlights(props) {
-    const [flightList,setFlightList]=React.useState([])
-    const [selectedFlightNumber,setSelectedFlightNumber]=React.useState([])
-    const [currentState,setCurrentState]=React.useState("")
+    const [flightList, setFlightList] = React.useState([]);
+    const [selectedFlightNumber, setSelectedFlightNumber] = React.useState([]);
+    const [currentState, setCurrentState] = React.useState('');
 
-
-    let navigate=useNavigate()
+    let navigate = useNavigate();
 
     const classes = useStyles();
 
-const handleDelete=(value)=>
-{
-  console.log(value)
-  const data={
-    id:value
-  }
-  console.log(data)
-  axios.post('http://localhost:3001/admin/deleteFlight',data).then((response) => {
-        console.log('Got response data', response.data);
-        setCurrentState("Deleted")
-       
-        
-    });
-
-}
+    const handleDelete = (value) => {
+        console.log(value);
+        const data = {
+            id: value,
+        };
+        console.log(data);
+        axios.post('http://localhost:3001/admin/deleteFlight', data).then((response) => {
+            console.log('Got response data', response.data);
+            setCurrentState('Deleted');
+        });
+    };
 
     useEffect(() => {
-      axios.get('http://localhost:3001/admin/getAllFlights').then((response) => {
-        console.log('Got response data', response.data);
-        setFlightList(response.data)
-        
-           
-    });
-      
-  },[],
-  );
+        axios.get('http://localhost:3001/admin/getAllFlights').then((response) => {
+            console.log('Got response data', response.data);
+            setFlightList(response.data);
+        });
+    }, []);
 
-
-
-
-    
-    const createFlightRow = (row,index) => {
+    const createFlightRow = (row, index) => {
         return (
             // <TableBody>
-            <TableRow
-              key={index}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell align="center" style={{ fontSize: 15 }}>{row.flightNumber}</TableCell>
-              <TableCell align="center" style={{ fontSize: 15 }}>{row.origin}</TableCell>
-              <TableCell align="center" style={{ fontSize: 15 }}>{row.destination}</TableCell>
-              <TableCell align="center" style={{ fontSize: 15 }}>{row.startTime}</TableCell>
-              <TableCell align="center" style={{ fontSize: 15 }}>{row.endTime}</TableCell>
-              <TableCell align="center"><Button variant="danger" onClick={(e) => {
-                                    {handleDelete(row._id)}
-                                    window.location.reload()
-                                }}>Delete Flight</Button></TableCell>
+            <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
+                <TableCell align='center' style={{ fontSize: 15 }}>
+                    {row.flightNumber}
+                </TableCell>
+                <TableCell align='center' style={{ fontSize: 15 }}>
+                    {row.origin}
+                </TableCell>
+                <TableCell align='center' style={{ fontSize: 15 }}>
+                    {row.destination}
+                </TableCell>
+                <TableCell align='center' style={{ fontSize: 15 }}>
+                    {row.startTime}
+                </TableCell>
+                <TableCell align='center' style={{ fontSize: 15 }}>
+                    {row.endTime}
+                </TableCell>
+                <TableCell align='center'>
+                    <Button
+                        variant='danger'
+                        onClick={(e) => {
+                            {
+                                handleDelete(row._id);
+                            }
+                            window.location.reload();
+                        }}
+                    >
+                        Delete Flight
+                    </Button>
+                </TableCell>
             </TableRow>
-        // </TableBody>
-      
-        )}
+            // </TableBody>
+        );
+    };
 
-    
-    
-    
     return (
-
         <div className='searchFlightsBody'>
-        <AdminNavbar />
-        <div>
-            <div className='searchContainer'>
-                <div className='row'>
-                    <div className='col-md-4'>
-                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
-                            DELETE A FLIGHT
-                        </h4> 
+            <AdminNavbar />
+            <div>
+                <div className='searchContainer'>
+                    <div className='row'>
+                        <div className='col-md-4'>
+                            <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                                DELETE A FLIGHT
+                            </h4>
+                        </div>
                     </div>
                 </div>
             </div>
+            <br></br>
+
+            {flightList ? (
+                <TableContainer component={Paper} className='tableDetails'>
+                    <Table sx={{ minWidth: 650 }} aria-label='simple table' className={classes.table}>
+                        <TableHead>
+                            <TableRow class='tablecell'>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Flight Number
+                                </TableCell>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Origin
+                                </TableCell>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Destination
+                                </TableCell>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Departure Time
+                                </TableCell>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Arrival Time
+                                </TableCell>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                    Book Flight
+                                </TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                            {flightList ? [flightList.map(createFlightRow)] : ''}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            ) : (
+                ''
+            )}
         </div>
-        <br></br>
-        
-        {(flightList ?         
-        <TableContainer component={Paper} className="tableDetails">
-            <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
-            <TableHead>
-            <TableRow class = "tablecell">
-            <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Flight Number</TableCell>
-                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Origin</TableCell>
-                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Destination</TableCell>
-                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Departure Time</TableCell>
-                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Arrival Time</TableCell>
-                <TableCell align="center" style={{ fontWeight: "bold", fontSize: 20 }}>Book Flight</TableCell>
-            </TableRow>
-            </TableHead>
-            <TableBody align="center" style={{ fontWeight: "bold", fontSize: 20 }}>
-            {flightList? [flightList.map(createFlightRow)]:""}
-            </TableBody>
-            </Table>
-    </TableContainer> : "")}
-        </div>   
-    )}
-
-
-
-
-            
-   
+    );
+}
 
 export default SearchFlights;
