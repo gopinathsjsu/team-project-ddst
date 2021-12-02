@@ -45,37 +45,7 @@ function BookFlight(props) {
 
     return (
         <div>
-        <Row className="m-4">
-				<Card>
-					<Card.Header>Hello World</Card.Header>
-					<Card.Body>
-						<Row>
-							<Col xs={10}>
-								<Card.Title>
-									Hello&emsp;-&emsp;
-									Hello
-								</Card.Title>
-								<Card.Text>
-                                Hello
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-									Hello
-								</Card.Text>
-							</Col>
-							<Col xs={2} className="px-5">
-								<Row className="my-2">
-									<Col xs={4}></Col>
-									<Col xs={8}>
-										<Card.Title>$Hello</Card.Title>
-									</Col>
-								</Row>
-								<Row>
-									
-								</Row>
-							</Col>
-						</Row>
-					</Card.Body>
-				</Card>
-			</Row>   
+        
         </div>
     );
 }

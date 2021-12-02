@@ -78,8 +78,8 @@ function SearchFlights(props) {
             destination: destination,
             flightNumber:parseInt(flightNumber),
             numberOfMiles:parseInt(miles),
-            startTime:arrivalDate,
-            endTime:departureDate,
+            startTime:departureDate,
+            endTime:arrivalDate,
             price:ticketCost
         };
         console.log('Printing data', data);

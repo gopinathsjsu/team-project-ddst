@@ -98,6 +98,17 @@ function SearchFlights(props) {
         setUpdatedAirportList(filteredList);
     };
 
+    function convertUTCDateToLocalDate(date) {
+        var newDate = new Date(date.getTime()+date.getTimezoneOffset()*60*1000);
+    
+        var offset = date.getTimezoneOffset() / 60;
+        var hours = date.getHours();
+    
+        newDate.setHours(hours - offset);
+    
+        return newDate;   
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 
@@ -111,6 +122,22 @@ function SearchFlights(props) {
         axios.post('http://localhost:3001/Booking/search', data).then((response) => {
             console.log('Got response data', response.data.flightSchema);
             setResultFlights(response.data.flightSchema);
+            // for(let i=0;i<resultFlights;i++)
+            // {
+            //     console.log(resultFlights[i])
+            //     let origin_date_time= convertUTCDateToLocalDate(resultFlights[i].startTime)
+            //     let destination_date_time=convertUTCDateToLocalDate(resultFlights[i].endTime)
+            //     origin_date_time=JSON.stringify(origin_date_time)
+            //     destination_date_time=JSON.stringify(destination_date_time)
+
+
+            //     let origin_date_string=origin_date_time.split("T")[0].substring(1,)
+            //     let origin_time_string=origin_date_time.split("T")[1].substring(0,5)
+            //     let origin_result_string=origin_date_string+" "+origin_time_string
+            //     resultFlights[i].startTime=origin_result_string
+            //}
+
+            
             setSearchFlightFlag(true);
         });
     };
@@ -148,27 +175,7 @@ function SearchFlights(props) {
         );
     };
 
-    //    const createTableHead =()=>
-    // {
-    //         console.log("Creating table head")
-    //         return
-    //         <TableContainer component={Paper}>
-    //             <Table sx={{ minWidth: 650}} aria-label="simple table" className={classes.table}>
-    //             <TableHead>
-    //             <TableRow>
-    //             <TableCell align="center">Flight Number</TableCell>
-    //                 <TableCell align="center">Origin</TableCell>
-    //                 <TableCell align="center">Destination</TableCell>
-    //                 <TableCell align="center">Departure Time</TableCell>
-    //                 <TableCell align="center">Arrival Time</TableCell>
-    //                 <TableCell align="center">Price</TableCell>
-    //                 <TableCell align="center">Book Flight</TableCell>
-    //             </TableRow>
-    //             </TableHead>
-    //             </Table>
-    //     </TableContainer>
-    //     }
-
+    
     return (
         <div className='searchFlightsBody'>
             <UserNavbar />
