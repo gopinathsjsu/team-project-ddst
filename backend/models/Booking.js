@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const moment = require('moment-timezone');
 const Schema = mongoose.Schema;
 
 const bookingSchema = new Schema({
@@ -44,12 +45,10 @@ const bookingSchema = new Schema({
         type: Number,
     },
     startTime: {
-        type: Date,
-        default: Date.now,
+        type: String,
     },
     endTime: {
-        type: Date,
-        default: Date.now,
+        type: String,
     },
     status: {
         type: String,
