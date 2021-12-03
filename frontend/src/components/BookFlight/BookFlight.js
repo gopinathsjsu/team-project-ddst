@@ -202,7 +202,7 @@ function BookFlight(props) {
     // checked={checked}    
   />
   {/* {console.log("Got miles info",mileageRewards)} */}
-  <label variant="primary" style={{marginLeft:"15px", marginTop:"5px", fontSize:"1.35rem"}}>Select checkbox to avail ${mileageRewards} Mileage Rewards!</label>
+  <label variant="primary" style={{marginLeft:"15px", marginTop:"1px", fontSize:"1.6rem"}}>Select checkbox to avail ${mileageRewards} Mileage Rewards!</label>
 
    
    <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"170px", marginTop:"30px", fontSize:"1.35rem"}} 
