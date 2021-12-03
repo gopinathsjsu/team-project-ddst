@@ -23,6 +23,7 @@ console.log(getUrl())
 function BookFlight(props) {
 
     const [currentFlight, setCurrentFlight] = React.useState([]);
+    const [confirmStatus,setConfirmStatus]=React.useState(false)
 
     async function getFlightDetails()
 
@@ -44,6 +45,13 @@ function BookFlight(props) {
     
     }, []);
 
+    const handleConfirmFlight=()=>
+    {
+        
+        console.log("Button Clicked")
+        setConfirmStatus(true)
+        console.log(confirmStatus)
+    }
 
 
     return (
@@ -89,7 +97,8 @@ function BookFlight(props) {
     <option value="Manually">Manually Enter Seats</option>
 </select>
     
-    <Button variant="primary" style={{height:"30px",marginLeft:"50px"}}>Choose Seats</Button>
+    <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
+    onClick={handleConfirmFlight}>Confirm Flight</Button>
   
     </div>    
   </Card.Body>
@@ -99,6 +108,48 @@ function BookFlight(props) {
 </Card> 
 
 </div>
+{confirmStatus?(<Card style={{marginLeft:"2%",marginRight:"2%",marginTop:"5%", height:"200px"}}>
+ 
+
+
+ <Card.Header as="h5"><center>Payment Details</center></Card.Header>
+
+ 
+
+ <Card.Body>
+   
+ <div className="thisdivcontainer">
+   <Card.Title style={{marginTop:"auto"}}> <h3>{currentFlight.origin} - {currentFlight.destination}</h3></Card.Title>
+   
+   <Card.Title><h5>Departure Time:<br/>{currentFlight.startTime}</h5></Card.Title>
+   
+   <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
+   
+   
+   <select id="selectNumber">
+   <option value="default">Select Number of Seats</option>
+   <option value="1">1</option>
+   <option value="2">2</option>
+   <option value="3">3</option>
+   <option value="4">4</option>
+   <option value="5">5</option>
+   <option value="6">6</option>
+   <option value="7">7</option>
+   <option value="8">8</option>
+   <option value="9">9</option>
+   <option value="10">10</option>
+   <option value="Manually">Manually Enter Seats</option>
+</select>
+   
+   <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
+   onClick={handleConfirmFlight}>Confirm Flight</Button>
+ 
+   </div>    
+ </Card.Body>
+
+ 
+
+</Card>):''}
 </div>
     ) 
 }
