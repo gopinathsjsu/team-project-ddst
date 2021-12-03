@@ -4,6 +4,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
+const bookingSchema = require('../models/Booking');
 
 router.post('/register', (req, res) => {
     // Form validation
@@ -83,22 +84,25 @@ router.post('/userDashboardDetails', (req, res) => {
     });
 });
 
-// router.post('/userDetails', (req, res) => {
-//     const emailID = req.body.emailID;
+router.post('/userBookings', (req, res) => {
+    const emailID = req.body.emailID;
+    try{
+        bookingSchema.find({ parentemailID: emailID }).then((userBookings) => {
+        // Check if user exists
+        if (!userBookings) {
+            return res.status(404).json({ message: 'No Bookings Found' });
+        } else {
+            res.json({
+                userBookings
+            });
+        }
+    });
+    }
+    catch (error) {
+        console.log(error);
+    }
 
-//     // Find user by email
-//     passengerSchema.findOne({ emailID }).then((user) => {
-//         // Check if user exists
-//         if (!user) {
-//             return res.status(404).json({ emailnotfound: 'Email not found' });
-//         } else {
-//             res.json({
-//                 firstName: user.firstName,
-//                 lastName: user.lastName,
-//                 mileageRewards: user.mileageRewards,
-//             });
-//         }
-//     });
-// });
+    
+});
 
 module.exports = router;
