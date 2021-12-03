@@ -142,7 +142,7 @@ function BookFlight(props) {
 </Card> 
 
 </div>
-{confirmStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"450px",width:"430px"}}>
+{confirmStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"480px",width:"430px"}}>
  
 
 
@@ -193,21 +193,22 @@ function BookFlight(props) {
                                             setSelectedSeat(newValue);
                                         }}
                                     />
+                                    <br/>
+                                    
     <input type="checkbox"
-    type="checkbox"
+    class="largerCheckbox"
     // name={name}
     // onChange={handleChange}
-    // checked={checked}
+    // checked={checked}    
   />
-  {console.log("Got miles info",mileageRewards)}
-    Select checkbox to avail ${mileageRewards} Mileage Rewards!
-   
+  {/* {console.log("Got miles info",mileageRewards)} */}
+  <label variant="primary" style={{marginLeft:"15px", marginTop:"5px", fontSize:"1.35rem"}}>Select checkbox to avail ${mileageRewards} Mileage Rewards!</label>
 
    
    <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"170px", marginTop:"30px", fontSize:"1.35rem"}} 
    onClick={sendPassengerDetails}>Pay Now</Button>
  
-   </div>    
+   </div> 
  </Card.Body>
 
  
