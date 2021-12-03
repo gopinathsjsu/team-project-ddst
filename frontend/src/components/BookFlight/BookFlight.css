@@ -1,0 +1,13 @@
+.thisdivcontainer
+{
+    /* display:flex;
+    flex-direction:row; */
+    column-count: 4;
+    text-align: center;
+    height: 200px;
+    
+}
+.ColumnNumber{
+    column-span:all;
+}
+
