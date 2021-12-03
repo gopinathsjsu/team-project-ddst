@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 
 import { Container, Button, Form, Row, Col, Card } from "react-bootstrap";
 import "./BookFlight.css"
-
+import Autocomplete from '@material-ui/lab/Autocomplete';
+import TextField from '@material-ui/core/TextField';
 
 
 
@@ -82,7 +83,7 @@ function BookFlight(props) {
     <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
     
     
-    <select id="selectNumber">
+    {/* <select id="selectNumber">
     <option value="default">Select Number of Seats</option>
     <option value="1">1</option>
     <option value="2">2</option>
@@ -95,7 +96,7 @@ function BookFlight(props) {
     <option value="9">9</option>
     <option value="10">10</option>
     <option value="Manually">Manually Enter Seats</option>
-</select>
+</select> */}
     
     <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
     onClick={handleConfirmFlight}>Confirm Flight</Button>
@@ -119,27 +120,36 @@ function BookFlight(props) {
  <Card.Body>
    
  <div className="thisdivcontainer">
-   <Card.Title style={{marginTop:"auto"}}> <h3>{currentFlight.origin} - {currentFlight.destination}</h3></Card.Title>
+   <Card.Title style={{marginTop:"auto"}}> <h5>Passenger First Name:</h5>
+   <input></input>
+   </Card.Title>
    
-   <Card.Title><h5>Departure Time:<br/>{currentFlight.startTime}</h5></Card.Title>
+   <Card.Title style={{marginTop:"auto"}}> <h5>Passenger Last Name:</h5>
+   <input></input>
+   </Card.Title>
    
-   <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
+   <Card.Title><h5> Select Seat:<br/></h5></Card.Title>
+   <Autocomplete
+                                        className='searchContainer'
+                                        id='combo-box-demo'
+                                        // options={updatedAirportList}
+                                        getOptionLabel={(option) => option}
+                                        // style={{ width: "relative" }}
+                                        renderInput={(params) => (
+                                            <TextField
+                                                {...params}
+                                                label='Destination'
+                                                variant='outlined'
+                                                InputLabelProps={{ style: { padding: '0px 0px', color: '#555555', fontSize: 11.5 } }}
+                                            />
+                                        )}
+                                        // onChange={(event, newValue) => {
+                                        //     setDestination(newValue);
+                                        //     console.log(destination);
+                                        // }}
+                                    />
    
-   
-   <select id="selectNumber">
-   <option value="default">Select Number of Seats</option>
-   <option value="1">1</option>
-   <option value="2">2</option>
-   <option value="3">3</option>
-   <option value="4">4</option>
-   <option value="5">5</option>
-   <option value="6">6</option>
-   <option value="7">7</option>
-   <option value="8">8</option>
-   <option value="9">9</option>
-   <option value="10">10</option>
-   <option value="Manually">Manually Enter Seats</option>
-</select>
+
    
    <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
    onClick={handleConfirmFlight}>Confirm Flight</Button>
