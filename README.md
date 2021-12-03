@@ -21,9 +21,9 @@
 Kanban
 
 ## Task Allocations:
-- Frontend: Danesh Dhamejani, Tanay Ganeriwal
+- Frontend: Danesh Dhamejani, Dhruvin Shah, Tanay Ganeriwal
 - Backend:  Dhruvin Shah, Sohan Shirodkar
-- Database: Dhruvin Shah, Sohan Shirodkar
+- Database: Danesh Dhamejani, Dhruvin Shah, Sohan Shirodkar
 - Deployment: Danesh Dhamejani, Sohan Shirodkar
 
 ## Steps to test and run the application:
@@ -45,7 +45,7 @@ npm run build
 4. The web application opens in the default browser
 
 ## XP Core Values:
-[XP Core Values implemented by our team](https://github.com/gopinathsjsu/team-project-ddst/blob/main/XP_Core_Values.md)
+[XP Core Values implemented by our team](https://github.com/gopinathsjsu/team-project-ddst/blob/main/Documentation/XP_Core_Values.md)
 
 ## Architecture Diagram
 ![image](https://user-images.githubusercontent.com/31564740/144546225-490e07ed-eb5a-452d-ad6c-8806c54985f6.png)
