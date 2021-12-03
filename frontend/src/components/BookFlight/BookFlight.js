@@ -25,6 +25,14 @@ function BookFlight(props) {
 
     const [currentFlight, setCurrentFlight] = React.useState([]);
     const [confirmStatus,setConfirmStatus]=React.useState(false)
+    const [selectedSeat,setSelectedSeat]=React.useState('')
+    const [firstName,setFirstName]=React.useState('')
+    const [lastName,setLastName]=React.useState('')
+    const [passengerEmail,setEmail]=React.useState('')
+    const [mileageRewards,setMileageRewards]=React.useState('')
+    const [flightID,setFlightID]=React.useState('')
+    const [userID,setUserID]=React.useState('')
+    
 
     async function getFlightDetails()
 
@@ -35,14 +43,27 @@ function BookFlight(props) {
     console.log("Printing data",data)
     await axios.post('http://localhost:3001/Booking/getBookedFlight',data).then((response) => {
             console.log('Got details of the current flight', response.data);
-            setCurrentFlight(response.data.getFlight);
+            setCurrentFlight(response.data.getFlight)
         });
 }
 
 
+    const getMiles= async (userEmail)=>{
+        let data = {
+            emailID: userEmail,
+        };
+        const response = await axios.post('http://localhost:3001/passenger/userDashboardDetails', data);
+        console.log("Got miles response",response.data)
+        setMileageRewards(response.data.mileageRewards)
+        setUserID(userEmail)
+
+    }
 
      useEffect(() => {
+    let userEmail = localStorage.getItem('email');
+    console.log("Got useremail",userEmail)
      getFlightDetails()
+     getMiles(userEmail)
     
     }, []);
 
@@ -52,6 +73,33 @@ function BookFlight(props) {
         console.log("Button Clicked")
         setConfirmStatus(true)
         console.log(confirmStatus)
+        // setFlightID(currentFlight._id)
+        // console.log("Got flight ID here",flightID)
+    }
+
+    const sendPassengerDetails = async ()=>
+    {
+        console.log(selectedSeat)
+        console.log("Inside send passenger details")
+        console.log("Got first name",firstName)
+        console.log("Got last name",lastName)
+        console.log("Got passenger email ID",passengerEmail)
+        console.log("Got selected seat",selectedSeat)
+        console.log("Mileage rewards",mileageRewards)
+        console.log("Got flight id",currentFlight._id)
+        let data=
+        {
+            passengerFirstName:firstName,
+            passengerLastName:lastName,
+            passengerEmailID:passengerEmail,
+            seatNumber:selectedSeat,
+            mileageRewardsUsed:mileageRewards,
+            id:currentFlight._id,
+            emailID:userID
+        }
+        const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
+        console.log("Got final API response",response.data)
+
     }
 
 
@@ -83,21 +131,6 @@ function BookFlight(props) {
     <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
     
     
-    {/* <select id="selectNumber">
-    <option value="default">Select Number of Seats</option>
-    <option value="1">1</option>
-    <option value="2">2</option>
-    <option value="3">3</option>
-    <option value="4">4</option>
-    <option value="5">5</option>
-    <option value="6">6</option>
-    <option value="7">7</option>
-    <option value="8">8</option>
-    <option value="9">9</option>
-    <option value="10">10</option>
-    <option value="Manually">Manually Enter Seats</option>
-</select> */}
-    
     <Button variant="primary" style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem"}} 
     onClick={handleConfirmFlight}>Confirm Flight</Button>
   
@@ -121,42 +154,58 @@ function BookFlight(props) {
    
  <div>
    <Card.Title style={{marginTop:"auto"}}> <h5>Passenger First Name:</h5>
-   <input style={{height:"5rem", width:"400px"}}></input>
+   <input style={{height:"5rem", width:"400px"}} onChange={(e) => {
+                                        setFirstName(e.target.value);
+                                    }}></input>
    </Card.Title>
    
    <Card.Title style={{marginTop:"auto"}}> <h5>Passenger Last Name:</h5>
-   <input style={{height:"5rem", width:"400px"}}></input>
+   <input style={{height:"5rem", width:"400px"}} onChange={(e) => {
+                                        setLastName(e.target.value);
+                                    }}></input>
    </Card.Title>
-   <Card.Title style={{marginTop:"auto"}}> <h5>Email: </h5>
-   <input style={{height:"5rem", width:"400px"}}></input>
+   
+   
+   
+   <Card.Title style={{marginTop:"auto"}}> <h5>Passenger Email: </h5>
+   <input style={{height:"5rem", width:"400px"}} onChange={(e) => {
+                                        setEmail(e.target.value);
+                                    }}></input>
    </Card.Title>
    <Card.Title><h5> Select Seat:<br/></h5></Card.Title>
    <Autocomplete
                                         className='searchContainer'
                                         id='combo-box-demo'
-                                        // options={updatedAirportList}
+                                        options={currentFlight.seatsAvailable}
                                         getOptionLabel={(option) => option}
                                         // style={{ width: "relative" }}
                                         renderInput={(params) => (
                                             <TextField
                                                 {...params}
-                                                label='Destination'
+                                                
                                                 variant='outlined'
                                                 height="2rem"
                                                 
                                                 InputLabelProps={{ style: { padding: '0px 0px', color: '#555555', fontSize: 11.5 } }}
                                             />
                                         )}
-                                        // onChange={(event, newValue) => {
-                                        //     setDestination(newValue);
-                                        //     console.log(destination);
-                                        // }}
+                                        onChange={(event, newValue) => {
+                                            setSelectedSeat(newValue);
+                                        }}
                                     />
+    <input type="checkbox"
+    type="checkbox"
+    // name={name}
+    // onChange={handleChange}
+    // checked={checked}
+  />
+  {console.log("Got miles info",mileageRewards)}
+    Select checkbox to avail ${mileageRewards} Mileage Rewards!
    
 
    
    <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"170px", marginTop:"30px", fontSize:"1.35rem"}} 
-   onClick={handleConfirmFlight}>Pay Now</Button>
+   onClick={sendPassengerDetails}>Pay Now</Button>
  
    </div>    
  </Card.Body>
