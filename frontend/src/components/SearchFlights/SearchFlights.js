@@ -262,30 +262,30 @@ function SearchFlights(props) {
                     <Table sx={{ minWidth: 650 }} aria-label='simple table' className={classes.table}>
                         <TableHead>
                             <TableRow class='tablecell'>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Flight Number
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Origin
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Destination
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Departure Time
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Arrival Time
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Price
                                 </TableCell>
-                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                                <TableCell align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                                     Book Flight
                                 </TableCell>
                             </TableRow>
                         </TableHead>
-                        <TableBody align='center' style={{ fontWeight: 'bold', fontSize: 20 }}>
+                        <TableBody align='center' style={{ fontWeight: 'bold', fontSize: 16 }}>
                             {resultFlights ? [resultFlights.map(createFlightRow)] : ''}
                         </TableBody>
                     </Table>
