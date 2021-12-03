@@ -48,14 +48,14 @@ router.post('/search', async (req, res) => {
     }
 });
 
-router.post('/selectFlight', async (req, res) => {
-    const id = req.body.id;
-    flightSchema.findOne({ _id: id }).then((selectFlight) => {
-        if (selectFlight) {
-            res.json({ selectFlight });
-        } else res.json({ status: false, message: 'Error while selecting!' });
-    });
-});
+// router.post('/selectFlight', async (req, res) => {
+//     const id = req.body.id;
+//     flightSchema.findOne({ _id: id }).then((selectFlight) => {
+//         if (selectFlight) {
+//             res.json({ selectFlight });
+//         } else res.json({ status: false, message: 'Error while selecting!' });
+//     });
+// });
 
 router.post('/getBookedFlight', async (req, res) => {
     const flightNumber = req.body.flightNumber;
@@ -66,9 +66,10 @@ router.post('/getBookedFlight', async (req, res) => {
     });
 });
 
-async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints) {
+async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints, mileagePointsUsed,newRewardPoints) {
     mileagePoints = userDetails.mileageRewards + Math.round(selectFlight.numberOfMiles / 100);
-    await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
+    newRewardPoints =  mileagePoints - mileagePointsUsed;
+    await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: newRewardPoints } });
     return;
 }
 
@@ -87,6 +88,14 @@ async function flightReserved(emailID, selectFlight) {
     return;
 }
 
+// async function mileageRewardsUsedUpdation(emailID, ) {
+        
+//         console.log(newRewardPoints);
+//         await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: newRewardPoints} });
+//         return;
+
+// }
+
 router.post('/passengerDetails', async (req, res) => {
     try {
         let passengerFirstName = req.body.passengerFirstName;
@@ -95,6 +104,7 @@ router.post('/passengerDetails', async (req, res) => {
         let seatNumber = req.body.seatNumber;
         let emailID = req.body.emailID;
         let id = req.body.id;
+        let mileagePointsUsed = req.body.mileageRewardsUsed;
         flightSchema.findOne({ _id: id }).then((selectFlight) => {
             if (selectFlight) {
                 passengerSchema.findOne({ emailID }).then((userDetails) => {
@@ -104,7 +114,8 @@ router.post('/passengerDetails', async (req, res) => {
                                 return res.json({ message: 'Seat not available. Please choose another seat!' });
                             } else {
                                 let mileagePoints = 0;
-                                milesUpdate(emailID, userDetails, selectFlight, mileagePoints);
+                                let newRewardPoints = 0;
+                                milesUpdate(emailID, userDetails, selectFlight, mileagePoints, mileagePointsUsed,newRewardPoints);
                                 flightReserved(emailID, selectFlight);
                                 let passengerDetail = new bookingSchema({
                                     passengerFirstName: passengerFirstName,
@@ -115,6 +126,7 @@ router.post('/passengerDetails', async (req, res) => {
                                     airplaneName: selectFlight.airplaneName,
                                     origin: selectFlight.origin,
                                     destination: selectFlight.destination,
+                                    mileageRewardsUsed:mileagePointsUsed,
                                     seatNumber: seatNumber,
                                     price: selectFlight.price,
                                     startTime: selectFlight.startTime,
@@ -135,9 +147,10 @@ router.post('/passengerDetails', async (req, res) => {
     }
 });
 
-async function milesDelete(emailID, userDetails, cancelSeat, mileagePoints) {
-    mileagePoints = userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100);
+async function milesDelete(emailID, userDetails, cancelSeat, mileagePoints, cancelReservation) {
+    mileagePoints = cancelReservation.mileageRewardsUsed + userDetails.mileageRewards - Math.round(cancelSeat.numberOfMiles / 100); 
     await passengerSchema.updateOne({ emailID: emailID }, { $set: { mileageRewards: mileagePoints } });
+    await bookingSchema.updateOne({ _id: cancelReservation._id }, { $set: { mileageRewardsUsed: 0} });
     return;
 }
 
@@ -154,21 +167,13 @@ async function flightCanceled(emailID, cancelSeat) {
     return;
 }
 
-
-router.post('/payByMileagePoints', async(req,res)=>{
-    try{
-        let mileageRewardsPresent = req.body.mileageRewards;
-        let seatNumber = req.body.seatNumber;
-        let emailID = req.body.emailID;
-        let passengerEmailID = req.body.passengerEmailID;
-        let id = req.body.id;
-    }
-    catch (error) {
-        console.log(error);
-    }
-
-});
-
+// async function mileageRewardsCancelledUpdation(userDetails,cancelReservation){
+//     let tempBookingRewards  = cancelReservation.mileageRewardsUsed;
+//     let finalRewards = tempBookingRewards + userDetails.mileageRewards;
+//     await passengerSchema.updateOne({ emailID: userDetails.emailID }, { $set: { mileageRewards: finalRewards } });
+//     await bookingSchema.updateOne({ _id: cancelReservation._id }, { $set: { mileageRewardsUsed: 0} });
+//     return;
+// }
 
 router.post('/cancelReservation', async (req, res) => {
     try {
@@ -176,17 +181,17 @@ router.post('/cancelReservation', async (req, res) => {
         let emailID = req.body.emailID;
         let passengerEmailID = req.body.passengerEmailID;
         let id = req.body.id;
-
+        let bookingID = req.body.bookingID;
         flightSchema.findOne({ _id: id }).then((cancelSeat) => {
             if (cancelSeat) {
                 bookingSchema
-                    .findOneAndDelete({ passengerEmailID, flightNumber: cancelSeat.flightNumber })
+                    .findOneAndDelete({ passengerEmailID, flightNumber: cancelSeat.flightNumber,_id: bookingID})
                     .then((cancelReservation) => {
                         if (cancelReservation) {
                             passengerSchema.findOne({ emailID }).then((userDetails) => {
                                 if (userDetails) {
                                     let mileagePoints = 0;
-                                    milesDelete(emailID, userDetails, cancelSeat, mileagePoints);
+                                    milesDelete(emailID, userDetails, cancelSeat, mileagePoints, cancelReservation);
                                     flightCanceled(emailID, cancelSeat);
                                     seatDelete(cancelSeat, seatNumber);
                                 }
