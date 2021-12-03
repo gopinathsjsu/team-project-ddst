@@ -154,6 +154,22 @@ async function flightCanceled(emailID, cancelSeat) {
     return;
 }
 
+
+router.post('/payByMileagePoints', async(req,res)=>{
+    try{
+        let mileageRewardsPresent = req.body.mileageRewards;
+        let seatNumber = req.body.seatNumber;
+        let emailID = req.body.emailID;
+        let passengerEmailID = req.body.passengerEmailID;
+        let id = req.body.id;
+    }
+    catch (error) {
+        console.log(error);
+    }
+
+});
+
+
 router.post('/cancelReservation', async (req, res) => {
     try {
         let seatNumber = req.body.seatNumber;

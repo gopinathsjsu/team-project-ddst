@@ -23,8 +23,8 @@ Kanban
 ## Task Allocations:
 - Frontend: Danesh Dhamejani, Tanay Ganeriwal
 - Backend:  Dhruvin Shah, Sohan Shirodkar
-- Database: Dhruvin Shah, Sohan Shirodkar
-- Deployment: Sohan Shirodkar
+- Database: Dhruvin Shah, Danesh Dhamejani
+- Deployment: Sohan Shirodkar, Tanay Ganeriwal
 
 ## Steps to test and run the application:
 1. Clone the repository
