@@ -6,6 +6,7 @@ import { Container, Button, Form, Row, Col, Card } from "react-bootstrap";
 import "./BookFlight.css"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
+import UserNavbar from '../UserNavbar/UserNavbar';
 
 
 
@@ -32,6 +33,7 @@ function BookFlight(props) {
     const [mileageRewards,setMileageRewards]=React.useState('')
     const [flightID,setFlightID]=React.useState('')
     const [userID,setUserID]=React.useState('')
+    const [passengerDetailsStatus,setPassengerDetailsStatus]=React.useState(false)
     
 
     async function getFlightDetails()
@@ -99,12 +101,13 @@ function BookFlight(props) {
         }
         const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
         console.log("Got final API response",response.data)
-
+        setPassengerDetailsStatus(true)
     }
 
 
     return (
         <div>
+            <UserNavbar/>
             <link
   rel="stylesheet"
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -113,7 +116,7 @@ function BookFlight(props) {
 />
  {console.log(currentFlight)}
  <div className="reactCard">
- <Card style={{marginLeft:"2%",marginRight:"2%",marginTop:"5%", height:"100px"}}>
+ <Card style={{marginLeft:"2%",marginRight:"2%",marginTop:"1%", height:"100px"}}>
  
 
 
@@ -146,7 +149,7 @@ function BookFlight(props) {
  
 
 
- <Card.Header as="h5"><center>Payment Details</center></Card.Header>
+ <Card.Header as="h5"><center>Booking Details</center></Card.Header>
 
  
 
@@ -205,7 +208,34 @@ function BookFlight(props) {
   <label variant="primary" style={{marginLeft:"15px", marginTop:"1px", fontSize:"1.6rem"}}>Select checkbox to avail ${mileageRewards} Mileage Rewards!</label>
 
    
-   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"170px", marginTop:"30px", fontSize:"1.35rem"}} 
+   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"145px", marginTop:"30px", fontSize:"1.35rem"}} 
+   onClick={sendPassengerDetails}>Confirm Details</Button>
+ 
+   </div> 
+ </Card.Body>
+
+ 
+
+</Card>):''}
+{console.log(passengerDetailsStatus)}
+{passengerDetailsStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"250px",width:"430px"}}>
+ 
+
+
+ <Card.Header as="h5"><center>Confirm Payment</center></Card.Header>
+
+ 
+
+ <Card.Body>
+   
+ <div>
+   
+   
+ <Card.Title style={{marginTop:"auto"}}> <h5>Passenger First Name:</h5>
+   
+   </Card.Title>
+   
+   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"155px", marginTop:"30px", fontSize:"1.35rem"}} 
    onClick={sendPassengerDetails}>Pay Now</Button>
  
    </div> 
