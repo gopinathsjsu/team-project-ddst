@@ -44,19 +44,6 @@ function BookFlight(props) {
     
     }, []);
 
-    // const flightCard=()=>
-    // {
-{/* <Card>
-  <Card.Header as="h5">Flight Number: {currentFlight.flightNumber}</Card.Header>
-  <Card.Body>
-    <Card.Title>Special title treatment</Card.Title>
-    <Card.Text>
-      With supporting text below as a natural lead-in to additional content.
-    </Card.Text>
-    <Button variant="primary">Go somewhere</Button>
-  </Card.Body>
-</Card>  */}
-   //}
 
 
     return (
@@ -85,15 +72,27 @@ function BookFlight(props) {
     <Card.Title><h5>Departure Time:<br/>{currentFlight.startTime}</h5></Card.Title>
     
     <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
-
+    
+    
+    <select id="selectNumber">
+    <option value="default">Select Number of Seats</option>
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="Manually">Manually Enter Seats</option>
+    
+</select>
     
     <Button variant="primary" style={{height:"30px"}}>Choose Seats</Button>
   
-    </div>
-    {/* <Card.Text>
-      With supporting text below as a natural lead-in to additional content.
-    </Card.Text> */}
-    
+    </div>    
   </Card.Body>
 
   
