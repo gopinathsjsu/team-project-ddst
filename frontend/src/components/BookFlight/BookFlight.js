@@ -87,10 +87,9 @@ function BookFlight(props) {
     <option value="9">9</option>
     <option value="10">10</option>
     <option value="Manually">Manually Enter Seats</option>
-    
 </select>
     
-    <Button variant="primary" style={{height:"30px"}}>Choose Seats</Button>
+    <Button variant="primary" style={{height:"30px",marginLeft:"50px"}}>Choose Seats</Button>
   
     </div>    
   </Card.Body>
