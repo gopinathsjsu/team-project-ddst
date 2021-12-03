@@ -98,7 +98,7 @@ function BookFlight(props) {
     <option value="Manually">Manually Enter Seats</option>
 </select> */}
     
-    <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
+    <Button variant="primary" style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem"}} 
     onClick={handleConfirmFlight}>Confirm Flight</Button>
   
     </div>    
@@ -109,7 +109,7 @@ function BookFlight(props) {
 </Card> 
 
 </div>
-{confirmStatus?(<Card style={{marginLeft:"2%",marginRight:"2%",marginTop:"5%", height:"200px"}}>
+{confirmStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"450px",width:"430px"}}>
  
 
 
@@ -119,15 +119,17 @@ function BookFlight(props) {
 
  <Card.Body>
    
- <div className="thisdivcontainer">
+ <div>
    <Card.Title style={{marginTop:"auto"}}> <h5>Passenger First Name:</h5>
-   <input></input>
+   <input style={{height:"5rem", width:"400px"}}></input>
    </Card.Title>
    
    <Card.Title style={{marginTop:"auto"}}> <h5>Passenger Last Name:</h5>
-   <input></input>
+   <input style={{height:"5rem", width:"400px"}}></input>
    </Card.Title>
-   
+   <Card.Title style={{marginTop:"auto"}}> <h5>Email: </h5>
+   <input style={{height:"5rem", width:"400px"}}></input>
+   </Card.Title>
    <Card.Title><h5> Select Seat:<br/></h5></Card.Title>
    <Autocomplete
                                         className='searchContainer'
@@ -140,6 +142,8 @@ function BookFlight(props) {
                                                 {...params}
                                                 label='Destination'
                                                 variant='outlined'
+                                                height="2rem"
+                                                
                                                 InputLabelProps={{ style: { padding: '0px 0px', color: '#555555', fontSize: 11.5 } }}
                                             />
                                         )}
@@ -151,8 +155,8 @@ function BookFlight(props) {
    
 
    
-   <Button variant="primary" style={{height:"30px",marginLeft:"50px"}} 
-   onClick={handleConfirmFlight}>Confirm Flight</Button>
+   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"170px", marginTop:"30px", fontSize:"1.35rem"}} 
+   onClick={handleConfirmFlight}>Pay Now</Button>
  
    </div>    
  </Card.Body>
