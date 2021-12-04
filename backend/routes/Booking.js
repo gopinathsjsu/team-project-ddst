@@ -75,10 +75,14 @@ async function milesUpdate(emailID, userDetails, selectFlight, mileagePoints, mi
 
 async function seatUpdate(selectFlight, seatNumber) {
     const flag = 0;
+    console.log(seatNumber);
+    console.log(selectFlight.seatsAvailable.indexOf(seatNumber));
     if (selectFlight.seatsAvailable.indexOf(seatNumber) === -1) {
         return flag;
     }
-    await flightSchema.updateOne({ seatsAvailable: seatNumber }, { $pull: { seatsAvailable: seatNumber } });
+    console.log("Hey");
+    let flightid = selectFlight._id;
+    await flightSchema.updateOne({_id:flightid},{ $pull: { seatsAvailable: seatNumber } });
     const temp = 1;
     return temp;
 }
@@ -109,7 +113,9 @@ router.post('/passengerDetails', async (req, res) => {
             if (selectFlight) {
                 passengerSchema.findOne({ emailID }).then((userDetails) => {
                     if (userDetails) {
+                        console.log(userDetails);
                         seatUpdate(selectFlight, seatNumber).then((result) => {
+                            console.log(result);
                             if (result === 0) {
                                 return res.json({ message: 'Seat not available. Please choose another seat!' });
                             } else {
