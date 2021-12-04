@@ -7,6 +7,9 @@ import "./BookFlight.css"
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import UserNavbar from '../UserNavbar/UserNavbar';
+import { Link, useNavigate } from 'react-router-dom';
+
+
 
 
 
@@ -34,6 +37,11 @@ function BookFlight(props) {
     const [flightID,setFlightID]=React.useState('')
     const [userID,setUserID]=React.useState('')
     const [passengerDetailsStatus,setPassengerDetailsStatus]=React.useState(false)
+    const [checkbox,setCheckbox]=React.useState(false)
+    const [updatedMileageRewards,setUpdatedMileageRewards]=React.useState(0)
+    const [flightBook,setFlightBook]=React.useState(false)
+
+    let navigate = useNavigate();
     
 
     async function getFlightDetails()
@@ -102,6 +110,20 @@ function BookFlight(props) {
         const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
         console.log("Got final API response",response.data)
         setPassengerDetailsStatus(true)
+    }
+
+    const handleClickCheckbox=()=>
+    {
+        setCheckbox(true)
+        setUpdatedMileageRewards(mileageRewards)
+        console.log("Updated Mileage rewards",updatedMileageRewards)
+    }
+
+    const handleFinalClick=()=>
+    {
+        alert("Your flight has been booked!")
+        setFlightBook(true)
+        navigate('/customerDashboard');
     }
 
 
@@ -201,7 +223,7 @@ function BookFlight(props) {
     <input type="checkbox"
     class="largerCheckbox"
     // name={name}
-    // onChange={handleChange}
+    onChange={handleClickCheckbox}
     // checked={checked}    
   />
   {/* {console.log("Got miles info",mileageRewards)} */}
@@ -218,7 +240,7 @@ function BookFlight(props) {
 
 </Card>):''}
 {console.log(passengerDetailsStatus)}
-{passengerDetailsStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"250px",width:"430px"}}>
+{passengerDetailsStatus?(<Card style={{marginLeft:"35%",marginRight:"35%",marginTop:"5%", height:"230px",width:"430px"}}>
  
 
 
@@ -231,12 +253,16 @@ function BookFlight(props) {
  <div>
    
    
- <Card.Title style={{marginTop:"auto"}}> <h5>Passenger First Name:</h5>
+ <center><Card.Title style={{marginTop:"auto"}}> <h3>Price of the Flight: ${currentFlight.price}</h3></Card.Title></center>
+ <br/>
+ 
+ <center><Card.Title style={{marginTop:"auto"}}> <h3>Mileage Rewards Used: ${updatedMileageRewards}</h3></Card.Title></center>
+<br/>
+
+ <center><Card.Title style={{marginTop:"auto"}}> <h3>Final Amount to Pay: ${currentFlight.price-updatedMileageRewards}</h3></Card.Title></center>
    
-   </Card.Title>
-   
-   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"155px", marginTop:"30px", fontSize:"1.35rem"}} 
-   onClick={sendPassengerDetails}>Pay Now</Button>
+   <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"155px", marginTop:"20px", fontSize:"1.35rem"}} 
+   onClick={handleFinalClick}>Pay Now</Button>
  
    </div> 
  </Card.Body>
