@@ -60,7 +60,7 @@ function SearchFlights(props) {
     const [updatedAirportList, setUpdatedAirportList] = React.useState([]);
     const [origin, setOrigin] = React.useState('');
     const [destination, setDestination] = React.useState('');
-    const [date, setDate] = React.useState('');
+    const [selectedDate, setSelectedDate] = React.useState('');
     const [resultFlights, setResultFlights] = React.useState('');
     const [searchFlightFlag, setSearchFlightFlag] = React.useState(false);
     const now = new Date();
@@ -121,11 +121,11 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        // console.log("Printing date",date)
         var data = {
             origin: origin,
             destination: destination,
-            date: date,
+            date: selectedDate,
         };
         console.log('Printing data', data);
 
@@ -272,7 +272,10 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
                                 </div>
                                 <label for='deptime'>Departure Date:</label>
                                 <br></br>
-                                <input type="date" id="txtDate" min={past()}/>
+                                <input type="date" id="txtDate" min={past()} onChange={(event) => {
+                                            setSelectedDate(event.target.value);
+                                            console.log("Printing selected date",selectedDate);
+                                        }}/>
                                 
                                 <br></br>
                                 <br></br>
