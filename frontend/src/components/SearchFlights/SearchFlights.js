@@ -214,7 +214,7 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
                 <div className='loginContainer'>
                     <div className='row'>
                         <div className='col-md-4'>
-                            <center><h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                            <center><h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22, fontWeight:"bold" }}>
                                 BOOK A FLIGHT
                             </h4></center>
                             <form onSubmit={handleSubmit}>

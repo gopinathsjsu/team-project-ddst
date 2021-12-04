@@ -154,7 +154,7 @@ function BookFlight(props) {
  
 
 
-  <Card.Header as="h5">Flight Number: {currentFlight.flightNumber}</Card.Header>
+  <Card.Header as="h5" style={{fontWeight:"bold", fontSize:"1.5rem"}}>Flight Number: {currentFlight.flightNumber}</Card.Header>
 
   
 
@@ -163,15 +163,15 @@ function BookFlight(props) {
   <div className="thisdivcontainer">
     <Card.Title style={{marginTop:"auto"}}> <h3>{currentFlight.origin} - {currentFlight.destination}</h3></Card.Title>
     
-    <Card.Title><h5>Departure Time:<br/>{convertTime(currentFlight.startTime)}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}>Departure Time:</b><br/>{convertTime(currentFlight.startTime)}</h5></Card.Title>
     
-    <Card.Title><h5> Arrival Time:<br/>{convertTime(currentFlight.endTime)}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}>Arrival Time:</b><br/>{convertTime(currentFlight.endTime)}</h5></Card.Title>
     
     
-    <Button variant="primary" style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem"}} 
+    <Button variant="primary" style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem", fontWeight:"bold"}} 
     onClick={handleConfirmFlight}>Confirm Flight</Button>
   
-    </div>    
+    </div>
   </Card.Body>
 
   

@@ -111,6 +111,7 @@ function SearchFlights(props) {
                 </TableCell>
                 <TableCell align='center'>
                     <Button
+                        style={{fontWeight:"bold"}}
                         variant='danger'
                         onClick={(e) => {
                             {
@@ -134,7 +135,7 @@ function SearchFlights(props) {
                 <div className='searchContainer'>
                     <div className='row'>
                         <div className='col-md-4'>
-                            <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                            <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22, fontWeight:"bold" }}>
                                 ALL FLIGHTS
                             </h4>
                         </div>

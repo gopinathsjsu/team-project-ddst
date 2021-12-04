@@ -47,7 +47,7 @@ const UserForm = () => {
             <div className='thiscontainer'>
                 <div className='row'>
                     <div className='col-md-4'>
-                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22,fontWeight:"bold" }}>
                             WELCOME TO JET AIRWAYS!
                         </h4>
                         <form onSubmit={handleSubmit}>
@@ -103,8 +103,8 @@ const UserForm = () => {
                                     }}
                                 />
                             </div>
-                            <button class='btn'>SIGN UP</button>
-                            <a href='/login' style={{ color: 'black', paddingLeft: '200px', fontSize: '17px', fontWeight: 'bold' }}>
+                            <button class='btn' style={{ backgroundColor: '#1976d2', color: 'white' }}>SIGN UP</button>
+                            <a href='/login' style={{ color: 'white', paddingLeft: '200px', fontSize: '17px', fontWeight: 'bold' }}>
                                 Already a member? Click here to login.
                             </a>
                         </form>
