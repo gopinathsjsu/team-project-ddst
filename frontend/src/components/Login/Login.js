@@ -37,7 +37,7 @@ function Login() {
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>
-                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22, fontWeight:"bold" }}>
                             WELCOME TO JET AIRWAYS!
                         </h4>
                         <form onSubmit={handleSubmit}>
@@ -67,7 +67,7 @@ function Login() {
                                 />
                             </div>
                             <center>
-                                <button class='btn'>LOGIN</button>
+                                <button class='btn' style={{ backgroundColor: '#1976d2', color: 'white' }}>LOGIN</button>
                             </center>
                         </form>
                     </div>

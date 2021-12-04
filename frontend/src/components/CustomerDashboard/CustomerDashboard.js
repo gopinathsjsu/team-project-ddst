@@ -78,20 +78,20 @@ function CustomerDashboard() {
         return(
             
  <Card style={{marginLeft:"2%",marginRight:"2%",marginTop:"1%", height:"100px"}}>
-  <Card.Header as="h5">Flight Number: {row.flightNumber}</Card.Header>
+  <Card.Header as="h5" style={{fontWeight:"bold", fontSize:"1.5rem"}}>Flight Number: {row.flightNumber}</Card.Header>
   <Card.Body>  
   <div className="customerreservation">
     <Card.Title style={{marginTop:"auto"}}> <h3>{row.origin} - {row.destination}</h3></Card.Title>
     
-    <Card.Title><h5>Departure Time:<br/>{convertTime(row.startTime)}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}>Departure Time:</b><br/>{convertTime(row.startTime)}</h5></Card.Title>
     
-    <Card.Title><h5> Arrival Time:<br/>{convertTime(row.endTime)}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}> Arrival Time:</b><br/>{convertTime(row.endTime)}</h5></Card.Title>
     
-    <Card.Title><h5> Passenger Name:<br/>{row.passengerFirstName+" "+row.passengerLastName}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}> Passenger Name:</b><br/>{row.passengerFirstName+" "+row.passengerLastName}</h5></Card.Title>
 
-    <Card.Title><h5> Seat Number:<br/>{row.seatNumber}</h5></Card.Title>
+    <Card.Title><h5><b style={{fontSize:"1.5rem"}}> Seat Number:</b><br/>{row.seatNumber}</h5></Card.Title>
     
-    <Button variant='danger' style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem"}} 
+    <Button variant='danger' style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem", fontWeight:"bold"}} 
     
     onClick={(e)=>{{
         handleCancelReservation(row.passengerEmailID,row.seatNumber,
@@ -135,7 +135,7 @@ function CustomerDashboard() {
                     Hello {firstName} {lastName}! You have ${mileagePoints} Mileage rewards, book flights to earn more rewards!
                 </p>
             </div>
-            {userReservations.length>0?(<div><br/><br/><h1><center>Your Reservations</center></h1></div>):''}
+            {userReservations.length>0?(<div><br/><br/><h1><center style={{fontWeight:"bold"}}>Your Reservations</center></h1></div>):''}
             {userReservations?([userReservations.map(createUserReservationCards)]):''}
         </div>
     );
