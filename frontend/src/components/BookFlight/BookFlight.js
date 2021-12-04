@@ -87,7 +87,40 @@ function BookFlight(props) {
         // console.log("Got flight ID here",flightID)
     }
 
-    const sendPassengerDetails = async ()=>
+    // const sendPassengerDetails = async ()=>
+    // {
+    //     console.log(selectedSeat)
+    //     console.log("Inside send passenger details")
+    //     console.log("Got first name",firstName)
+    //     console.log("Got last name",lastName)
+    //     console.log("Got passenger email ID",passengerEmail)
+    //     console.log("Got selected seat",selectedSeat)
+    //     console.log("Mileage rewards",mileageRewards)
+    //     console.log("Got flight id",currentFlight._id)
+    //     let data=
+    //     {
+    //         passengerFirstName:firstName,
+    //         passengerLastName:lastName,
+    //         passengerEmailID:passengerEmail,
+    //         seatNumber:selectedSeat,
+    //         mileageRewardsUsed:updatedMileageRewards,
+    //         id:currentFlight._id,
+    //         emailID:userID
+    //     }
+    //     const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
+    //     console.log("Got final API response",response.data)
+    //     console.log("Type of seat number",typeof(selectedSeat))
+    //     setPassengerDetailsStatus(true)
+    // }
+
+    // const handleClickCheckbox=()=>
+    // {
+    //     setCheckbox(true)
+    //     setUpdatedMileageRewards(mileageRewards)
+    //     console.log("Updated Mileage rewards",updatedMileageRewards)
+    // }
+
+    const handleFinalClick=async ()=>
     {
         console.log(selectedSeat)
         console.log("Inside send passenger details")
@@ -111,17 +144,6 @@ function BookFlight(props) {
         console.log("Got final API response",response.data)
         console.log("Type of seat number",typeof(selectedSeat))
         setPassengerDetailsStatus(true)
-    }
-
-    const handleClickCheckbox=()=>
-    {
-        setCheckbox(true)
-        setUpdatedMileageRewards(mileageRewards)
-        console.log("Updated Mileage rewards",updatedMileageRewards)
-    }
-
-    const handleFinalClick=()=>
-    {
         alert("Your flight has been booked!")
         setFlightBook(true)
         navigate('/customerDashboard');
@@ -135,6 +157,25 @@ function BookFlight(props) {
         var now = new Date(inputTime);
         console.log(now.toString())
         return now.toString()
+    }
+
+    const handleConfirmDetails =()=>
+    {
+        setPassengerDetailsStatus(true)
+    }
+
+    const handleCheckBox=(e)=>
+    {
+        const checked = e.target.checked;
+        console.log(checked)
+        if(checked)
+        {
+            setUpdatedMileageRewards(mileageRewards)
+        }
+        else
+        {
+            setUpdatedMileageRewards(0)
+        }
     }
 
 
@@ -234,16 +275,20 @@ function BookFlight(props) {
                                     
     <input type="checkbox"
     class="largerCheckbox"
-    // name={name}
-    onChange={handleClickCheckbox}
-    // checked={checked}    
+    onClick={(e) => {
+        handleCheckBox(e);
+    }}
+    
+    // onChange={handleClickCheckbox}
+    
   />
   {/* {console.log("Got miles info",mileageRewards)} */}
   <label variant="primary" style={{marginLeft:"15px", marginTop:"1px", fontSize:"1.6rem"}}>Select checkbox to avail ${mileageRewards} Mileage Rewards!</label>
 
    
    <Button variant="primary" style={{height:"30px",marginRight:"20px",marginLeft:"145px", marginTop:"30px", fontSize:"1.35rem"}} 
-   onClick={sendPassengerDetails}>Confirm Details</Button>
+   
+   onClick={handleConfirmDetails}>Confirm Details</Button>
  
    </div> 
  </Card.Body>

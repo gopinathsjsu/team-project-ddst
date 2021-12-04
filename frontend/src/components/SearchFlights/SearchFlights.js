@@ -131,9 +131,16 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
 
         axios.post('http://localhost:3001/Booking/search', data).then((response) => {
             console.log('Got response data', response.data.flightSchema);
-
+            console.log("RES",response.status)
+            if(response.status==202)
+            {
+                alert("No Flights Exist!")
+                window.location.reload()
+            }
+            else{
             setResultFlights(response.data.flightSchema);
             setSearchFlightFlag(true);
+            }
         });
     };
 

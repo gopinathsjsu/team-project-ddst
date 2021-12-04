@@ -44,7 +44,7 @@ router.post('/search', async (req, res) => {
 
         res.status(200).json({ flightSchema: result });
     } else {
-        res.json('No flights exist');
+        res.status(202).json('No flights exist');
     }
 });
 
