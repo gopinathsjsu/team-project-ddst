@@ -18,3 +18,8 @@
     font-weight: bold;
 }
 
+.customerreservation
+{
+    column-count: 6; 
+    text-align: center;
+}

@@ -85,10 +85,13 @@ router.post('/userDashboardDetails', (req, res) => {
 });
 
 router.post('/userBookings', (req, res) => {
-    const emailID = req.body.emailID;
+    const parentEmail = req.body.emailID;
+    console.log(parentEmail)
+    console.log(parentEmail);
     try{
-        bookingSchema.find({ parentemailID: emailID }).then((userBookings) => {
+        bookingSchema.find({ parentEmailID: parentEmail }).then((userBookings) => {
         // Check if user exists
+        console.log(userBookings);
         if (!userBookings) {
             return res.status(404).json({ message: 'No Bookings Found' });
         } else {
