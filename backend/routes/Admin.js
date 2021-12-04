@@ -116,18 +116,29 @@ async function revertMileageRewardsFinal(passenger, mileagePoints) {
     await passengerSchema.updateOne({ emailID: passenger.emailID }, { $set: { mileageRewards: balanceMileagePoints } });
 }
 
+async function flightDeleted(passenger,idFlight) {
+    
+    await passengerSchema.updateOne({ emailID: passenger.emailID }, { $pull: { flightsReserved: idFlight} });
+    return;
+}
+
 async function revertMileageRewards(cancelReservation) {
     for (let i = 0; i < cancelReservation.length; i++) {
         let element = cancelReservation[i];
         if (element.mileageRewardsUsed !== 0) {
-            passengerSchema.findOne({ emailID: element.parentEmailID }).then((passenger) => {
+            await passengerSchema.findOne({ emailID: element.parentEmailID }).then((passenger) => {
                 revertMileageRewardsFinal(passenger, element.mileageRewardsUsed);
+                let idFlight = element._id;
+                // flightDeleted(passenger,idFlight);
             });
         }
 
-        bookingSchema.findOneAndDelete({ flightNumber: element.flightNumber });
+        await bookingSchema.findOneAndDelete({ flightNumber: element.flightNumber });
     }
 }
+
+
+
 
 router.post('/deleteFlight', function (req, res) {
     flightSchema

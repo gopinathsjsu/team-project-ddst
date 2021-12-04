@@ -191,7 +191,7 @@ router.post('/cancelReservation', async (req, res) => {
         flightSchema.findOne({ flightNumber: flightNumber }).then((cancelSeat) => {
             if (cancelSeat) {
                 bookingSchema
-                    .findOneAndDelete({ passengerEmailID, flightNumber: cancelSeat.flightNumber,_id: bookingID})
+                    .findOneAndDelete({ passengerEmailID, flightNumber: cancelSeat.flightNumber})
                     .then((cancelReservation) => {
                         if (cancelReservation) {
                             passengerSchema.findOne({ emailID }).then((userDetails) => {

@@ -35,13 +35,7 @@ function SearchFlights(props) {
         });
     }, []);
 
-    const disablePastDate = () => {
-        const today = new Date();
-        const dd = String(today.getDate()).padStart(2, '0');
-        const mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
-        const yyyy = today.getFullYear();
-        return yyyy + '-' + mm + '-' + dd;
-    };
+   
 
     const handleSelectedValue = (value) => {
         console.log('Got Selected Value', value);
@@ -57,6 +51,9 @@ function SearchFlights(props) {
         console.log('Printing updated list', filteredList);
         setUpdatedAirportList(filteredList);
     };
+
+
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -192,6 +189,7 @@ function SearchFlights(props) {
                                 type='datetime-local'
                                 id='arrtime'
                                 name='arrtime'
+                                
                                 onChange={(e) => {
                                     setArrivalDateTime(e.target.value);
                                 }}
