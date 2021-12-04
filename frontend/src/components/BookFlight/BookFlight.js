@@ -131,7 +131,10 @@ function BookFlight(props) {
     {
       var myDate1 = new Date(inputTime)
       inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
-      return inputTime
+        console.log(inputTime)
+        var now = new Date(inputTime);
+        console.log(now.toString())
+        return now.toString()
     }
 
 
@@ -143,6 +146,7 @@ function BookFlight(props) {
   href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
   crossorigin="anonymous"
+  
 />
  {console.log(currentFlight)}
  <div className="reactCard">

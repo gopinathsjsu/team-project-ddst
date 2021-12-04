@@ -24,6 +24,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import DatePicker from "react-datepicker";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -51,13 +52,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const disablePastDate = () => {
-    const today = new Date();
-    const dd = String(today.getDate()).padStart(2, '0');
-    const mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
-    const yyyy = today.getFullYear();
-    return yyyy + '-' + mm + '-' + dd;
-};
+
 
 function SearchFlights(props) {
     const [airportList, setAirports] = React.useState([]);
@@ -68,6 +63,10 @@ function SearchFlights(props) {
     const [date, setDate] = React.useState('');
     const [resultFlights, setResultFlights] = React.useState('');
     const [searchFlightFlag, setSearchFlightFlag] = React.useState(false);
+    const now = new Date();
+const min = now;
+const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
+
 
     const classes = useStyles();
 
@@ -95,6 +94,20 @@ function SearchFlights(props) {
         setUpdatedAirportList(filteredList);
     };
 
+    const today = new Date()
+
+    function disablePastDate()  {
+        const today = new Date();
+        
+        const dd = String(today.getDate()).padStart(2, '0');
+        
+        const mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+        // return yyyy + '-' + mm + '-' + dd;
+        var result=yyyy + '-' + mm + '-' + dd;
+        return result
+    };
+
     function convertUTCDateToLocalDate(date) {
         var newDate = new Date(date.getTime() + date.getTimezoneOffset() * 60 * 1000);
 
@@ -118,33 +131,41 @@ function SearchFlights(props) {
 
         axios.post('http://localhost:3001/Booking/search', data).then((response) => {
             console.log('Got response data', response.data.flightSchema);
+
             setResultFlights(response.data.flightSchema);
-            // for(let i=0;i<resultFlights;i++)
-            // {
-            //     console.log(resultFlights[i])
-            //     let origin_date_time= convertUTCDateToLocalDate(resultFlights[i].startTime)
-            //     let destination_date_time=convertUTCDateToLocalDate(resultFlights[i].endTime)
-            //     origin_date_time=JSON.stringify(origin_date_time)
-            //     destination_date_time=JSON.stringify(destination_date_time)
-
-            //     let origin_date_string=origin_date_time.split("T")[0].substring(1,)
-            //     let origin_time_string=origin_date_time.split("T")[1].substring(0,5)
-            //     let origin_result_string=origin_date_string+" "+origin_time_string
-            //     resultFlights[i].startTime=origin_result_string
-            //}
-
             setSearchFlightFlag(true);
         });
     };
 
+    function past(){
+        var dtToday = new Date();
+        
+        var month = dtToday.getMonth() + 1;
+        var day = dtToday.getDate();
+        var year = dtToday.getFullYear();
+        if(month < 10)
+            month = '0' + month.toString();
+        if(day < 10)
+            day = '0' + day.toString();
+        
+        var minDate= year + '-' + month + '-' + day;
+        
+        return minDate
+    }
+
+    function convertTime(inputTime)
+    {
+      var myDate1 = new Date(inputTime)
+      inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+        // console.log(inputTime)
+        var now = new Date(inputTime);
+        // console.log(now.toString())
+        return now.toString()
+    }
     
 
     const createFlightRow = (row, index) => {
-        var myDate1 = new Date(row.startTime)
-         row.startTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
-
-         var myDate2 = new Date(row.endTime)
-         row.endTime = myDate2.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+        
          
 
         return (
@@ -160,10 +181,10 @@ function SearchFlights(props) {
                     {row.destination}
                 </TableCell>
                 <TableCell align='center' style={{ fontSize: 15 }}>
-                    {row.startTime}
+                    {convertTime(row.startTime)}
                 </TableCell>
                 <TableCell align='center' style={{ fontSize: 15 }}>
-                    {row.endTime}
+                    {convertTime(row.endTime)}
                 </TableCell>
                 <TableCell align='center' style={{ fontSize: 15 }}>
                     $ {row.price}
@@ -181,6 +202,7 @@ function SearchFlights(props) {
                     </Button>
                 </TableCell>
             </TableRow>
+        
             // </TableBody>
         );
     };
@@ -243,14 +265,8 @@ function SearchFlights(props) {
                                 </div>
                                 <label for='deptime'>Departure Date:</label>
                                 <br></br>
-                                <input
-                                    type='date'
-                                    min={disablePastDate()}
-                                    onChange={(event, newValue) => {
-                                        setDate(event.target.value);
-                                        console.log(event.target.value);
-                                    }}
-                                ></input>
+                                <input type="date" id="txtDate" min={past()}/>
+                                
                                 <br></br>
                                 <br></br>
                                 <center>

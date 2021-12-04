@@ -84,7 +84,10 @@ function SearchFlights(props) {
     {
       var myDate1 = new Date(inputTime)
       inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
-      return inputTime
+        console.log(inputTime)
+        var now = new Date(inputTime);
+        console.log(now.toString())
+        return now.toString()
     }
 
     const createFlightRow = (row, index) => {
