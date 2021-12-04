@@ -80,6 +80,13 @@ function SearchFlights(props) {
         });
     }, []);
 
+    function convertTime(inputTime)
+    {
+      var myDate1 = new Date(inputTime)
+      inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+      return inputTime
+    }
+
     const createFlightRow = (row, index) => {
         return (
             // <TableBody>
@@ -94,10 +101,10 @@ function SearchFlights(props) {
                     {row.destination}
                 </TableCell>
                 <TableCell align='center' style={{ fontSize: 15 }}>
-                    {row.startTime}
+                    {convertTime(row.startTime)}
                 </TableCell>
                 <TableCell align='center' style={{ fontSize: 15 }}>
-                    {row.endTime}
+                    {convertTime(row.endTime)}
                 </TableCell>
                 <TableCell align='center'>
                     <Button
@@ -125,7 +132,7 @@ function SearchFlights(props) {
                     <div className='row'>
                         <div className='col-md-4'>
                             <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
-                                DELETE A FLIGHT
+                                ALL FLIGHTS
                             </h4>
                         </div>
                     </div>

@@ -45,10 +45,14 @@ const bookingSchema = new Schema({
         type: Number,
     },
     startTime: {
-        type: String,
+        // type: String,
+        type: Date,
+        default: Date.now,
     },
     endTime: {
-        type: String,
+        // type: String,
+        type: Date,
+        default: Date.now,
     },
     status: {
         type: String,

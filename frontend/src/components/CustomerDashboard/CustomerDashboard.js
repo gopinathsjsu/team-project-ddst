@@ -58,9 +58,16 @@ function CustomerDashboard() {
         };
         axios.post('http://localhost:3001/Booking/cancelReservation', data).then((response) => {
             console.log('Got response data', response.data);
+            window.location.reload()
         });
     };
     
+    function convertTime(inputTime)
+    {
+      var myDate1 = new Date(inputTime)
+      inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+      return inputTime
+    }
 
 
     const createUserReservationCards=(row,index)=>
@@ -73,9 +80,9 @@ function CustomerDashboard() {
   <div className="customerreservation">
     <Card.Title style={{marginTop:"auto"}}> <h3>{row.origin} - {row.destination}</h3></Card.Title>
     
-    <Card.Title><h5>Departure Time:<br/>{row.startTime}</h5></Card.Title>
+    <Card.Title><h5>Departure Time:<br/>{convertTime(row.startTime)}</h5></Card.Title>
     
-    <Card.Title><h5> Arrival Time:<br/>{row.endTime}</h5></Card.Title>
+    <Card.Title><h5> Arrival Time:<br/>{convertTime(row.endTime)}</h5></Card.Title>
     
     <Card.Title><h5> Passenger Name:<br/>{row.passengerFirstName+" "+row.passengerLastName}</h5></Card.Title>
 

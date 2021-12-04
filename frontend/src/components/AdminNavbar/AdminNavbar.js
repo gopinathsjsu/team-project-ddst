@@ -144,7 +144,7 @@ function PersistentDrawerLeft(props) {
                         <ListItemIcon>
                             <FaPlane fontSize='large' />
                         </ListItemIcon>
-                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='Cancel Flights' />
+                        <ListItemText sx={{ fontSize: '2rem' }} disableTypography primary='View Flights' />
                     </ListItem>
                     <Divider />
 

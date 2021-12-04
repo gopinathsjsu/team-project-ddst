@@ -25,14 +25,14 @@ const flightSchema = new Schema({
         type: Number,
     },
     startTime: {
-        type: String,
-        // type: Date,
-        // default: Date.now,
+        // type: String,
+        type: Date,
+        default: Date.now,
     },
     endTime: {
-        type: String,
-        // type: Date,
-        // default: Date.now,
+        // type: String,
+        type: Date,
+        default: Date.now,
     },
     status: {
         type: String,

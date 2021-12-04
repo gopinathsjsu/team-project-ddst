@@ -127,6 +127,13 @@ function BookFlight(props) {
         navigate('/customerDashboard');
     }
 
+    function convertTime(inputTime)
+    {
+      var myDate1 = new Date(inputTime)
+      inputTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+      return inputTime
+    }
+
 
     return (
         <div>
@@ -152,9 +159,9 @@ function BookFlight(props) {
   <div className="thisdivcontainer">
     <Card.Title style={{marginTop:"auto"}}> <h3>{currentFlight.origin} - {currentFlight.destination}</h3></Card.Title>
     
-    <Card.Title><h5>Departure Time:<br/>{currentFlight.startTime}</h5></Card.Title>
+    <Card.Title><h5>Departure Time:<br/>{convertTime(currentFlight.startTime)}</h5></Card.Title>
     
-    <Card.Title><h5> Arrival Time:<br/>{currentFlight.endTime}</h5></Card.Title>
+    <Card.Title><h5> Arrival Time:<br/>{convertTime(currentFlight.endTime)}</h5></Card.Title>
     
     
     <Button variant="primary" style={{height:"30px",marginLeft:"50px", fontSize:"1.35rem"}} 

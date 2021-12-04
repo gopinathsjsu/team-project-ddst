@@ -137,7 +137,16 @@ function SearchFlights(props) {
         });
     };
 
+    
+
     const createFlightRow = (row, index) => {
+        var myDate1 = new Date(row.startTime)
+         row.startTime = myDate1.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+
+         var myDate2 = new Date(row.endTime)
+         row.endTime = myDate2.toLocaleString("en-US", {timeZone: "America/Los_Angeles"})
+         
+
         return (
             // <TableBody>
             <TableRow key={index} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>

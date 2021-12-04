@@ -26,6 +26,7 @@ function AdminLogin() {
 
         axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
             console.log('Got response data', response.data);
+            console.log(response.status)
             localStorage.setItem('adminEmail', email);
             navigate('/adminDashboard');
         });
