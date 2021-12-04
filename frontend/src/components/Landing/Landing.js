@@ -16,6 +16,16 @@ function Landing() {
                 <Grid item xs={6}></Grid>
                 <Grid item xs={6}></Grid>
             </Grid>
+            
+                <div class="cardlanding2 ">
+                    <div>
+                    <h1 style={{color:"white",fontSize:"30px", textAlign:"center", fontWeight:"bold" }}>WELCOME TO JET AIRWAYS</h1>
+                    <h3 style={{color:"white",fontSize:"25px", textAlign:"center", fontWeight:"bold"}}>
+                    "When Everything seems to be going against you, remember that aircraft take off against the wind, not with it."
+                    </h3>
+                    </div>
+                
+            </div>
         </div>
     );
 }

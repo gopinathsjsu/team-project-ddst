@@ -2,3 +2,34 @@
     height: 100vh !important;
     overflow-x: hidden;
 }
+
+/* .background {
+    
+    height: 2000px;
+    padding: 10px;
+} */
+
+  
+.cardlanding2 {
+    margin-right: 100px;
+    margin-left: auto;
+    width: 570px;
+    box-shadow: 0 15px 25px rgba(129, 124, 124, 0.8);
+    height: 190px;
+    /* border: 200px; */
+    outline-style: solid;
+    outline-color: rgb(255, 255, 255);
+    /* outline:  white 29px; */
+    border-radius: 10px;    
+    /* outline-offset: 20px; */
+        /* border-radius: 5px; */
+    backdrop-filter: blur(10px);
+    /* background-color: rgba(0, 0, 0, 0); */
+    padding: 10px;
+  
+
+}
+  
+/* .card img {
+    height: 60%;
+} */
