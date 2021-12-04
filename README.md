@@ -53,6 +53,9 @@ npm run build
 ## Project Journals:
 Please find all the individual project journals in the [Documentation](https://github.com/gopinathsjsu/team-project-ddst/tree/main/Documentation/) directory.
 
+## UI Wireframe
+Find the [UI Wireframe](https://github.com/gopinathsjsu/team-project-ddst/blob/main/Documentation/Wireframe.pdf) here.
+
 ## Architecture Diagram
 ![image](https://user-images.githubusercontent.com/31564740/144546225-490e07ed-eb5a-452d-ad6c-8806c54985f6.png)
 
