@@ -103,12 +103,13 @@ function BookFlight(props) {
             passengerLastName:lastName,
             passengerEmailID:passengerEmail,
             seatNumber:selectedSeat,
-            mileageRewardsUsed:mileageRewards,
+            mileageRewardsUsed:updatedMileageRewards,
             id:currentFlight._id,
             emailID:userID
         }
         const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
         console.log("Got final API response",response.data)
+        console.log("Type of seat number",typeof(selectedSeat))
         setPassengerDetailsStatus(true)
     }
 

@@ -90,9 +90,9 @@ function SearchFlights(props) {
             <div className='loginContainer'>
                 <div className='row'>
                     <div className='col-md-4'>
-                        <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
+                        <center><h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22 }}>
                             ADD A FLIGHT
-                        </h4>
+                        </h4></center>
                         <form onSubmit={handleSubmit}>
                             <div class='form-group inputLogin' style={{ color: 'black' }}>
                                 <label for='exampleInputPassword1'>Origin</label>
