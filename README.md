@@ -6,7 +6,7 @@
 3. Sohan Shirodkar
 4. Tanay Ganeriwal
 
-## Tools and Languages:
+## Tools used:
 - Frontend: React JS
 - Backend: Node JS, Express JS
 - Database: MongoDB
@@ -46,6 +46,12 @@ npm run build
 
 ## XP Core Values:
 [XP Core Values implemented by our team](https://github.com/gopinathsjsu/team-project-ddst/blob/main/Documentation/XP_Core_Values.md)
+
+## Sprint Sheet:
+[Sprint Sheet for Team DDST](https://github.com/gopinathsjsu/team-project-ddst/blob/main/Documentation/Sprint_Sheet.xlsx)
+
+## Project Journals:
+Please find all the individual project journals in the [Documentation](https://github.com/gopinathsjsu/team-project-ddst/tree/main/Documentation/) directory.
 
 ## Architecture Diagram
 ![image](https://user-images.githubusercontent.com/31564740/144546225-490e07ed-eb5a-452d-ad6c-8806c54985f6.png)
