@@ -9,6 +9,8 @@ import Paper from '@material-ui/core/Paper';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Button, Form, Row, Col, Card } from "react-bootstrap";
+import backendServer from "../../../src/webConfig" 
+
 
 
 function CustomerDashboard() {
@@ -23,7 +25,7 @@ function CustomerDashboard() {
         let data = {
             emailID: userEmail,
         };
-        const response = await axios.post('http://localhost:3001/passenger/userDashboardDetails', data);
+        const response = await axios.post(`${backendServer}/passenger/userDashboardDetails`, data);
         setFirstName(response.data.firstName);
         setLastName(response.data.lastName);
         setMileagePoints(response.data.mileageRewards);
@@ -34,7 +36,7 @@ function CustomerDashboard() {
         let data = {
             emailID: userEmail,
         };
-        const response = await axios.post('http://localhost:3001/Passenger/userBookings', data);
+        const response = await axios.post(`${backendServer}/Passenger/userBookings`, data);
         console.log("Got flights reserved",response.data.userBookings)
         setUserReservation(response.data.userBookings)
         
@@ -56,7 +58,7 @@ function CustomerDashboard() {
             flightNumber:flightNumber
 
         };
-        axios.post('http://localhost:3001/Booking/cancelReservation', data).then((response) => {
+        axios.post(`${backendServer}/Booking/cancelReservation`, data).then((response) => {
             console.log('Got response data', response.data);
             window.location.reload()
         });

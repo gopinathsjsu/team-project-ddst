@@ -5,6 +5,8 @@ import axios from 'axios';
 import { BrowserRouter, Route, Link, Switch, Redirect } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
+import backendServer from "../../../src/webConfig" 
+
 
 function Login() {
     let navigate = useNavigate();
@@ -24,7 +26,7 @@ function Login() {
         };
         console.log('Printing data', data);
 
-        axios.post('http://localhost:3001/passenger/login', data).then((response) => {
+        axios.post(`${backendServer}/passenger/login`, data).then((response) => {
             console.log('Got response data', response.data);
             localStorage.setItem('email', email);
             navigate('/customerDashboard');

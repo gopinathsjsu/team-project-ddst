@@ -8,6 +8,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import UserNavbar from '../UserNavbar/UserNavbar';
 import { Link, useNavigate } from 'react-router-dom';
+import backendServer from "../../../src/webConfig" 
+
 
 
 
@@ -51,7 +53,7 @@ function BookFlight(props) {
         flightNumber:getUrl()
     }
     console.log("Printing data",data)
-    await axios.post('http://localhost:3001/Booking/getBookedFlight',data).then((response) => {
+    await axios.post(`${backendServer}/Booking/getBookedFlight`,data).then((response) => {
             console.log('Got details of the current flight', response.data);
             setCurrentFlight(response.data.getFlight)
         });
@@ -62,7 +64,7 @@ function BookFlight(props) {
         let data = {
             emailID: userEmail,
         };
-        const response = await axios.post('http://localhost:3001/passenger/userDashboardDetails', data);
+        const response = await axios.post(`${backendServer}/passenger/userDashboardDetails`, data);
         console.log("Got miles response",response.data)
         setMileageRewards(response.data.mileageRewards)
         setUserID(userEmail)
@@ -140,7 +142,7 @@ function BookFlight(props) {
             id:currentFlight._id,
             emailID:userID
         }
-        const response = await axios.post('http://localhost:3001/Booking/passengerDetails', data);
+        const response = await axios.post(`${backendServer}/Booking/passengerDetails`, data);
         console.log("Got final API response",response.data)
         console.log("Type of seat number",typeof(selectedSeat))
         setPassengerDetailsStatus(true)

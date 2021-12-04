@@ -4,6 +4,8 @@ import './AdminLogin.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
+import backendServer from "../../../src/webConfig" 
+
 
 function AdminLogin() {
     const [password, setPassword] = React.useState('');
@@ -24,7 +26,7 @@ function AdminLogin() {
         };
         console.log('Printing data', data);
 
-        axios.post('http://localhost:3001/admin/adminLogin', data).then((response) => {
+        axios.post(`${backendServer}/admin/adminLogin`, data).then((response) => {
             console.log('Got response data', response.data);
             console.log(response.status)
             localStorage.setItem('adminEmail', email);

@@ -14,6 +14,8 @@ import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import AdminNavbar from '../AdminNavbar/AdminNavbar';
 import { Link, useNavigate } from 'react-router-dom';
+import backendServer from "../../../src/webConfig"
+
 
 function SearchFlights(props) {
     const [airportList, setAirports] = React.useState([]);
@@ -29,7 +31,7 @@ function SearchFlights(props) {
     let navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3001/admin/getAirportNames').then((response) => {
+        axios.get(`${backendServer}/admin/getAirportNames`).then((response) => {
             console.log('Got list of all airports', response.data);
             setAirports(response.data);
         });
@@ -69,7 +71,7 @@ function SearchFlights(props) {
         };
         console.log('Printing data', data);
 
-        axios.post('http://localhost:3001/admin/addFlights', data).then((response) => {
+        axios.post(`${backendServer}/admin/addFlights`, data).then((response) => {
             console.log('STATUS', response.status);
             if (response.status == 202) {
                 console.log('Flight already there');

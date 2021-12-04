@@ -25,6 +25,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import DatePicker from "react-datepicker";
+import backendServer from "../../../src/webConfig" 
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -73,7 +75,7 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
     const navigate = useNavigate();
 
     useEffect(() => {
-        axios.get('http://localhost:3001/admin/getAirportNames').then((response) => {
+        axios.get(`${backendServer}/admin/getAirportNames`).then((response) => {
             console.log('Got list of all airports', response.data);
             setAirports(response.data);
         });
@@ -129,7 +131,7 @@ const max = new Date(now.getFullYear(), now.getMonth() + 6, now.getDate());
         };
         console.log('Printing data', data);
 
-        axios.post('http://localhost:3001/Booking/search', data).then((response) => {
+        axios.post(`${backendServer}/Booking/search`, data).then((response) => {
             console.log('Got response data', response.data.flightSchema);
             console.log("RES",response.status)
             if(response.status==202)

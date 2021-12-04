@@ -8,6 +8,9 @@ import bg_image from '../../images/254381.jpeg';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import CommonNavbar from '../CommonNavbar/CommonNavbar';
+import backendServer from "../../../src/webConfig" 
+
+
 
 const UserForm = () => {
     // const classes = useStyle();
@@ -34,7 +37,7 @@ const UserForm = () => {
         };
         console.log('Printing data', data);
 
-        axios.post('http://localhost:3001/passenger/register', data).then((response) => {
+        axios.post(`${backendServer}/passenger/register`, data).then((response) => {
             console.log('Got response data', response.data);
             localStorage.setItem('email', email);
             navigate('/customerDashboard');

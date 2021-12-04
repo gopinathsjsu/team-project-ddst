@@ -15,6 +15,7 @@ import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import { Container, Button, Form, Row, Col, Card } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import backendServer from "../../../src/webConfig" 
 
 // Material UI
 
@@ -56,6 +57,7 @@ function SearchFlights(props) {
     const [flightList, setFlightList] = React.useState([]);
     const [selectedFlightNumber, setSelectedFlightNumber] = React.useState([]);
     const [currentState, setCurrentState] = React.useState('');
+    
 
     let navigate = useNavigate();
 
@@ -67,16 +69,18 @@ function SearchFlights(props) {
             id: value,
         };
         console.log(data);
-        axios.post('http://localhost:3001/admin/deleteFlight', data).then((response) => {
+        axios.post(`${backendServer}/admin/deleteFlight`, data).then((response) => {
             console.log('Got response data', response.data);
             setCurrentState('Deleted');
+            
         });
     };
 
     useEffect(() => {
-        axios.get('http://localhost:3001/admin/getAllFlights').then((response) => {
+        axios.get(`${backendServer}/admin/getAllFlights`).then((response) => {
             console.log('Got response data', response.data);
             setFlightList(response.data);
+            
         });
     }, []);
 
@@ -135,16 +139,17 @@ function SearchFlights(props) {
                 <div className='searchContainer'>
                     <div className='row'>
                         <div className='col-md-4'>
+                            {flightList.length>0?(
                             <h4 data-testid='LoginTest' style={{ color: 'black', fontSize: 25, marginBottom: 22, fontWeight:"bold" }}>
                                 ALL FLIGHTS
-                            </h4>
+                            </h4>):(<h4 style={{ color: 'black', fontSize: 25, marginBottom: 22, fontWeight:"bold" }}>NO FLIGHTS AVAILABLE!</h4>)}
                         </div>
                     </div>
                 </div>
             </div>
             <br></br>
 
-            {flightList ? (
+            {flightList.length>0 ? (
                 <TableContainer component={Paper} className='tableDetails'>
                     <Table sx={{ minWidth: 650 }} aria-label='simple table' className={classes.table}>
                         <TableHead>
